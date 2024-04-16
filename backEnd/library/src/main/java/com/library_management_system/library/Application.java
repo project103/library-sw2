@@ -1,13 +1,13 @@
-package Library.mangement.system.library;
+package com.library_management_system.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LibraryApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LibraryApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
