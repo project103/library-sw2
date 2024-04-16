@@ -1,4 +1,4 @@
-package sw2_project.library.mangement.system;
+package Library.mangement.system.library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
