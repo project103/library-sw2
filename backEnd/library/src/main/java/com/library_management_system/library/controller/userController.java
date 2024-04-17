@@ -1,6 +1,6 @@
 package com.library_management_system.library.controller;
 import com.library_management_system.library.service.userService;
-import com.library_management_system.library.entity.user;
+import com.library_management_system.library.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +12,15 @@ public class userController {
     @Autowired
     private userService Service;
 @PostMapping("/saveUser")
-    public user saveUser(@RequestBody user user) {
+    public User saveUser(@RequestBody User user) {
         return Service.saveUser(user);
     }
     @GetMapping("/getUsers")
-    public List<user> getUsers() {
+    public List<User> getUsers() {
         return Service.getUsers();
     }
     @GetMapping("/getUserById/{id}")
-    public user getUserById(@PathVariable  int id) {
+    public User getUserById(@PathVariable  int id) {
         return Service.getUserById(id);
     }
     @DeleteMapping("/deleteUserById/{id}")
@@ -29,7 +29,7 @@ public class userController {
         return"deleted successfully !!"+id;
     }
     @PutMapping("/UpdateUser")
-    public user UpdateUser(@RequestBody user user) {
+    public User UpdateUser(@RequestBody User user) {
         return Service.UpdateUser(user);
     }
 
