@@ -1,6 +1,16 @@
 spring:
   application:
     name: demo
-server:
-  port: 9090
-
+  datasource:
+    url: jdbc:mysql://localhost:3306/library?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+        show_sql: true
