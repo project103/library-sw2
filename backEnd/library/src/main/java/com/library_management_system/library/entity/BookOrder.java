@@ -1,8 +1,9 @@
 package com.library_management_system.library.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Table(name = "bookOrder")
 public class BookOrder {
