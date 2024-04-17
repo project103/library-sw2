@@ -33,7 +33,7 @@ public class userController {
         return Service.getUserById(id);
     }
 
-    @DeleteMapping("/deleteUserById/{id}")
+    @DeleteMapping("/{id}/deleteByid")
     public String DeleteUserById(@PathVariable int id) {
         Service.DeleteUserById(id);
         return "deleted successfully !!" + id;
