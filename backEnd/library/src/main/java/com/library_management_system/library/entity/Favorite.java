@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 public class Favorite {
 
     @Id
+    private int id;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Book product;

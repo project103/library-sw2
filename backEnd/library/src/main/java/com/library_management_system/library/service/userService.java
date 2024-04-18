@@ -55,14 +55,4 @@ public class userService {
 
     }
 
-     public Boolean Login(String username, String password){
-
-        for (int i=0;i<getUsers().size();i++){
-               
-        }
-            return true;
-     }
-
-
-
 }
