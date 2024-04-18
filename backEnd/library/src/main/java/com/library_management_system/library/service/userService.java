@@ -27,6 +27,11 @@ public class userService {
         return Repository.findById(id).orElse(null);
     }
 
+    public Boolean getUserByusername(String username) {
+        return Repository.findByname(username);
+    }
+
+
     public String DeleteUserById(int id) {
         Repository.deleteById(id);
         return "deleted successfully !!" + id;
@@ -47,5 +52,15 @@ public class userService {
         return Repository.save(existingUser);
 
     }
+
+     public Boolean Login(String username, String password){
+
+        for (int i=0;i<getUsers().size();i++){
+               
+        }
+            return true;
+     }
+
+
 
 }
