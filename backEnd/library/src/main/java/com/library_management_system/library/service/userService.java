@@ -2,13 +2,14 @@ package com.library_management_system.library.service;
 
 import com.library_management_system.library.entity.User;
 import com.library_management_system.library.repository.userRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class userService {
-
+@Autowired
     private userRepository Repository;
 
     public userService(userRepository Repository) {
@@ -27,8 +28,9 @@ public class userService {
         return Repository.findById(id).orElse(null);
     }
 
-    public Boolean getUserByusername(String username) {
-        return Repository.findByname(username);
+    public boolean getUserByusername(String username , String password) {
+       User user = Repository.findByname(username);
+        return (user.getPassword().contentEquals(password));
     }
 
 
