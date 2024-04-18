@@ -25,7 +25,7 @@ public class Visa {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User userID;
 
     // Getters and setters
 }
