@@ -32,19 +32,7 @@
 </head>
 
 <body>
-<script>
-    // Define the script content
-    var scriptContent = "localStorage.setItem('sessionId', '0');";
 
-    // Create a new script element
-    var scriptElement = document.createElement('script');
-
-    // Set the script content
-    scriptElement.textContent = scriptContent;
-
-    // Append the script element to the document body
-    document.body.appendChild(scriptElement);
-</script>
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">
@@ -176,52 +164,7 @@
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 
 <!-- Your custom script -->
-<script>
-    localStorage.setItem('sessionId', 0);
-    $(document).ready(function() {
-        $('#loginForm').submit(function(event) {
-            event.preventDefault(); // Prevent form submission
 
-            // Get username and password from form
-            var username = $('#username').val();
-            var password = $('#password').val();
-
-            // Prepare request body
-            var requestBody = {
-                name: username,
-                password: password
-            };
-
-            // Perform AJAX request
-            $.ajax({
-                url: "http://localhost:9090/user/login",
-                type: 'POST', // Use POST method for login
-                contentType: 'application/json',
-                data: JSON.stringify(requestBody),
-                success: function(data) {
-                    // Check if authentication was successful
-                    if (data === true) {
-                        // Simulate successful login (replace with server-side authentication)
-                        localStorage.setItem('sessionId', 1);
-
-                        // Redirect to dashboard or another page
-                        window.location.href = 'main.html';
-
-                    } else {
-                        alert('Authentication failed');
-                        console.log('Authentication failed');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error('Error:', error);
-                    alert('An error occurred while processing your request');
-                }
-            });
-        });
-    });
-
-</script>
 
 <!-- Other JavaScript libraries and custom scripts -->
 <!-- Include your other scripts here -->
