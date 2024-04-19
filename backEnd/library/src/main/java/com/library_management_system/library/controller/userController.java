@@ -59,7 +59,6 @@ public class userController {
 
     @PostMapping("/login")
     public ModelAndView login(String username, String password) {
-//         Map<String, String> name;
          boolean result= Service.getUserByusername(username, password);
        if(result){
            return new ModelAndView("redirect:/user/main.html");
