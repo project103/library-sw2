@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="zxx">
-    
+<head>
 
-<head>        
-        
     <!-- Meta -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-    
+
     <!-- Title -->
     <title>..:: LIBRARIA ::..</title>
-    
+
     <!-- Favicon -->
     <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
-    
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
+
     <!-- Mobile Menu -->
     <link href="css/mmenu.css" rel="stylesheet" type="text/css" />
     <link href="css/mmenu.positioning.css" rel="stylesheet" type="text/css" />
-    
-    <!-- Stylesheet -->
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-    
+    <!-- Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,197 +32,199 @@
 </head>
 
 <body>
-    
+<script>
+    // Define the script content
+    var scriptContent = "localStorage.setItem('sessionId', '0');";
 
-        
-        <!-- Start: Page Banner -->
-        <section class="page-banner services-banner">
-            <div class="container">
-                <div class="banner-header">
-                    <h2>Signin</h2>
-                    <span class="underline center"></span>
-                    <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
-                </div>
-                <div class="breadcrumb">
-                    <ul>
-                        
-                        <li>Signin</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!-- End: Page Banner -->
-        <!-- Start: Cart Section -->
-        <div id="content" class="site-content">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <div class="signin-main">
-                        <div class="container">
-                            <div class="woocommerce">
-                                <div class="woocommerce-login">
-                                    <div class="company-info signin-register">
-                                        <div class="col-md-5 col-md-offset-1 border-dark-left">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="company-detail bg-dark margin-left">
-                                                        <div class="signin-head">
-                                                            <h2>Sign in</h2>
-                                                            <span class="underline left"></span>
-                                                        </div>
-                                                        <form class="login" method="post">
-                                                            <p class="form-row form-row-first input-required">
-                                                                <label>
-                                                                    <span class="first-letter">Username</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                                <input type="text"  id="username" name="username" class="input-text">
-                                                             </p>
-                                                            <p class="form-row form-row-last input-required">
-                                                                <label>
-                                                                    <span class="first-letter">Pin</span>  
-                                                                    <span class="second-letter">*</span>
-                                                                </label>
-                                                                <input type="password" id="password" name="password" class="input-text">
-                                                            </p>
-                                                            <div class="clear"></div>
-                                                            <div class="password-form-row">
-                                                                <p class="form-row input-checkbox">
-                                                                    <input type="checkbox" value="forever" id="rememberme" name="rememberme">
-                                                                    
-                                                                </p>
-                                                                
-                                                            </div>
-                                                            <p class="new account">
-                                                                <a href="register.html">Register?</a>
-                                                            </p>
-                                                            <input type="submit" value="Login" name="login" class="button btn btn-default">
-                                                            <div class="clear"></div>
-                                                        </form>
-                                                    </div>
+    // Create a new script element
+    var scriptElement = document.createElement('script');
+
+    // Set the script content
+    scriptElement.textContent = scriptContent;
+
+    // Append the script element to the document body
+    document.body.appendChild(scriptElement);
+</script>
+<!-- Start: Page Banner -->
+<section class="page-banner services-banner">
+    <div class="container">
+        <div class="banner-header">
+            <h2>Signin</h2>
+            <span class="underline center"></span>
+            <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+        </div>
+        <div class="breadcrumb">
+            <ul>
+                <li>Signin</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End: Page Banner -->
+
+<!-- Start: Cart Section -->
+<div id="content" class="site-content">
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main">
+            <div class="signin-main">
+                <div class="container">
+                    <div class="woocommerce">
+                        <div class="woocommerce-login">
+                            <div class="company-info signin-register">
+                                <div class="col-md-5 col-md-offset-1 border-dark-left">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="company-detail bg-dark margin-left">
+                                                <div class="signin-head">
+                                                    <h2>Sign in</h2>
+                                                    <span class="underline left"></span>
                                                 </div>
+                                                <form class="login" method="post" id="loginForm" action="signin.html">
+                                                    <p class="form-row form-row-first input-required">
+
+                                                        <input type="text"  id="username" name="username" class="input-text">
+                                                    </p>
+                                                    <p class="form-row form-row-last input-required">
+
+                                                        <input type="password" id="password" content="password" name="password" class="input-text">
+                                                    </p>
+                                                    <div class="clear"></div>
+                                                    <div class="password-form-row">
+                                                        <p class="form-row input-checkbox">
+                                                            <input type="checkbox" value="forever" id="rememberme" name="rememberme">
+                                                        </p>
+                                                    </div>
+                                                    <p class="new account">
+                                                        <a href="register.html">Register?</a>
+                                                    </p>
+                                                    <button type="submit" class="button btn btn-default">submit</button>
+
+                                                    <div class="clear"></div>
+                                                </form>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
-        </div>
-        <!-- End: Cart Section -->
-        
-        <!-- Start: Social Network -->
-        <section class="social-network section-padding">
-            <div class="container">
-                <div class="center-content">
-                    <h2 class="section-title">Follow Us</h2>
-                    <span class="underline center"></span>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </div>
-                <ul>
-                    <li>
-                        <a class="facebook" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-facebook-f"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="twitter" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-twitter"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="google" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-google-plus"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="rss" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="linkedin" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-linkedin"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="youtube" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-youtube"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
             </div>
-        </section>
-        <!-- End: Social Network -->
-        
-        
-        
-        <!-- jQuery Latest Version 1.x -->
-        <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-        
-        <!-- jQuery UI -->
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        
-        <!-- jQuery Easing -->
-        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        </main>
+    </div>
+</div>
+<!-- End: Cart Section -->
 
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
-        <!-- Mobile Menu -->
-        <script type="text/javascript" src="js/mmenu.min.js"></script>
-        
-        <!-- Harvey - State manager for media queries -->
-        <script type="text/javascript" src="js/harvey.min.js"></script>
-        
-        <!-- Waypoints - Load Elements on View -->
-        <script type="text/javascript" src="js/waypoints.min.js"></script>
+<!-- Start: Social Network -->
+<section class="social-network section-padding">
+    <div class="container">
+        <div class="center-content">
+            <h2 class="section-title">Follow Us</h2>
+            <span class="underline center"></span>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <ul>
+            <li>
+                <a class="facebook" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-facebook-f"></i>
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a class="twitter" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-twitter"></i>
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a class="google" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-google-plus"></i>
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a class="rss" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-rss"></i>
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a class="linkedin" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-linkedin"></i>
+                        </span>
+                </a>
+            </li>
+            <li>
+                <a class="youtube" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-youtube"></i>
+                        </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- End: Social Network -->
 
-        <!-- Facts Counter -->
-        <script type="text/javascript" src="js/facts.counter.min.js"></script>
+<!-- Your jQuery library should be included before your custom script -->
+<!-- jQuery Latest Version 1.x -->
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 
-        <!-- MixItUp - Category Filter -->
-        <script type="text/javascript" src="js/mixitup.min.js"></script>
+<!-- Your custom script -->
+<script>
+    localStorage.setItem('sessionId', 0);
+    $(document).ready(function() {
+        $('#loginForm').submit(function(event) {
+            event.preventDefault(); // Prevent form submission
 
-        <!-- Owl Carousel -->
-        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-        
-        <!-- Accordion -->
-        <script type="text/javascript" src="js/accordion.min.js"></script>
-        
-        <!-- Responsive Tabs -->
-        <script type="text/javascript" src="js/responsive.tabs.min.js"></script>
-        
-        <!-- Responsive Table -->
-        <script type="text/javascript" src="js/responsive.table.min.js"></script>
-        
-        <!-- Masonry -->
-        <script type="text/javascript" src="js/masonry.min.js"></script>
-        
-        <!-- Carousel Swipe -->
-        <script type="text/javascript" src="js/carousel.swipe.min.js"></script>
-        
-        <!-- bxSlider -->
-        <script type="text/javascript" src="js/bxslider.min.js"></script>
-        
-        <!-- Custom Scripts -->
-        <script type="text/javascript" src="js/main.js"></script>
+            // Get username and password from form
+            var username = $('#username').val();
+            var password = $('#password').val();
 
-    </body>
+            // Prepare request body
+            var requestBody = {
+                name: username,
+                password: password
+            };
 
+            // Perform AJAX request
+            $.ajax({
+                url: "http://localhost:9090/user/login",
+                type: 'POST', // Use POST method for login
+                contentType: 'application/json',
+                data: JSON.stringify(requestBody),
+                success: function(data) {
+                    // Check if authentication was successful
+                    if (data === true) {
+                        // Simulate successful login (replace with server-side authentication)
+                        localStorage.setItem('sessionId', 1);
 
+                        // Redirect to dashboard or another page
+                        window.location.href = 'main.html';
+
+                    } else {
+                        alert('Authentication failed');
+                        console.log('Authentication failed');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error('Error:', error);
+                    alert('An error occurred while processing your request');
+                }
+            });
+        });
+    });
+
+</script>
+
+<!-- Other JavaScript libraries and custom scripts -->
+<!-- Include your other scripts here -->
+
+</body>
 </html>
