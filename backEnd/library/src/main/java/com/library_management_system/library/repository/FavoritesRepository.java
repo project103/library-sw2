@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FavoritesRepository extends JpaRepository<Favorite,Integer> {
+public interface FavoritesRepository extends JpaRepository<Favorite, Integer> {
     List<Favorite> findByUserId(int userId);
+
     List<Favorite> findByProductId(int productId);
     // You can add more custom query methods as needed
 }
