@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class userController {
     @Autowired
     private userService Service;
 
-    @PostMapping("/user/saveUser")
+    @PostMapping("saveUser")
     public ModelAndView saveUser(String user_name, String email, String phone, String password, String password_2, String Gender) {
         User user = new User();
         user.setEmail(email);
@@ -56,7 +57,7 @@ public class userController {
         return Service.UpdateUser(user);
     }
 
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public ModelAndView login(String username, String password) {
 //         Map<String, String> name;
          boolean result= Service.getUserByusername(username, password);
