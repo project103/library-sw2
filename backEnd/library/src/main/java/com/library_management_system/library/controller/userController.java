@@ -4,19 +4,30 @@ import com.library_management_system.library.service.userService;
 import com.library_management_system.library.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/user")
 public class userController {
     @Autowired
     private userService Service;
 
-    @PostMapping("/saveUser")
-    public User saveUser(@RequestBody User user) {
-        return Service.saveUser(user);
+    @PostMapping("/user/saveUser")
+    public ModelAndView saveUser(String user_name, String email, String phone, String password, String password_2, String Gender) {
+        User user = new User();
+        user.setEmail(email);
+        user.setGender(Gender);
+        user.setName(user_name);
+        user.setPhone(phone);
+        user.setPassword(password);
+        boolean result= Service.checkUSerExist(user_name);
+        if(result){
+            return new ModelAndView("redirect:/user/register.html");
+        }
+        Service.saveUser(user);
+        return new ModelAndView("redirect:/user/signin.html");
     }
 
     @GetMapping("")
@@ -45,8 +56,15 @@ public class userController {
         return Service.UpdateUser(user);
     }
 
-    @GetMapping("/login")
-    public boolean login(@RequestBody Map<String, String> name) {
-        return Service.getUserByusername(name.get("name"), name.get("password"));
+    @PostMapping("/user/login")
+    public ModelAndView login(String username, String password) {
+//         Map<String, String> name;
+         boolean result= Service.getUserByusername(username, password);
+       if(result){
+           return new ModelAndView("redirect:/user/main.html");
+       }
+       else {
+           return new ModelAndView("redirect:/user/signin.html");
+       }
     }
 }

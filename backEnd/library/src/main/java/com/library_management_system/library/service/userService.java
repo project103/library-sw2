@@ -30,7 +30,18 @@ public class userService {
 
     public boolean getUserByusername(String username , String password) {
        User user = Repository.findByname(username);
+       if(user == null) {
+           return false;
+       }
         return (user.getPassword().contentEquals(password));
+    }
+
+    public boolean checkUSerExist(String username) {
+        User user = Repository.findByname(username);
+        if(user == null) {
+            return false;
+        }
+        return true;
     }
 
 
