@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="zxx" xmlns:url="http://www.w3.org/1999/xhtml" xmlns:success="http://www.w3.org/1999/xhtml"
+      xmlns:error="http://www.w3.org/1999/xhtml">
 
 
 <head>        
@@ -234,19 +235,19 @@
     <div class="container">
         <div class="profile-header">
             <img src="images/profile/profilePic.jpg" alt="Profile Picture">
-            <h2>John Doe</h2>
+            <h2 id="name1"></h2>
             <p>Web Developer | Book Enthusiast</p>
         </div>
-        <div class="profile-details">
+        <div class="profile-details" id="prof_details">
             <h3>Profile Information</h3>
             <ul>
-                <li><span>Name:</span> john.doe</li>
-                <li><span>email:</span> john.doe@example.com</li>
-                <li><span>phone Number:</span> 01145718831</li>
-                <li><span>gender:</span> unKnown</li>
-                <li><span>pasdword:</span>*******</li>
-                <li><span>Joined:</span> January 1, 2024</li>
-            
+                <li id="name"></li>
+                <li id="email"></li>
+                <li id="phone"></li>
+                <li id="gender"></li>
+                <li id="password"></li>
+                <li id="joined"></li>
+
                 <div class="col-sm-12">
                     <div class="form-group form-submit">
                         <a href="UpdateProfile.html">
@@ -317,7 +318,7 @@
             </div>
         </footer>
         <!-- End: Footer -->
-        
+
         <!-- jQuery Latest Version 1.x -->
         <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
         
@@ -368,7 +369,33 @@
         
         <!-- Custom Scripts -->
         <script type="text/javascript" src="js/main.js"></script>
-        
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        function UpdateUser() {
+        var url = "http://localhost:9090/user/getUserById/1";
+        $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+        $("#name").text("Name: " + data.name);
+            $("#name1").text(data.name);
+        $("#email").text("Email: " + data.email);
+        $("#phone").text("Phone Number: " + data.phone);
+        $("#gender").text("Gender: " + data.gender);
+        $("#password").text("Password: " + data.password);
+        $("#joined").text("Joined: " + data.joined);
+        },
+        error: function() {
+        console.log("Error");
+        }
+        });
+        }
+
+        UpdateUser();
+        </script>
+
     </body>
 
 
