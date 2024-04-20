@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:63342")
 @RequestMapping("/user")
 public class userController {
     @Autowired
@@ -43,7 +44,7 @@ public class userController {
     public User UpdateUser(@RequestBody User user) {
         return Service.UpdateUser(user);
     }
-@GetMapping("/login")
+@PostMapping("/login")
  public boolean login(@RequestBody Map<String,String> name) {
     return Service.getUserByusername(name.get("name"),name.get("password"));
 }
