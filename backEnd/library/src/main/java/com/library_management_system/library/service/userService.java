@@ -1,6 +1,7 @@
 package com.library_management_system.library.service;
 
 import com.library_management_system.library.entity.User;
+import com.library_management_system.library.repository.ShoppingCartRepository;
 import com.library_management_system.library.repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,14 @@ public class userService {
 @Autowired
     private userRepository Repository;
 
+
     public userService(userRepository Repository) {
         this.Repository = Repository;
     }
 
     public User saveUser(User user) {
         return Repository.save(user);
+
     }
 
     public List<User> getUsers() {

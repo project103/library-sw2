@@ -27,8 +27,8 @@ public class OrderItem {
     private Book product;
 
     private int quantity;
-    private BigDecimal price;
-    private BigDecimal fine;
+    private double price;
+    private double fine;
 
     // Getters and setters
 }
