@@ -33,14 +33,14 @@ public class OrderItemService {
     public void addItem(int userId) {
         ShoppingCart cart = getShoppingCartByUserId(userId);
         if (cart == null) {
-            // Handle case where shopping cart is not found
+            
             return;
         }
 
         List<CartItem> cartItems = cartItemsRepository.findAllByCart(cart);
         Order order = orderRepository.findByuser(getUserByUserId(userId));
         if (order == null) {
-            // Handle case where order is not found
+
             return;
         }
 
