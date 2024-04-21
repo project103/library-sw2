@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:63342")
-@RequestMapping("/user")
+
+@RequestMapping("/User")
 public class userController {
     @Autowired
     private userService Service;
