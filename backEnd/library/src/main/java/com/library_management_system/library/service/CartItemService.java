@@ -27,7 +27,7 @@ public class CartItemService {
 
     public void addItem(int userId, String bookName, int quantity) {
         User user = UserRepository.getUserById(userId);
-        Book book = bookRepository.getBookByname(bookName);
+        Book book = bookRepository.findByName(bookName);
         ShoppingCart shoppingCart = shoppingCartRepository.findByuser(user);
 
 

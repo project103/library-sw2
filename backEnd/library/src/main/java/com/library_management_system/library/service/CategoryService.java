@@ -31,7 +31,7 @@ public class CategoryService {
 
     public Category getCategoryById(int id) {
         return categoryRepository.findById(id)
-               .orElseThrow(() -> new NotFoundException("Category not found with id: " + category.getId()));
+                .orElseThrow(() -> new NotFoundException("Category not found with id: " + category.getId()));
     }
 
     public Category getCategoryByName(String name) {
@@ -51,7 +51,7 @@ public class CategoryService {
     }
 
     public Category updateCategory(Category category){
-        
+
         Category existingCategory = categoryRepository.findById(category.getId()).orElse(null);
         existingCategory.setId(category.getId());
         existingCategory.setName(category.getName());
@@ -61,7 +61,7 @@ public class CategoryService {
 
     public Book AddBookToCategory(Book book, Category category){
         book = bookService.getBookById(book.getId());
-        
+
         category = getCategoryById(category.getId());
 
         book.setCategory(category);
