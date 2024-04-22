@@ -67,7 +67,7 @@
                                                     <h2>Sign in</h2>
                                                     <span class="underline left"></span>
                                                 </div>
-                                                <form class="login" method="post" id="loginForm" action="signin.html">
+                                                <form class="login" method="post" id="loginForm" action="/User/login">
                                                     <p class="form-row form-row-first input-required">
 
                                                         <input type="text"  id="username" name="username" class="input-text">
@@ -83,9 +83,9 @@
                                                         </p>
                                                     </div>
                                                     <p class="new account">
-                                                        <a href="register.html">Register?</a>
+                                                        <a href="register.html" style="color:orangered">Register?</a>
                                                     </p>
-                                                    <button type="submit" class="button btn btn-default">submit</button>
+                                                    <button type="submit" class="button btn btn-default" style="color: orangered;">submit</button>
 
                                                     <div class="clear"></div>
                                                 </form>
@@ -164,8 +164,57 @@
 <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 
 <!-- Your custom script -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to handle form submission
+        $("#loginForm").submit(function(event) {
+            // Prevent default form submission
+            event.preventDefault();
 
+            // Get form data
+            var formData = {
+                name: $("#username").val(),
+                password: $("#password").val()
+            };
 
+            $.ajax({
+                type: "POST", // Change request type to POST
+                url: "http://localhost:9098/User/login",
+                data: JSON.stringify(formData),
+                contentType: "application/json",
+                success: function(response) {
+                    if (response) {
+                        // Redirect to dashboard or another page upon successful login
+                        window.location.href = "/user/main.html";
+                    } else {
+                        // Redirect to sign-in page with error message
+                        displayErrorMessage("Invalid username or password");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                    // Handle any errors here, or ignore them
+                }
+            });
+        });
+        function displayErrorMessage(message) {
+            // Create error message element
+            var errorMessage = $("<p></p>").text(message).addClass("error-message");
+
+            // Append error message to the sign-in form
+            $("#loginForm").append(errorMessage);
+        }
+    });
+
+</script>
+
+<style>
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
+</style>
 <!-- Other JavaScript libraries and custom scripts -->
 <!-- Include your other scripts here -->
 
