@@ -46,6 +46,10 @@ public class userService {
         }
         return true;
     }
+    public List<User> findUsersByEmail(String email) {
+        return Repository.findByEmail(email);
+    }
+
 
 
     public String DeleteUserById(int id) {
