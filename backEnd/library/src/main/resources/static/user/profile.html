@@ -31,8 +31,7 @@
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-        <script src="js/html5shiv.min.js"></script>
-        <script src="js/respond.min.js"></script>
+        <
         <![endif]-->
     </head>
     
@@ -234,7 +233,7 @@
             <!-- Start: Profile Section -->
     <div class="container">
         <div class="profile-header">
-            <img src="images/profile/profilePic.jpg" alt="Profile Picture">
+            <img id="profilePic" src="" >
             <h2 id="name1"></h2>
             <p>Web Developer | Book Enthusiast</p>
         </div>
@@ -373,7 +372,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         function UpdateUser() {
-        var url = "http://localhost:9090/user/getUserById/1";
+        var url = "http://localhost:9098/User/getUserById/1";
         $.ajax({
         url: url,
         type: "GET",
@@ -386,6 +385,8 @@
         $("#gender").text("Gender: " + data.gender);
         $("#password").text("Password: " + data.password);
         $("#joined").text("Joined: " + data.joined);
+
+
         },
         error: function() {
         console.log("Error");

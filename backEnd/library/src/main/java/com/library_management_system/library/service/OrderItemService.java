@@ -23,33 +23,59 @@ public class OrderItemService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-    public void addItem(int userId) {
+
+    public ShoppingCart getShoppingCartByUserId(int userId) {
         User user = UserRepository.getUserById(userId);
-        ShoppingCart shoppingCart = shoppingCartRepository.findByuser(user);
-        List<CartItem> cartItems = cartItemsRepository.findAllByCart(shoppingCart);
+        return shoppingCartRepository.findByuser(user);
+    }
+
+
+    public void addItem(int userId) {
+        ShoppingCart cart = getShoppingCartByUserId(userId);
+        if (cart == null) {
+            
+            return;
+        }
+
+        List<CartItem> cartItems = cartItemsRepository.findAllByCart(cart);
+        Order order = orderRepository.findByuser(getUserByUserId(userId));
+        if (order == null) {
+
+            return;
+        }
+
         List<OrderItem> orderItems = new ArrayList<>();
 
-        Order order = orderRepository.findByuser(user); // Assuming this method exists
-
         for (CartItem cartItem : cartItems) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProduct(cartItem.getProduct());
-            orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setOrder(order);
-            orderItem.setPrice(cartItem.getProduct().getPrice());
-            if (LocalDateTime.now().isAfter(order.getReturnDeadline())) {
-                orderItem.setFine(10);
-            } else {
-                orderItem.setFine(0);
-            }
+            OrderItem orderItem = createOrderItemFromCartItem(cartItem, order);
             orderItems.add(orderItem);
         }
 
         orderItemRepository.saveAll(orderItems);
-
-        // delete cart items after converting them to order items
         cartItemsRepository.deleteAll(cartItems);
     }
+    private User getUserByUserId(int userId) {
+        return UserRepository.getUserById(userId);
+    }
+
+    private OrderItem createOrderItemFromCartItem(CartItem cartItem, Order order) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(cartItem.getProduct());
+        orderItem.setQuantity(cartItem.getQuantity());
+        orderItem.setOrder(order);
+        orderItem.setPrice(cartItem.getProduct().getPrice());
+        orderItem.setFine(calculateFine(order));
+        return orderItem;
+    }
+
+    private int calculateFine(Order order) {
+        if (LocalDateTime.now().isAfter(order.getReturnDeadline())) {
+            return 10;
+        } else {
+            return 0;
+        }
+    }
+
 
     public List<OrderItem> getOrderItemsByUserId(int userId) {
         User user = UserRepository.getUserById(userId);
