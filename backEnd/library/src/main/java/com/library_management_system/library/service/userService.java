@@ -1,7 +1,6 @@
 package com.library_management_system.library.service;
 
 import com.library_management_system.library.entity.User;
-import com.library_management_system.library.repository.ShoppingCartRepository;
 import com.library_management_system.library.repository.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,12 +30,14 @@ public class userService {
         return Repository.findById(id).orElse(null);
     }
 
-    public boolean getUserByusername(String username , String password) {
+    public Integer getUserByusername(String username , String password) {
        User user = Repository.findByname(username);
        if(user == null) {
-           return false;
-       }
-        return (user.getPassword().contentEquals(password));
+           return null;
+       }if(user.getPassword().contentEquals(password))
+           return user.getId();
+       else
+            return null;
     }
 
     public boolean checkUSerExist(String username) {

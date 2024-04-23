@@ -372,7 +372,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         function UpdateUser() {
-        var url = "http://localhost:9098/User/getUserById/1";
+        var url = "http://localhost:9098/User/getUserById/"+localStorage.getItem("userId");
+
         $.ajax({
         url: url,
         type: "GET",
@@ -385,6 +386,7 @@
         $("#gender").text("Gender: " + data.gender);
         $("#password").text("Password: " + data.password);
         $("#joined").text("Joined: " + data.joined);
+        console.log()
 
 
         },
@@ -396,7 +398,13 @@
 
         UpdateUser();
         </script>
+        <script>
 
+            if (localStorage.getItem('sessionId') == 1) {
+            } else {
+                window.location.href = 'signin.html';
+            }
+        </script>
     </body>
 
 

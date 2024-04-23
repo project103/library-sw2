@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Map;
 
+import static java.sql.DriverManager.println;
+
 @RestController
 
 @RequestMapping("/User")
@@ -54,7 +56,8 @@ public class userController {
         return Service.UpdateUser(user);
     }
 @PostMapping("/login")
- public boolean login(@RequestBody Map<String,String> name) {
+ public Integer login(@RequestBody Map<String,String> name) {
+        println(Service.getUserByusername(name.get("name"),name.get("password")).toString());
     return Service.getUserByusername(name.get("name"),name.get("password"));
 }
 }

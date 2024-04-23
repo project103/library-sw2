@@ -210,7 +210,7 @@
                                                         <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-2 col-sm-6">
                                                     <div class="form-group">
                                                         <button type="submit" type="submit">Search</button>
@@ -225,7 +225,7 @@
                             <div class="row">
                                 <div class="col-md-9 col-md-push-3">
                                     <div class="filter-options margin-list">
-                                        <div class="row">                                            
+                                        <div class="row">
                                             <div class="col-md-4 col-sm-4">
                                                 <select name="orderby">
                                                     <option selected="selected">Default sorting</option>
@@ -235,17 +235,17 @@
                                                     <option>Sort by price</option>
                                                 </select>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="books-list">
-                                        <article> 
-                                            <div class="single-book-box">                                                
+                                        <article>
+                                            <div class="single-book-box">
                                                 <div class="post-thumbnail">
                                                     <div class="book-list-icon yellow-icon"></div>
                                                     <a href="books-media-detail-v2.html"><img alt="Book" src="images/books-media/list-view/book-media-01.jpg" /></a>                                                                 </div>
                                                 <div class="post-detail">
-                                                    
+
                                                     <div class="optional-links">
                                                         <ul>
                                                             <li>
@@ -258,7 +258,7 @@
                                                                     <i class="fa fa-heart"></i>
                                                                 </a>
                                                             </li>
-                                                            
+
                                                         </ul>
                                                     </div>
                                                     <header class="entry-header">
@@ -286,14 +286,14 @@
                                                                             <span>☆</span>
                                                                         </div>
                                                                     </li>
-                                                                </ul>                                                                
+                                                                </ul>
                                                             </div>
                                                         </div>
                                                     </header>
-                                                    
-                                
-                        
-                        
+
+
+
+
                     </div>
                 </main>
             </div>
@@ -461,7 +461,13 @@
         
         <!-- Custom Scripts -->
         <script type="text/javascript" src="js/main.js"></script>
+    <script>
 
+        if (localStorage.getItem('sessionId') == 1) {
+        } else {
+            window.location.href = 'signin.html';
+        }
+    </script>
     </body>
 
 

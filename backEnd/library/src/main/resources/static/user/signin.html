@@ -33,6 +33,10 @@
 
 <body>
 
+<script>
+    localStorage.setItem('sessionId', 0);
+</script>
+
 <!-- Start: Page Banner -->
 <section class="page-banner services-banner">
     <div class="container">
@@ -67,7 +71,7 @@
                                                     <h2>Sign in</h2>
                                                     <span class="underline left"></span>
                                                 </div>
-                                                <form class="login" method="post" id="loginForm" action="/User/login">
+                                                <form class="login" method="post" id="loginForm" >
                                                     <p class="form-row form-row-first input-required">
 
                                                         <input type="text"  id="username" name="username" class="input-text">
@@ -166,6 +170,7 @@
 <!-- Your custom script -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     $(document).ready(function() {
         // Function to handle form submission
         $("#loginForm").submit(function(event) {
@@ -183,9 +188,11 @@
                 url: "http://localhost:9098/User/login",
                 data: JSON.stringify(formData),
                 contentType: "application/json",
-                success: function(response) {
-                    if (response) {
+                success: function(data) {
+                    if (data > 0) {
                         // Redirect to dashboard or another page upon successful login
+                        localStorage.setItem('sessionId' , 1);
+                        localStorage.setItem('userId' ,data )
                         window.location.href = "/user/main.html";
                     } else {
                         // Redirect to sign-in page with error message

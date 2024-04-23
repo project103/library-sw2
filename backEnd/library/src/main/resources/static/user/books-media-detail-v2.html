@@ -848,7 +848,13 @@
 
     <!-- Custom Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
+    <script>
 
+        if (localStorage.getItem('sessionId') == 1) {
+        } else {
+            window.location.href = 'signin.html';
+        }
+    </script>
 </body>
 
 
