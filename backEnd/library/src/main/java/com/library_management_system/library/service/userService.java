@@ -60,7 +60,7 @@ public class userService {
 
     public User UpdateUser(User user) {
         User existingUser = Repository.findById(user.getId()).orElse(null);
-        existingUser.setId(user.getId());
+
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
         existingUser.setPassword(user.getPassword());
@@ -70,6 +70,7 @@ public class userService {
         existingUser.setJob(user.getJob());
         existingUser.setUserRole(user.getUserRole());
         existingUser.setJoined(user.getJoined());
+        Repository.deleteById(existingUser.getId());
         return Repository.save(existingUser);
 
     }
