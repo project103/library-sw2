@@ -1,10 +1,10 @@
 package com.library_management_system.library.repository;
-
-import com.library_management_system.library.entity.Order;
 import com.library_management_system.library.entity.Suggestion;
+import com.library_management_system.library.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SuggestionRepository extends JpaRepository<Suggestion, Integer> {
+import java.util.List;
 
-    // You can add more custom query methods as needed
+public interface SuggestionRepository extends JpaRepository<Suggestion, Integer> {
+    List<Suggestion> findByUser(User user);
 }

@@ -1,11 +1,14 @@
 package com.library_management_system.library.repository;
-
+import com.library_management_system.library.entity.Category;
 import com.library_management_system.library.entity.Book;
-import com.library_management_system.library.entity.CartItem;
+import com.library_management_system.library.entity.Suggestion;
+import com.library_management_system.library.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 public interface BookRepository extends JpaRepository<Book, Integer> {
     Book getBookById(int id);
 
-    // You can add more custom query methods as needed
+    List<Book> findByCategory(Category category);
+
 }
