@@ -4,6 +4,8 @@ import com.library_management_system.library.service.userService;
 import com.library_management_system.library.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +17,16 @@ public class userController {
     private userService Service;
 
     @PostMapping("/Register")
-    public User RegisterUser(@RequestBody User user) {
-        return Service.saveUser(user);
+    public ModelAndView registerUser(@RequestBody User user) {
+        List<User> existingUsers = Service.findUsersByEmail(user.getEmail());
+        if (!existingUsers.isEmpty()) {
+            return new ModelAndView("redirect:/user/register.html");
+        } else {
+            Service.saveUser(user);
+            return new ModelAndView("redirect:/user/signin.html");
+        }
     }
+
 
     @GetMapping("")
     public String test() {

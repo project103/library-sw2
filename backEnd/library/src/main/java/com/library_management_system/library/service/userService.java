@@ -18,7 +18,7 @@ public class userService {
         this.Repository = Repository;
     }
 
-    public User saveUser(User user) {
+     public User saveUser(User user) {
         return Repository.save(user);
 
     }
@@ -46,6 +46,10 @@ public class userService {
         }
         return true;
     }
+    public List<User> findUsersByEmail(String email) {
+        return Repository.findByEmail(email);
+    }
+
 
 
     public String DeleteUserById(int id) {

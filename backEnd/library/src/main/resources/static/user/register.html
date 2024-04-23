@@ -72,10 +72,10 @@
                                                                 <h2>Create New Account</h2>
                                                                 <span class="underline left"></span>
                                                             </div>
-                                                            <form class="login" method="post" action="/user/saveUser">
+                                                            <form class="login" method="post" id="registrationForm" action="/User/Register">
                                                             <div class="col-md-6 col-sm-6">
                                                                 <div class="form-group">
-                                                                    <input class="form-control" type="text" placeholder="user name" name="user_name" id="user_name" size="30" value="" aria-required="true" required />
+                                                                    <input class="form-control" type="text" placeholder="user name" name="name" id="name" size="30" value="" aria-required="true" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6">
@@ -127,7 +127,8 @@
             </div>
         </div>
         <!-- End: Cart Section -->
-        
+
+
         <!-- Start: Social Network -->
         <section class="social-network section-padding">
             <div class="container">
@@ -236,6 +237,41 @@
         
         <!-- Custom Scripts -->
         <script type="text/javascript" src="js/main.js"></script>
+
+
+        <script>
+            $(document).ready(function() {
+                $("#registrationForm").submit(function(event) {
+                    event.preventDefault();
+
+                    // Get form data
+                    var formData = {
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        phone: $("#phone").val(),
+                        password: $("#password").val(),
+                        gender: $("input[name='Gender']:checked").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:9098/User/Register",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function(response) {
+                            console.log("Registration successful");
+                            window.location.href = "/user/signin.html";
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error:", error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+
 
     </body>
 
