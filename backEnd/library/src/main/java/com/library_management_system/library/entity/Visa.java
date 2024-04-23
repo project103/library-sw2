@@ -20,7 +20,7 @@ public class Visa {
 
     private String creditCardNo;
     private String cvv;
-    private LocalDate endDate;
+    private String endDate;
     private String userName;
 
     @ManyToOne

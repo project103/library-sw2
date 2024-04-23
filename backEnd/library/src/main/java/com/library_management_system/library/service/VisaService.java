@@ -1,4 +1,5 @@
 package com.library_management_system.library.service;
+import com.library_management_system.library.entity.User;
 import com.library_management_system.library.entity.Visa;
 import com.library_management_system.library.repository.VisaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class VisaService {
         return Repository.save(visa);
     }
 
-    public List<Visa> getVisas(int userId) {
-        return Repository.findAllById(Collections.singleton(userId));
+    public List<Visa> getVisas(User userId) {
+        return Repository.findAllByuserID(userId);
     }
 
     public Visa getVisaById(int id) {
