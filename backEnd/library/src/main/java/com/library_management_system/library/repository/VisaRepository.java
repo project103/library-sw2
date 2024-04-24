@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface VisaRepository extends JpaRepository<Visa,Integer> {
-    List<Visa> findAllByuserID(User userId);
+
+    List<Visa> findAllByuserID (User userId);
 }

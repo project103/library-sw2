@@ -68,7 +68,7 @@ public class BookController {
         book.setName(NewBook.get("BookName"));
         // set all attributes yaa marwaa
 
-        
+
 
 
 

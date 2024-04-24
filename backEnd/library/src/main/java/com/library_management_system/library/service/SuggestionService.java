@@ -14,6 +14,7 @@ public class SuggestionService {
     @Autowired
     private SuggestionRepository suggestionRepository;
 
+
     // Updated method to use bookRepository instance
     public List<Category> getSuggestedCategories(int userId) {
         User user = Repository.getUserById(userId);
@@ -32,5 +33,16 @@ public class SuggestionService {
             bookList.addAll(booksInCategory);
         }
         return bookList;
+    }
+
+    public void addSuggestion(int userId, List<OrderItem> orderItems) {
+        User user = Repository.getUserById(userId);
+        for (OrderItem orderItem : orderItems) {
+            Book book = orderItem.getProduct(); // Assuming getProduct() returns the Book associated with the OrderItem
+            Suggestion suggestion = new Suggestion();
+            suggestion.setSuggestedBook(book);
+            suggestion.setUser(user);
+            suggestionRepository.save(suggestion);
+        }
     }
 }

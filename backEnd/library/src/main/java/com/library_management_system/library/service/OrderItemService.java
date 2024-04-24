@@ -77,9 +77,9 @@ public class OrderItemService {
     }
 
 
-    public List<OrderItem> getOrderItemsByUserId(int userId) {
+    public List<OrderItem> getOrderItemsByUserId(int userId , int orderId) {
         User user = UserRepository.getUserById(userId);
-        Order order = orderRepository.findByuser(user);
+        Order order = orderRepository.findByUserAndId(user, orderId);
         return orderItemRepository.findAllByOrder(order);
     }
 }
