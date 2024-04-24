@@ -189,11 +189,14 @@
                 data: JSON.stringify(formData),
                 contentType: "application/json",
                 success: function(data) {
-                    if (data > 0) {
+                    if (data != null) {
                         // Redirect to dashboard or another page upon successful login
                         localStorage.setItem('sessionId' , 1);
-                        localStorage.setItem('userId' ,data )
-                        window.location.href = "/user/main.html";
+                        localStorage.setItem('userId' ,data.id);
+                        if (data.userRole == 0) {
+                            window.location.href = "/user/main.html";
+                        }else if(data.userRole == 1){window.location.href = "/admin/blank.html";}
+
                     } else {
                         // Redirect to sign-in page with error message
                         displayErrorMessage("Invalid username or password");
