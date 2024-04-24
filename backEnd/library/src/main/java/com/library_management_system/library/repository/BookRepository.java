@@ -12,4 +12,5 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     List<Book> findByCategory(Category category);
     List<Book> findByFormat(String format);
     Book findByName(String name);
+    List<Book> findByLanguage(String language);
 }
