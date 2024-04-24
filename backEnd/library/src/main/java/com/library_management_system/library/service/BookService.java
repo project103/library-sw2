@@ -29,8 +29,7 @@ public class BookService {
     }
 
     public Book getBookById(int id) {
-            return bookRepository.findById(id)
-                    .orElseThrow(() -> new NotFoundException("Book not found with id: " + id));
+            return bookRepository.getBookById(id);
         }
 
     public List<Book> getBookByFormat(String format) {
