@@ -33,6 +33,10 @@ public class BookService {
                     .orElseThrow(() -> new NotFoundException("Book not found with id: " + id));
         }
 
+    public List<Book> getBookByFormat(String format) {
+        return bookRepository.findByFormat(format);
+    }
+
 
     public Book updateBook(Book book) {
         

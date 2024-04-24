@@ -1,8 +1,8 @@
 package com.library_management_system.library.controller;
 
-import com.library_management_system.library.entity.Book;
+//import com.library_management_system.library.entity.Book;
 import com.library_management_system.library.entity.Category;
-import com.library_management_system.library.service.BookService;
+//import com.library_management_system.library.service.BookService;
 import com.library_management_system.library.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private BookService bookService;
+    //@Autowired
+    //private BookService bookService;
 
     @GetMapping("/all")
     public List<Category> getAllCategories() {

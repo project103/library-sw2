@@ -1,7 +1,7 @@
 package com.library_management_system.library.controller;
 
 import com.library_management_system.library.entity.Book;
-import com.library_management_system.library.entity.Category;
+//import com.library_management_system.library.entity.Category;
 import com.library_management_system.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +28,13 @@ public class BookController {
         Book book = bookService.getBookById(id);
         return book;
     }//check but needs exception!
+
+
+    @GetMapping("/{format}")
+    public List<Book> getBookByFormat(@PathVariable String format) {
+        List<Book> books = bookService.getBookByFormat(format);
+        return books;
+    }
 
     // @PostMapping("/add")
     // public Book addBook(@RequestBody Book book) {
@@ -69,6 +76,12 @@ public class BookController {
     public String removeBookFromCategory(@PathVariable String categoryName, @PathVariable String bookName) {
         bookService.RemoveBookFromCategory(bookName, categoryName);
         return ("Book removed from category successfully");
+    }
+
+    @GetMapping("/categoryContent/{categoryName}")
+        public List<Book> viewCategoryContent(@PathVariable String categoryName) {
+        List<Book> books = bookService.getCategoryContent(categoryName);
+        return books;
     }
 }
 

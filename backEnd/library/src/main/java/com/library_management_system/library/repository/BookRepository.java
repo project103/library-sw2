@@ -10,6 +10,6 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     Book getBookById(int id);
 
     List<Book> findByCategory(Category category);
-
+    List<Book> findByFormat(String format);
     Book findByName(String name);
 }
