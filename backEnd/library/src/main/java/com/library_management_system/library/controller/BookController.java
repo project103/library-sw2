@@ -2,6 +2,8 @@ package com.library_management_system.library.controller;
 
 import com.library_management_system.library.entity.Book;
 //import com.library_management_system.library.entity.Category;
+import com.library_management_system.library.entity.Category;
+import com.library_management_system.library.repository.CategoryRepository;
 import com.library_management_system.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/books")
@@ -16,6 +19,8 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("/all")
     public List<Book> getAllBooks() {
@@ -28,7 +33,7 @@ public class BookController {
     }//check but needs exception!
 
 
-    @GetMapping("/GetByFormat/{format}")
+    @GetMapping("/GetByFormat /{format}")
     public List<Book> getBookByFormat(@PathVariable String format) {
         return bookService.getBookByFormat(format);
     }
@@ -56,8 +61,18 @@ public class BookController {
     }//check but needs exception
 
     @PostMapping("/addBook/{categoryName}")
-    public Book addBookToCategory(@PathVariable String categoryName,@RequestBody String bookName, @RequestBody String author, @RequestBody String description, @RequestBody double price, @RequestBody int copies, @RequestBody String format, @RequestBody int length, @RequestBody double rating, @RequestBody String edition, @RequestBody String language) {
-        return bookService.AddBookToCategory(new Book(bookName, author, description, price, copies, format, length, rating, edition, language), categoryName);
+    public Book addBookToCategory(@PathVariable String categoryName,@RequestBody Map<String , String> NewBook) {
+        Book book = new Book();
+        Category category = categoryRepository.findByName(NewBook.get("category"));
+        book.setCategory(category);
+        book.setName(NewBook.get("BookName"));
+        // set all attributes yaa marwaa
+
+        
+
+
+
+        return bookService.AddBookToCategory(book, categoryName);
     }
 
     @GetMapping("/name/{name}")

@@ -54,8 +54,7 @@ public class BookService {
         
         try {
             Category category = categoryRepository.findByName(categoryName);
-            List<Book> books= bookRepository.findByCategory(category);
-            return books;
+            return bookRepository.findByCategory(category);
           } catch (Exception e) {
             System.out.println("There's no Books in category: " + categoryName);
           }
