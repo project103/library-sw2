@@ -201,9 +201,8 @@
                     datatype:"json",
                     success:function(data){
                         for(i=0; i<data.length; i++){
-                            $("#table tbody").append("<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].author +
-                            "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
-                            <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>")
+                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
+                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser()" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
