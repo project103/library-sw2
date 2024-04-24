@@ -44,6 +44,8 @@ public class BookService {
         existingBook.setAuthor(updatedBook.getAuthor());
         existingBook.setDescription(updatedBook.getDescription());
         existingBook.setPrice(updatedBook.getPrice());
+        existingBook.setEdition(updatedBook.getEdition());
+        existingBook.setLanguage(updatedBook.getLanguage());
         return bookRepository.save(existingBook);
     }
 
