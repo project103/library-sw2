@@ -19,21 +19,18 @@ public class BookController {
 
     @GetMapping("/all")
     public List<Book> getAllBooks() {
-        List<Book> books = bookService.getAllBooks();
-        return books;
+        return bookService.getAllBooks();
     }//check
 
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable int id) {
-        Book book = bookService.getBookById(id);
-        return book;
+        return bookService.getBookById(id);
     }//check but needs exception!
 
 
     @GetMapping("/{format}")
     public List<Book> getBookByFormat(@PathVariable String format) {
-        List<Book> books = bookService.getBookByFormat(format);
-        return books;
+        return bookService.getBookByFormat(format);
     }
 
     // @PostMapping("/add")
@@ -44,14 +41,12 @@ public class BookController {
 
     @PutMapping("/update")
     public Book updateBook(@RequestBody Book book) {
-        Book updatedBook = bookService.updateBook(book);
-        return updatedBook;
+        return bookService.updateBook(book);
     }//check
 
     @GetMapping("/category/{categoryName}")
     public List<Book> getBooksByCategory(@PathVariable String categoryName) {
-        List<Book> books = bookService.getBookByCategory(categoryName);
-        return books;
+        return bookService.getBookByCategory(categoryName);
     }//check but needs exception
 
     @DeleteMapping("/delete/{id}")
@@ -62,14 +57,12 @@ public class BookController {
 
     @PostMapping("/addBook/{categoryName}")
     public Book addBookToCategory(@PathVariable String categoryName,@RequestBody String bookName, @RequestBody String author, @RequestBody String description, @RequestBody double price, @RequestBody int copies, @RequestBody String format, @RequestBody int length, @RequestBody double rating, @RequestBody String edition, @RequestBody String language) {
-        Book book = bookService.AddBookToCategory(new Book(bookName, author, description, price, copies, format, length, rating, edition, language), categoryName);
-        return book;
+        return bookService.AddBookToCategory(new Book(bookName, author, description, price, copies, format, length, rating, edition, language), categoryName);
     }
 
     @GetMapping("/name/{name}")
     public Book findBookByName(@PathVariable String name) {
-        Book book = bookService.findBookByName(name);
-        return book;
+        return bookService.findBookByName(name);
     }
 
     @DeleteMapping("/deleteBooks/{categoryName}/{bookName}")
@@ -80,8 +73,7 @@ public class BookController {
 
     @GetMapping("/categoryContent/{categoryName}")
         public List<Book> viewCategoryContent(@PathVariable String categoryName) {
-        List<Book> books = bookService.getCategoryContent(categoryName);
-        return books;
+        return bookService.getCategoryContent(categoryName);
     }
 }
 
