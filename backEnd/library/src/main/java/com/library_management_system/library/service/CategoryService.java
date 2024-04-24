@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.library_management_system.library.Exceptions.NotFoundException;
 import com.library_management_system.library.entity.Book;
 import com.library_management_system.library.entity.Category;
+import com.library_management_system.library.repository.BookRepository;
 import com.library_management_system.library.repository.CategoryRepository;
 import java.util.*;
 
@@ -17,6 +18,8 @@ public class CategoryService {
     private Category category;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookRepository bookRepository;
 
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
@@ -48,30 +51,5 @@ public class CategoryService {
             throw new NotFoundException("Category "+ category + " does not exist!");
         }
         categoryRepository.delete(category);
-    }
-
-    public Category updateCategory(Category category){
-
-        Category existingCategory = categoryRepository.findById(category.getId()).orElse(null);
-        existingCategory.setId(category.getId());
-        existingCategory.setName(category.getName());
-
-        return categoryRepository.save(existingCategory);
-    }
-
-    public Book AddBookToCategory(Book book, Category category){
-        book = bookService.getBookById(book.getId());
-
-        category = getCategoryById(category.getId());
-
-        book.setCategory(category);
-        bookService.getBookByCategory(category).add(book);
-
-        return bookService.addBook(book);
-    }
-
-    public void RemoveBookFromCategory(Book book, Category category){
-        book = bookService.getBookById(book.getId());
-        bookService.getBookByCategory(category).remove(book);
     }
 }

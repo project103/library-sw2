@@ -21,9 +21,8 @@ public class Book {
     }
 
 
-    public Book(Integer id, String name, String author, String description, double price, Integer copies, String format,
+    public Book(String name, String author, String description, double price, Integer copies, String format,
             Integer length, Double rating, String edition, String language) {
-        this.id = id;
         this.name = name;
         this.author = author;
         this.description = description;
@@ -40,7 +39,6 @@ public class Book {
     public Book(String name) {
         this.name = name;
     }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

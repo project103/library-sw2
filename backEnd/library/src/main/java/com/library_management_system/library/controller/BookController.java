@@ -17,48 +17,58 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
+    @GetMapping("/all")
+    public List<Book> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
-        return ResponseEntity.ok(books);
-    }
+        return books;
+    }//check
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable int id) {
+    public Book getBookById(@PathVariable int id) {
         Book book = bookService.getBookById(id);
-        return ResponseEntity.ok(book);
-    }
+        return book;
+    }//check but needs exception!
 
-    @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book savedBook = bookService.addBook(book);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
-    }
+    // @PostMapping("/add")
+    // public Book addBook(@RequestBody Book book) {
+        
+    //     return bookService.addBook(book);
+    // }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) {
-        book.setId(id);
+    @PutMapping("/update")
+    public Book updateBook(@RequestBody Book book) {
         Book updatedBook = bookService.updateBook(book);
-        return ResponseEntity.ok(updatedBook);
-    }
+        return updatedBook;
+    }//check
 
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable int categoryId) {
-        Category category = new Category(categoryId);
-        List<Book> books = bookService.getBookByCategory(category);
-        return ResponseEntity.ok(books);
-    }
+    @GetMapping("/category/{categoryName}")
+    public List<Book> getBooksByCategory(@PathVariable String categoryName) {
+        List<Book> books = bookService.getBookByCategory(categoryName);
+        return books;
+    }//check but needs exception
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable int id) {
+    @DeleteMapping("/delete/{id}")
+    public String deleteBook(@PathVariable int id) {
         bookService.deleteBook(bookService.getBookById(id));
-        return ResponseEntity.ok("Book deleted successfully");
+        return "Book deleted successfully";
+    }//check but needs exception
+
+    @PostMapping("/addBook/{categoryName}")
+    public Book addBookToCategory(@PathVariable String categoryName,@RequestBody String bookName, @RequestBody String author, @RequestBody String description, @RequestBody double price, @RequestBody int copies, @RequestBody String format, @RequestBody int length, @RequestBody double rating, @RequestBody String edition, @RequestBody String language) {
+        Book book = bookService.AddBookToCategory(new Book(bookName, author, description, price, copies, format, length, rating, edition, language), categoryName);
+        return book;
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Book> findBookByName(@PathVariable String name) {
+    public Book findBookByName(@PathVariable String name) {
         Book book = bookService.findBookByName(name);
-        return ResponseEntity.ok(book);
+        return book;
+    }
+
+    @DeleteMapping("/deleteBooks/{categoryName}/{bookName}")
+    public String removeBookFromCategory(@PathVariable String categoryName, @PathVariable String bookName) {
+        bookService.RemoveBookFromCategory(bookName, categoryName);
+        return ("Book removed from category successfully");
     }
 }
 
