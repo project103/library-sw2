@@ -376,7 +376,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Number of Users</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                            <div id="NoUsers" class="h5 mb-0 font-weight-bold text-gray-800"> </div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -394,7 +394,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Number Of books</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">25</div>
+                                            <div id="NoBooks" class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -474,7 +474,44 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+                    <script>
+                        function updateNoOfUsers(){
+                            var url = "http://localhost:9098/User/getUsers"
+                            $.ajax({
+                                url:url,
+                                type:"GET",
+                                datatype:"json",
+                                success:function(data){
+                                var divElement = document.getElementById("NoUsers");
+                                divElement.innerHTML = data.length;
+                                },
+                                error:function(){
+                                    console.log("error")
+                                }
+                            });
+                        }
+                        updateNoOfUsers()
+                    </script>
+                    <script>
+                        function updateNoOfBooks(){
+                            var url = "http://localhost:9098/books/all"
+                            $.ajax({
+                                url:url,
+                                type:"GET",
+                                datatype:"json",
+                                success:function(data){
+                                var divElement = document.getElementById("NoBooks");
+                                divElement.innerHTML = data.length;
+                                },
+                                error:function(){
+                                    console.log("error")
+                                }
+                            });
+                        }
+                        updateNoOfBooks()
+                    </script>
 
+                </div>
 </body>
 
 </html>

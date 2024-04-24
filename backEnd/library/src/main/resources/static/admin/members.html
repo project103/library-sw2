@@ -153,51 +153,17 @@
               <div class="card-body">
                 <h5 class="card-title mb-4 d-inline">Categories</h5>
                <a href="#" class="btn btn-primary mb-4 text-center float-right">Create Categories</a>
-                <table class="table">
+                <table class="table" id="table">
                   <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">name</th>
-                      <th scope="col">country</th>
-                      <th scope="col">phone</th>
-                      <th scope="col">email</th>
-                      <th scope="col">zipcode</th>
-                      <th scope="col">update</th>
-                      <th scope="col">delete</th>
-                    </tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Gender</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Update</th>
+                      <th scope="col">Delete</th>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>mohamed</td>
-                      <td>cario</td>
-                      <td>023469797</td>
-                      <td>mohamed@gmail.com</td>
-                      <td>02341</td>
-                      <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                      <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>ahmed</td>
-                      <td>alex</td>
-                      <td>023464490</td>
-                      <td>ahmed@gmail.com</td>
-                      <td>5729</td>
-                      <td><a  href="#" class="btn btn-warning text-white text-center">Update </a></td>
-                      <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>karim</td>
-                      <td>giza</td>
-                      <td>045657472</td>
-                      <td>karim@gmail.com</td>
-                      <td>9797</td>
-                       <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                      <td><a href="#" class="btn btn-danger text-center">Delete </a></td>
-                    </tr>
-                  </tbody>
+                  <tbody></tbody>
                 </table> 
               </div>
             </div>
@@ -225,7 +191,47 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+        <script>
+            function updateTable(){
+                $("#table tbody").empty()
+                var url = "http://localhost:9098/User/getUsers"
+                $.ajax({
+                    url:url,
+                    type:"GET",
+                    datatype:"json",
+                    success:function(data){
+                        for(i=0; i<data.length; i++){
+                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].gender +
+                            '</td><td>' + data[i].phone +'</td><td>' + data[i].email +
+                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <a id="deletebtn" href="#" class="btn btn-danger  text-center "> Delete </a> </td></tr>')
+                        }
+                        console.log(data)
+                    },
+                    error:function(){
+                        console.log("error")
+                    }
+                });
+            }
 
+            var deleteAction = document.getElementById("deletebtn");
+            deleteAction.addEventListener("click", deleteUser);
+            function deleteUser(){
+            var url = "http://localhost:9098/User/{id}/deleteByid"
+                $.ajax({
+                    url:url,
+                    type:"DELETE",
+                    success:function(data){
+                    updateTable()
+                    },
+                    error:function(){
+                        console.log("error")
+                    }
+                });
+            }
+            deleteUser()
+            updateTable()
+        </script>
+    </div>
 </body>
 
 </html>

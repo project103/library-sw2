@@ -153,39 +153,15 @@
               <div class="card-body">
                 <h5 class="card-title mb-4 d-inline">Categories</h5>
                <a href="#" class="btn btn-primary mb-4 text-center float-right">Create Categories</a>
-                <table class="table">
+                <table class="table" id="table">
                   <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">name</th>
-                      <th scope="col">photo</th>
-                      <th scope="col">update</th>
-                      <th scope="col">delete</th>
-                    </tr>
+                      <th scope="col">Id</th>
+                      <th scope="col">Book Name</th>
+                      <th scope="col">Author</th>
+                      <th scope="col">Update</th>
+                      <th scope="col">Delete</th>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Fruits</td>
-                      <td><img src="1648989693.jpg" alt="" style="width: 30px; height: 30px;"></td>
-                      <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                      <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Meat</td>
-                      <td><img src="1648989693.jpg" alt="" style="width: 30px; height: 30px;"></td>
-                      <td><a  href="#" class="btn btn-warning text-white text-center">Update </a></td>
-                      <td><a href="#" class="btn btn-danger  text-center ">Delete </a></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Frozen Food</td>
-                      <td><img src="1648989693.jpg" alt="" style="width: 30px; height: 30px;"></td>
-                       <td><a  href="#" class="btn btn-warning text-white text-center ">Update </a></td>
-                      <td><a href="#" class="btn btn-danger text-center">Delete </a></td>
-                    </tr>
-                  </tbody>
+                  <tbody></tbody>
                 </table> 
               </div>
             </div>
@@ -213,7 +189,35 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                             <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
+        <script>
+            function updateTable(){
+                $("#table tbody").empty()
+                var url = "http://localhost:9098/books/all"
+                $.ajax({
+                    url:url,
+                    type:"GET",
+                    datatype:"json",
+                    success:function(data){
+                        for(i=0; i<data.length; i++){
+                            $("#table tbody").append("<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].author +
+                            "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                            <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>")
+                        }
+                        console.log(data)
+                    },
+                    error:function(){
+                        console.log("error")
+                    }
+                });
 
+
+            }
+
+            updateTable()
+        </script>
+    </div>
 </body>
 
 </html>
