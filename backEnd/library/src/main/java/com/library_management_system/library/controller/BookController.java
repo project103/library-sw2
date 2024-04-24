@@ -22,13 +22,13 @@ public class BookController {
         return bookService.getAllBooks();
     }//check
 
-    @GetMapping("/{id}")
+    @GetMapping("/GetById/{id}")
     public Book getBookById(@PathVariable int id) {
         return bookService.getBookById(id);
     }//check but needs exception!
 
 
-    @GetMapping("/{format}")
+    @GetMapping("/GetByFormat/{format}")
     public List<Book> getBookByFormat(@PathVariable String format) {
         return bookService.getBookByFormat(format);
     }
