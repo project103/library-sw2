@@ -18,8 +18,7 @@ public class BookService {
     private BookRepository bookRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private CategoryService categoryService;
+
     @Autowired
     private Category category;
 
@@ -65,14 +64,14 @@ public class BookService {
         if(book.getFormat().equals("Audio")) {
             book.setCopies(1);
         }
-        Category category = categoryService.getCategoryByName(categoryName);
+        Category category = categoryRepository.findByName(categoryName);
         
         book.setCategory(category);
         return bookRepository.save(book);
     }
 
     public List<Book> getCategoryContent(String categoryName){
-        Category category = categoryService.getCategoryByName(categoryName);
+        Category category = categoryRepository.findByName(categoryName);
         return bookRepository.findByCategory(category);
     }
 
