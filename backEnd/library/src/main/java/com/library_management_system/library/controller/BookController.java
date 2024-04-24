@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/books")
@@ -44,9 +47,9 @@ public class BookController {
     //     return bookService.addBook(book);
     // }
 
-    @PutMapping("/update")
-    public Book updateBook(@RequestBody Book book) {
-        return bookService.updateBook(book);
+    @PutMapping("/update/{bookId}")
+    public Book updateBook(@PathVariable int bookId ,@RequestBody Book book) {
+        return bookService.updateBook(bookId, book);
     }//check
 
     @GetMapping("/category/{categoryName}")
@@ -66,11 +69,15 @@ public class BookController {
         Category category = categoryRepository.findByName(NewBook.get("category"));
         book.setCategory(category);
         book.setName(NewBook.get("BookName"));
-        // set all attributes yaa marwaa
-
-
-
-
+        book.setAuthor(NewBook.get("author"));
+        book.setDescription(NewBook.get("description"));
+        book.setPrice(Double.parseDouble(NewBook.get("price")));
+        book.setCopies(Integer.parseInt(NewBook.get("copies")));
+        book.setFormat(NewBook.get("format"));
+        book.setLength(Integer.parseInt(NewBook.get("length")));
+        book.setRating(Double.parseDouble(NewBook.get("rating")));
+        book.setEdition(NewBook.get("edition"));
+        book.setLanguage(NewBook.get("language"));
 
         return bookService.AddBookToCategory(book, categoryName);
     }
@@ -79,6 +86,12 @@ public class BookController {
     public Book findBookByName(@PathVariable String name) {
         return bookService.findBookByName(name);
     }
+
+    @GetMapping("/language/{language}")
+    public List<Book> getBookByLanguage(@PathVariable String language) {
+        return bookService.getBookByLanguage(language);
+    }
+    
 
     @DeleteMapping("/deleteBooks/{categoryName}/{bookName}")
     public String removeBookFromCategory(@PathVariable String categoryName, @PathVariable String bookName) {

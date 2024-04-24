@@ -37,17 +37,14 @@ public class BookService {
     }
 
 
-    public Book updateBook(Book book) {
+    public Book updateBook(int bookId, Book updatedBook) {
+        Book existingBook = bookRepository.findById(bookId).orElse(null);
         
-        Book existingBook = bookRepository.findById(book.getId()).orElse(null);
-        existingBook.setId(book.getId());
-        existingBook.setName(book.getName());
-        existingBook.setAuthor(book.getAuthor());
-        existingBook.setDescription(book.getDescription());
-        existingBook.setCategory(book.getCategory());
-        existingBook.setPrice(book.getPrice());
+        existingBook.setName(updatedBook.getName());
+        existingBook.setAuthor(updatedBook.getAuthor());
+        existingBook.setDescription(updatedBook.getDescription());
+        existingBook.setPrice(updatedBook.getPrice());
         return bookRepository.save(existingBook);
-        
     }
 
     public List<Book> getBookByCategory(String categoryName){
@@ -59,6 +56,10 @@ public class BookService {
             System.out.println("There's no Books in category: " + categoryName);
           }
         return null;
+    }
+
+    public List<Book> getBookByLanguage(String language){
+        return bookRepository.findByLanguage(language);
     }
 
     public Book AddBookToCategory(Book book, String categoryName){
