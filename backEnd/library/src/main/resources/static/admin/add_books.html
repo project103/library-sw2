@@ -100,6 +100,8 @@
                 Addons
             </div>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            
             <!-- Nav Item - Charts -->
             
 
@@ -111,39 +113,65 @@
             </div> -->
 
         </ul>
+        <!-- id	age	email	gender	job	joined	name	password	phone	profile_pic	 user_role	 -->
+        <!-- id	author	copies	description	edition	format	language	length	name	price	rating	category_id	 -->
 
-        <div class="container-fluid">
 
-            <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mb-4 d-inline">Categories</h5>
-               <a href="create-user.html" class="btn btn-primary mb-4 text-center float-right">Add member</a>
-                <table class="table" id="table">
-                  <thead>
-                      <th scope="col">ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Gender</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Update</th>
-                      <th scope="col">Delete</th>
-                  </thead>
-                  <tbody></tbody>
-                </table> 
-              </div>
+    <div class="container-fluid">
+       <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-5 d-inline">Add Books</h5>
+              <form method="POST" action="" enctype="multipart/form-data">
+                <!-- Email input -->
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="author" id="form2Example1" class="form-control" placeholder="author" />
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="description" id="form2Example1" class="form-control" placeholder="description" />      
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="edition" id="form2Example1" class="form-control" placeholder="edition" />      
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="name" id="form2Example1" class="form-control" placeholder="name" />      
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="price" id="form2Example1" class="form-control" placeholder="price" />      
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="rating" id="form2Example1" class="form-control" placeholder="rating" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="category_id" id="form2Example1" class="form-control" placeholder="category_id" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="length" id="form2Example1" class="form-control" placeholder="length" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="copies" id="form2Example1" class="form-control" placeholder="copies" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="format" id="form2Example1" class="form-control" placeholder="format" />      
+                  </div>
+                
+                
+                
+
+      
+                <!-- Submit button -->
+                <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+
+          
+              </form>
+
             </div>
           </div>
         </div>
-  
-  
-  
-    </div>
-
-
-
-    <script src="vendor/jquery/jquery.min.js"></script>
+      </div>
+  </div>
+  <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -158,30 +186,39 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                             <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
         <script>
             function updateTable(){
                 $("#table tbody").empty()
-                var url = "http://localhost:9098/User/getUsers"
+                var url = "http://localhost:9098/books/all"
                 $.ajax({
                     url:url,
                     type:"GET",
                     datatype:"json",
                     success:function(data){
                         for(i=0; i<data.length; i++){
-                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].gender +
-                            '</td><td>' + data[i].phone +'</td><td>' + data[i].email +
+                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
                             '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser()" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
-                        error:function(){
+                    error:function(){
                         console.log("error")
                     }
                 });
+
+
             }
+
             updateTable()
         </script>
     </div>
 </body>
 
+</html>
+<!-- <script type="text/javascript"> -->
+
+</script>
+</body>
 </html>

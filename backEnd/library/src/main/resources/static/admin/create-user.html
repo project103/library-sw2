@@ -100,6 +100,8 @@
                 Addons
             </div>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            
             <!-- Nav Item - Charts -->
             
 
@@ -111,39 +113,59 @@
             </div> -->
 
         </ul>
+        <!-- id	age	email	gender	job	joined	name	password	phone	profile_pic	 user_role	 -->
 
-        <div class="container-fluid">
 
-            <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mb-4 d-inline">Categories</h5>
-               <a href="create-user.html" class="btn btn-primary mb-4 text-center float-right">Add member</a>
-                <table class="table" id="table">
-                  <thead>
-                      <th scope="col">ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Gender</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Update</th>
-                      <th scope="col">Delete</th>
-                  </thead>
-                  <tbody></tbody>
-                </table> 
-              </div>
+    <div class="container-fluid">
+       <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-5 d-inline">Add Members</h5>
+              <form method="POST" action="" enctype="multipart/form-data">
+                <!-- Email input -->
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="name" id="form2Example1" class="form-control" placeholder="name" />
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="email" id="form2Example1" class="form-control" placeholder="email" />      
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="password" id="form2Example1" class="form-control" placeholder="password" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="phone" id="form2Example1" class="form-control" placeholder="phone" />      
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="user_role" id="form2Example1" class="form-control" placeholder="user_role" />      
+                  </div>
+                
+                <div class="form-outline mb-4 mt-4">
+                    <label>Gender</label><br>
+                    <input type="radio" name="gender" id="male" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">Female</label><br>
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                  <label>Image</label>
+
+                  <input type="file" name="image" id="form2Example1" class="form-control" placeholder="image" />
+                </div>
+
+      
+                <!-- Submit button -->
+                <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+
+          
+              </form>
+
             </div>
           </div>
         </div>
-  
-  
-  
-    </div>
-
-
-
-    <script src="vendor/jquery/jquery.min.js"></script>
+      </div>
+  </div>
+  <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -158,30 +180,39 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                             <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
         <script>
             function updateTable(){
                 $("#table tbody").empty()
-                var url = "http://localhost:9098/User/getUsers"
+                var url = "http://localhost:9098/books/all"
                 $.ajax({
                     url:url,
                     type:"GET",
                     datatype:"json",
                     success:function(data){
                         for(i=0; i<data.length; i++){
-                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].gender +
-                            '</td><td>' + data[i].phone +'</td><td>' + data[i].email +
+                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
                             '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser()" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
-                        error:function(){
+                    error:function(){
                         console.log("error")
                     }
                 });
+
+
             }
+
             updateTable()
         </script>
     </div>
 </body>
 
+</html>
+<!-- <script type="text/javascript"> -->
+
+</script>
+</body>
 </html>
