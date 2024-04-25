@@ -257,11 +257,10 @@
                         type: "POST",
                         url: "http://localhost:9098/User/Register",
                         data: JSON.stringify(formData),
-                        contentType: "application/json",
+                        contentType: "application/json", // Corrected content type
                         success: function(response) {
                             console.log("Registration successful");
                             window.location.href = "/user/signin.html";
-
                         },
                         error: function(xhr, status, error) {
                             console.error("Error:", error);
@@ -273,7 +272,8 @@
 
 
 
-    </body>
+
+</body>
 
 
 </html>
