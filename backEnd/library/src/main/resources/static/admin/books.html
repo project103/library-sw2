@@ -171,7 +171,7 @@
                     success:function(data){
                         for(i=0; i<data.length; i++){
                             $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
-                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser()" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
+                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteBook(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
@@ -179,10 +179,21 @@
                         console.log("error")
                     }
                 });
-
-
             }
-
+            function deleteBook(bookId) {
+            var apiUrl = "http://localhost:9098/books/GetById/" + bookId
+            $.ajax({
+                url: apiUrl,
+                type: "DELETE",
+                success: function(result) {
+                console.log("User deleted successfully");
+                updateTable();
+        },
+        error: function(xhr, status, error) {
+            console.error("Error deleting user:", error);
+        }
+    });
+}
             updateTable()
         </script>
     </div>
