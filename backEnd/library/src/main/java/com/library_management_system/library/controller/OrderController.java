@@ -26,9 +26,9 @@ public class OrderController {
     @Autowired
     private OrderItemService orderItemService;
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addOrder(@RequestParam("userId") int userId) {
-        orderService.addOrder(userId);
+    @PostMapping("/add/{id}")
+    public ResponseEntity<Void> addOrder(@PathVariable  int id) {
+        orderService.addOrder(id);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

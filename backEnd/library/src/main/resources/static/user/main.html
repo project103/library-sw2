@@ -33,6 +33,14 @@
     <!--[if lt IE 9]>
         <script src="js/html5shiv.min.js"></script>
         <script src="js/respond.min.js"></script>
+        <script src="js/CartDrop.js"></script>
+        <script>
+            // Fetch cart items when the page loads for a specific user
+            $(document).ready(function() {
+                const userId = 1; // Example user ID, replace it with the actual user ID
+                fetchCartItems(userId);
+            });
+        </script>
         <script>
 
             if (localStorage.getItem('sessionId') == 1) {
@@ -80,30 +88,69 @@
                                             <span>|</span>
                                             <a href="Favorits.html"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                             <span>|</span>
+                                            <!-- Include jQuery library -->
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                            <!-- Your script containing UpdateCartMenu function -->
+                                            <!-- Include jQuery library -->
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                            <!-- Your script for updating the cart menu -->
+                                            <script>
+                                                function UpdateCartMenu() {
+                                                    var url = "http://localhost:9098/cart-items/"+localStorage.getItem("userId");
+                                                    var total = 0; // Initialize total variable
+
+                                                    $.ajax({
+                                                        url: url,
+                                                        type: "GET",
+                                                        dataType: "json",
+                                                        success: function(data) {
+                                                            // Clear existing items in the cart menu
+                                                            $('#cart-items-list').empty();
+
+                                                            // Iterate through each item in the data array and append to cart menu
+                                                            for(var i = 0; i < data.length; i++) {
+                                                                var item = data[i];
+                                                                $('#cart-items-list').append(
+                                                                    `<li class="clearfix">
+                            <div class="item-info">
+                                <div class="name">
+                                    <a href="#" class="item-name">${item.product.name}</a>
+                                </div>
+                                <div class="price">${item.quantity} X $${item.product.price.toFixed(2)}</div>
+                            </div>
+                            <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
+                        </li>`
+                                                                    );
+                                                                total += item.quantity * item.product.price; // Calculate total
+                                                            }
+                                                            $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
+                                                            $('#numItemOfCart').text(data.length); // Update number of items in cart
+                                                        },
+                                                        error: function() {
+                                                            console.log("Error");
+                                                        }
+                                                    });
+                                                }
+
+                                                UpdateCartMenu();
+                                            </script>
+
+
 
                                             <div class="header-cart dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                     <i class="fa fa-shopping-cart"></i>
-                                                    <small>0</small>
+                                                    <small id="numItemOfCart"></small>
                                                 </a>
-                                                <div class="dropdown-menu cart-dropdown">
-                                                    <ul>
-                                                        <li class="clearfix">
-                                                            <img src="images/header-cart-image-01.jpg"
-                                                                alt="cart item" />
-                                                            <div class="item-info">
-                                                                <div class="name">
-                                                                    <a href="#">The Great Gatsby</a>
-                                                                </div>
-                                                                <div class="author"><strong>Author:</strong> F. Scott
-                                                                    Fitzgerald</div>
-                                                                <div class="price">1 X $10.00</div>
-                                                            </div>
-                                                            <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+                                                <div class="dropdown-menu cart-dropdown" id="dropdown-menu">
+                                                    <ul id="cart-items-list">
+                                                        <!-- Cart items will be dynamically added here -->
                                                     </ul>
                                                     <div class="cart-total">
                                                         <div class="title">SubTotal</div>
-                                                        <div class="price">$30.00</div>
+                                                        <div class="price" id="cart-subtotal">$30.00</div>
                                                     </div>
                                                     <div class="cart-buttons">
                                                         <a href="cart.html" class="btn btn-dark-gray">View Cart</a>
@@ -111,6 +158,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +177,7 @@
                                     <li class="dropdown">
                                         <a data-toggle="dropdown" class="dropdown-toggle disabled"
                                             href="#">categories</a>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" id="dropdown">
                                             <li><a href="books-media-list-view.html">Adults </a></li>
                                             <li><a href="books-media-list-view.html">Romance </a></li>
                                             <li><a href="books-media-list-view.html">horror </a></li>
