@@ -166,6 +166,30 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
         <script>
+            //get 
+            function getUserData(userId){
+                window.location.href = "updatemember.html";
+    var formData = {
+        userId: userId // Include the user ID in the formData object
+    };
+
+    $.ajax({
+        url: "http://localhost:9098/User/getUserById"+userId,
+        type: "GET",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            
+            console.log("User data retrieved successfully:", response);
+            
+            // Handle the retrieved user data here
+        },
+        error: function(xhr, status, error) {
+            console.error("Error retrieving user data:", error);
+
+        }
+    });
+}
             function updateTable(){
                 $("#table tbody").empty()
                 var url = "http://localhost:9098/User/getUsers"
@@ -177,7 +201,7 @@
                         for(i=0; i<data.length; i++){
                             $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].gender +
                             '</td><td>' + data[i].phone +'</td><td>' + data[i].email +
-                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
+                            '</td><td> <button class="btn btn-warning text-white text-center" onclick="getUserData(' + data[i].id + ')">Update</button> </td><td> <button onclick="deleteUser(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
@@ -186,6 +210,9 @@
                     }
                 });
             }
+            function redirectToUpdate() {
+    window.location.href = "updatemember.html";
+}
             function deleteUser(userId) {
             var apiUrl = "http://localhost:9098/User/" + userId + "/deleteByid"
             $.ajax({
