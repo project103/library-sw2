@@ -55,11 +55,12 @@ public class userController {
     public User UpdateUser(@RequestBody User user) {
         return Service.UpdateUser(user);
     }
-@PostMapping("/login")
- public User login(@RequestBody Map<String,String> name) {
-  Integer id =   Service.getUserByusername(name.get("name"),name.get("password"));
-if (id != null){
-    return Service.getUserById(id);}
-else return null;
+
+    @PostMapping("/login")
+    public User login(@RequestBody Map<String,String> name) {
+        Integer id =   Service.getUserByusername(name.get("name"),name.get("password"));
+        if (id != null){
+            return Service.getUserById(id);}
+        else return null;
 }
 }
