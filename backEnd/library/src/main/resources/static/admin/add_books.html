@@ -123,37 +123,40 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-5 d-inline">Add Books</h5>
-              <form method="POST" action="" enctype="multipart/form-data">
+              <form method="post" id="creationForm" action="/books/addBook" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="author" id="form2Example1" class="form-control" placeholder="author" />
+                  <input type="text" name="category" id="category" class="form-control" placeholder="Category" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="description" id="form2Example1" class="form-control" placeholder="description" />      
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="edition" id="form2Example1" class="form-control" placeholder="edition" />      
+                  <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="name" id="form2Example1" class="form-control" placeholder="name" />      
+                  <input type="text" name="description" id="description" class="form-control" placeholder="Description" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="price" id="form2Example1" class="form-control" placeholder="price" />      
+                  <input type="text" name="price" id="price" class="form-control" placeholder="Price" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="rating" id="form2Example1" class="form-control" placeholder="rating" />      
+                    <input type="text" name="copies" id="copies" class="form-control" placeholder="Copies" />
                   </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="category_id" id="form2Example1" class="form-control" placeholder="category_id" />      
+                    <input type="text" name="format" id="format" class="form-control" placeholder="Format" />
                   </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="length" id="form2Example1" class="form-control" placeholder="length" />      
+                    <input type="text" name="length" id="length" class="form-control" placeholder="Length" />
                   </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="copies" id="form2Example1" class="form-control" placeholder="copies" />      
+                    <input type="text" name="rating" id="rating" class="form-control" placeholder="Rating" />
                   </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="format" id="form2Example1" class="form-control" placeholder="format" />      
+                    <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" />
+                  </div>
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="language" id="language" class="form-control" placeholder="Language" />
                   </div>
                 
                 
@@ -186,39 +189,53 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
-                             <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
-        <script>
-            function updateTable(){
-                $("#table tbody").empty()
-                var url = "http://localhost:9098/books/all"
-                $.ajax({
-                    url:url,
-                    type:"GET",
-                    datatype:"json",
-                    success:function(data){
-                        for(i=0; i<data.length; i++){
-                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
-                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteUser()" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
+    <script>
+        $(document).ready(function() {
+                $("#creationForm").submit(function(event) {
+                    event.preventDefault();
+
+                    // Get form data
+                    var formData = {
+                        category: $("#category").val(),
+                        name: $("#name").val(),
+                        author: $("#author").val(),
+                        description: $("#description").val(),
+                        price: $("#price").val(),
+                        copies: $("#copies").val(),
+                        format: $("#format").val(),
+                        length: $("#length").val(),
+                        rating: $("#rating").val(),
+                        edition: $("#edition").val(),
+                        language: $("#language").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:9098/User/addBook/"+ add category,
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function(response) {
+                            console.log("Registration successful");
+                             $("#category").val("");
+                             $("#name").val("");
+                             $("#author").val("");
+                             $("#description").val("");
+                             $("#price").val("");
+                             $("#copies").val("");
+                             $("#format").val("");
+                             $("#length").val("");
+                             $("#rating").val("");
+                             $("#edition").val("");
+                             $("#language").val("");
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error:", error);
                         }
-                        console.log(data)
-                    },
-                    error:function(){
-                        console.log("error")
-                    }
+                    });
                 });
+            });
+    </script>
 
-
-            }
-
-            updateTable()
-        </script>
     </div>
-</body>
-
-</html>
-<!-- <script type="text/javascript"> -->
-
-</script>
 </body>
 </html>

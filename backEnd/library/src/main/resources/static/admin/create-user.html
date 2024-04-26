@@ -122,7 +122,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-5 d-inline">Add Members</h5>
-              <form method="post" id="creation_form" action="" enctype="multipart/form-data">
+              <form method="post" id="creationForm" action="/User/Register" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
                   <input type="text" name="name" id="name" class="form-control" placeholder="name" />
@@ -137,7 +137,7 @@
                     <input type="text" name="phone" id="phone" class="form-control" placeholder="phone" />
                   </div>
                   <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="user_role" id="user_role" class="form-control" placeholder="user_role" />
+                    <input type="text" name="userRole" id="userRole" class="form-control" placeholder="user_role" />
                   </div>
                 
                 <div class="form-outline mb-4 mt-4">
@@ -148,7 +148,8 @@
                     <label for="female">Female</label><br>
                   </div>
                 <!-- Submit button -->
-                <button onclick="createUser()"  type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+                <button  type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+
 
           
               </form>
@@ -173,38 +174,43 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
-                   <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
-        <script>
-            function createUser() {
-            var formData = {
-                name: $("#name").val(),
-                email: $("#email").val(),
-                password: $("#password").val(),
-                phone: $("#phone").val(),
-                user_role: $("#user_role").val(),
-                gender: $("input[name='gender']:checked").val()
-            };
 
-            $.ajax({
-            url: "http://localhost:9098/User/Register",
-            type: "POST",
-            dataType: "json",
-            data: formData,
-            success: function(response) {
-            console.log("User created successfully:", response);
-            $("#name").val("");
-            $("#email").val("");
-            $("#password").val("");
-            $("#phone").val("");
-            $("#user_role").val("");
-            $("input[name='gender']").prop('checked', false);
-        },
-        error: function(xhr, status, error) {
-            console.error("Error creating user:", error);
-        }
-    });
-}
+        <script>
+             $(document).ready(function() {
+                $("#creationForm").submit(function(event) {
+                    event.preventDefault();
+
+                    // Get form data
+                    var formData = {
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        phone: $("#phone").val(),
+                        userRole: $("#userRole").val(),
+                        gender: $("input[name='gender']:checked").val()
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:9098/User/Register",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function(response) {
+                            console.log("Registration successful");
+                             $("#name").val("");
+                             $("#email").val("");
+                             $("#password").val("");
+                             $("#phone").val("");
+                             $("#userRole").val("");
+                             $("input[name='gender']").prop('checked', false);
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error:", error);
+                        }
+                    });
+                });
+            });
         </script>
 
 
