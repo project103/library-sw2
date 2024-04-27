@@ -75,20 +75,8 @@
                 </a>
                 
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ebooks.html">
-                    <i class='bx bxs-add-to-queue' ></i>
-                    <span>E Books</span>
-                </a>
-                
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="borrowbooks.html">
-                    <i class='bx bx-archive-out' ></i>
-                    <span>Borrow Books</span>
-                </a>
-                
-            </li>
+            
+
             <li class="nav-item">
                 <a class="nav-link" href="returnbooks.html">
                     <i class='bx bx-archive-in' ></i>
@@ -118,6 +106,9 @@
             <div class="sidebar-heading">
                 Addons
             </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            
             <!-- Nav Item - Charts -->
             
 
@@ -129,14 +120,52 @@
             </div> -->
 
         </ul>
+        <!-- id	age	email	gender	job	joined	name	password	phone	profile_pic	 user_role	 -->
 
 
+    <div class="container-fluid">
+       <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-5 d-inline">Update Members</h5>
+              <form method="post" id="creation_form" action="" enctype="multipart/form-data">
+                <!-- Email input -->
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="name" id="name" class="form-control" placeholder="name" />
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                  <input type="text" name="email" id="email" class="form-control" placeholder="email" />
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="password" id="password" class="form-control" placeholder="password" />
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="phone" />
+                  </div>
+                  <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="user_role" id="user_role" class="form-control" placeholder="user_role" />
+                  </div>
+                
+                <div class="form-outline mb-4 mt-4">
+                    <label>Gender</label><br>
+                    <input type="radio" vlaue="" name="gender" id="male" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">Female</label><br>
+                  </div>
+                <!-- Submit button -->
+                <button onclick="updateUser()"   type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
 
+          
+              </form>
 
-
-        
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+  <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -151,7 +180,34 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                   <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
+        <script>
+
+function getUserData(userId) {
+
+    var formData = {
+        userId: userId // Include the user ID in the formData object
+    };
+
+    $.ajax({
+        url: "http://localhost:9098/User/getUserById/" +userId,
+        type: "GET",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            console.log("User data retrieved successfully:", response);
+            // Handle the retrieved user data here
+        },
+        error: function(xhr, status, error) {
+            console.error("Error retrieving user data:", error);
+        }
+    });
+}
+
+
+        </script>
+
 
 </body>
-
 </html>

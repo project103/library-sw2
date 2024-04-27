@@ -85,6 +85,13 @@
                 
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="show-categories.html">
+                    <i class='bx bx-archive-in' ></i>
+                    <span>View Category</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="transactions.html">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>transactions</span>
@@ -160,6 +167,30 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
         <script>
+            //get 
+            function getUserData(userId){
+                window.location.href = "updatemember.html";
+    var formData = {
+        userId: userId // Include the user ID in the formData object
+    };
+
+    $.ajax({
+        url: "http://localhost:9098/User/getUserById"+userId,
+        type: "GET",
+        dataType: "json",
+        data: formData,
+        success: function(response) {
+            
+            console.log("User data retrieved successfully:", response);
+            
+            // Handle the retrieved user data here
+        },
+        error: function(xhr, status, error) {
+            console.error("Error retrieving user data:", error);
+
+        }
+    });
+}
             function updateTable(){
                 $("#table tbody").empty()
                 var url = "http://localhost:9098/User/getUsers"
@@ -180,6 +211,9 @@
                     }
                 });
             }
+            function redirectToUpdate() {
+    window.location.href = "updatemember.html";
+}
             function deleteUser(userId) {
             var apiUrl = "http://localhost:9098/User/" + userId + "/deleteByid"
             $.ajax({

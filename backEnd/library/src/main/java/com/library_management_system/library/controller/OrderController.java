@@ -44,7 +44,7 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{orderId}/{userId}/checkout")
+    @PostMapping("/{orderId}/{userId}")
     public ResponseEntity<Void> checkoutOrder(@PathVariable int orderId, @PathVariable int userId) {
         orderService.checkOut(orderId);
         List<OrderItem> orderItems = orderItemService.getOrderItemsByUserId(orderId, userId);

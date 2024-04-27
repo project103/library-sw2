@@ -257,7 +257,7 @@
                                 <article class="page type-page status-publish hentry">
                                     <div class="entry-content">
                                         <div class="woocommerce">
-                                            <form action="http://libraria.demo.presstigers.com/checkout.html"
+                                            <form
                                                 class="checkout woocommerce-checkout" method="post" name="checkout">
                                                 <div class="row">
                                                     <div class="col-sm-8">
@@ -266,10 +266,9 @@
                                                             <span class="underline left"></span>
                                                             <div class="form-row place-order">
                                                                 <div class="radio">
-                                                                    <input id="ship-address" type="radio"
-                                                                        value="ship-address" name="ship-address">
-                                                                    <label for="ship-address"><a type="submit" data-value="Place order"
-                                                                         id="place_order"
+
+                                                                    <label ><a type="submit" data-value="Place order"
+                                                                         id="add_visar"
                                                                         name="woocommerce_checkout_place_order"
                                                                         class="button alt btn btn-default" href="addVisa.html"> add visa</a>
                                                     
@@ -293,50 +292,8 @@
                                                         <h2>Your order</h2>
                                                         <span class="underline left"></span>
                                                         <div class="woocommerce-checkout-review-order"
-                                                            id="order_review">
-                                                            <table
-                                                                class="shop_table woocommerce-checkout-review-order-table">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th class="product-name">Product</th>
-                                                                        <th class="product-total">Total</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="cart_item">
-                                                                        <td class="product-name">
-                                                                            <span class="woocommerce-product-amount">The
-                                                                                Great Gatsby</span>
-                                                                        </td>
-                                                                        <td class="product-total">
-                                                                            <span
-                                                                                class="woocommerce-Price-amount amount">$10.00</span>
-                                                                        </td>
-                                                                    </tr>
+                                                            id="cart-items-list">
 
-                                                                    </tr>
-                                                                </tbody>
-                                                                <tfoot>
-                                                                    <tr class="cart-subtotal">
-                                                                        <td>Cart Sub Total</td>
-                                                                        <td>$10.00</td>
-                                                                    </tr>
-                                                                    <tr class="cart-shipping">
-                                                                        <td>Fine</td>
-                                                                        <td>$05.00</td>
-                                                                    </tr>
-                                                                    <tr class="cart-shipping">
-                                                                        <td>Shipping</td>
-                                                                        <td><strong
-                                                                                class="shipping-amount">Free</strong>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr class="order-total">
-                                                                        <th>Order Totals</th>
-                                                                        <th>$947.96</th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -617,6 +574,90 @@
 
                                                 UpdateCartMenu();
                                             </script>
+    <script>
+        function UpdateCart() {
+            var url = "http://localhost:9098/cart-items/" + localStorage.getItem("userId");
+            var total = 0; // Initialize total variable
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    // Initialize an empty string to store the HTML content for the table
+                    var tableHTML = '';
+
+                    // Start building the table structure
+                    tableHTML += '<table class="shop_table woocommerce-checkout-review-order-table">';
+                    tableHTML += '<thead>';
+                    tableHTML += '<tr>';
+                    tableHTML += '<th class="product-name">Product</th>';
+                    tableHTML += '<th class="product-total">Total</th>';
+                    tableHTML += '</tr>';
+                    tableHTML += '</thead>';
+                    tableHTML += '<tbody>';
+
+                    // Iterate through each item in the data array and append to table
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        tableHTML += '<tr class="cart_item">';
+                        tableHTML += '<td class="product-name">';
+                        tableHTML += '<a href="#" class="item-name">' + item.product.name + '</a>';
+                        tableHTML += '</td>';
+                        tableHTML += '<td class="product-total">';
+                        tableHTML += item.quantity + ' X $' + item.product.price.toFixed(2);
+                        tableHTML += '</td>';
+                        tableHTML += '</tr>';
+                        total += item.quantity * item.product.price; // Calculate total
+                    }
+
+                    // End the table body and add the table footer
+                    tableHTML += '</tbody>';
+                    tableHTML += '<tfoot>';
+                    tableHTML += '<tr class="order-total">';
+                    tableHTML += '<th>Order Total</th>';
+                    tableHTML += '<th>$' + total.toFixed(2) + '</th>';
+                    tableHTML += '</tr>';
+                    tableHTML += '</tfoot>';
+                    tableHTML += '</table>';
+
+                    // Update the HTML content of the table container with the dynamically generated table
+                    $('#cart-items-list').html(tableHTML);
+
+                    // Update the number of items in cart
+                    $('#numItemOfCart').text(data.length);
+                },
+                error: function() {
+                    console.log("Error");
+                }
+            });
+        }
+
+        UpdateCart();
+    </script>
+    <script>
+        function checkOut() {
+            // Assuming '#place_order' is the ID of your form
+            $('#place_order').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                var url = "http://localhost:9098/" + localStorage.getItem("order_id") + "/" + localStorage.getItem("userId") ;
+                var total = 0; // Initialize total variable
+
+                $.ajax({
+                    url: url,
+                    type: "post",
+                    success: function() {
+                        console.log("Order Complete");
+                    },
+                    error: function() {
+                        console.log("Error");
+                    }
+                });
+            });
+        }
+    </script>
+
 </body>
 
 
