@@ -186,7 +186,7 @@
                         for(i=0; i<data.length; i++){
                             $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
                             '</td><td>' + data[i].price +'</td><td>' + data[i].copies +'</td><td>' + data[i].format +'</td><td>' + data[i].length +
-                            '</td><td>' + data[i].edition +'</td><td>' + data[i].language +'</td><td>' + data[i].category +
+                            '</td><td>' + data[i].edition +'</td><td>' + data[i].language +'</td><td>' + data[i].category.name +
                             '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteBook(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
