@@ -6,6 +6,9 @@
 
     <!-- Meta -->
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 
     <!-- Title -->
     <title>..:: LIBRARIA ::..</title>
@@ -24,7 +27,7 @@
     <link href="css/mmenu.positioning.css" rel="stylesheet" type="text/css" />
 
     <!-- Stylesheet -->
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -87,8 +90,6 @@
                                             <span>|</span>
                                             <a href="Favorits.html"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                             <span>|</span>
-                                            <!-- Include jQuery library -->
-                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                             <!-- Your script containing UpdateCartMenu function -->
                                             <!-- Include jQuery library -->
@@ -97,19 +98,19 @@
                                             <!-- Your script for updating the cart menu -->
                                             <script>
                                                 function UpdateCartMenu() {
-                                                    var url = "http://localhost:9098/cart-items/"+localStorage.getItem("userId");
+                                                    var url = "http://localhost:9098/cart-items/" + localStorage.getItem("userId");
                                                     var total = 0; // Initialize total variable
 
                                                     $.ajax({
                                                         url: url,
                                                         type: "GET",
                                                         dataType: "json",
-                                                        success: function(data) {
+                                                        success: function (data) {
                                                             // Clear existing items in the cart menu
                                                             $('#cart-items-list').empty();
 
                                                             // Iterate through each item in the data array and append to cart menu
-                                                            for(var i = 0; i < data.length; i++) {
+                                                            for (var i = 0; i < data.length; i++) {
                                                                 var item = data[i];
                                                                 $('#cart-items-list').append(
                                                                     `<li class="clearfix">
@@ -121,20 +122,23 @@
                             </div>
                             <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
                         </li>`
-                                                                    );
+                                                                );
                                                                 total += item.quantity * item.product.price; // Calculate total
                                                             }
                                                             $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
                                                             $('#numItemOfCart').text(data.length); // Update number of items in cart
                                                         },
-                                                        error: function() {
+                                                        error: function () {
                                                             console.log("Error");
                                                         }
                                                     });
                                                 }
 
                                                 UpdateCartMenu();
+
                                             </script>
+
+                                        
 
 
 
@@ -176,13 +180,8 @@
                                     <li class="dropdown">
                                         <a data-toggle="dropdown" class="dropdown-toggle disabled"
                                             href="#">categories</a>
-                                        <ul class="dropdown-menu" id="dropdown">
+                                        <ul class="dropdown-menu" id="dropdownCategory">
                                             <li><a href="books-media-list-view.html">Adults </a></li>
-                                            <li><a href="books-media-list-view.html">Romance </a></li>
-                                            <li><a href="books-media-list-view.html">horror </a></li>
-                                            <li><a href="books-media-list-view.html">Fantasy </a></li>
-                                            <li><a href="books-media-list-view.html">Crime </a></li>
-                                            <li><a href="books-media-list-view.html">Adventure </a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -191,6 +190,36 @@
                                     </li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
+                                <script>
+                                    function UpdateCategories() {
+                                        var url = "http://localhost:9098/categories/all";
+                                
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                // Clear existing items in the cart menu
+                                                $('#dropdownCategory').empty();
+                                
+                                                // Iterate through each item in the data array and append to cart menu
+                                                for (var i = 0; i < data.length; i++) {
+                                                    var item = data[i];
+                                                    $('#dropdownCategory').append(
+                                                        '<li><a href="books-media-list-view.html">' + item.name + '</a></li>'
+                                                    );
+                                                }
+                                            },
+                                            error: function () {
+                                                console.log("Error");
+                                            }
+                                        });
+                                    }
+                                
+                                    UpdateCategories();
+                                </script>
+                                
+
                             </div>
                         </div>
                     </div>
@@ -457,13 +486,13 @@
     <!-- Custom Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
 
-<script>
+    <script>
 
-    if (localStorage.getItem('sessionId') == 1) {
-    } else {
-        window.location.href = 'signin.html';
-    }
-</script>
+        if (localStorage.getItem('sessionId') == 1) {
+        } else {
+            window.location.href = 'signin.html';
+        }
+    </script>
 
 </body>
 
