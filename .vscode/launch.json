@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open main.html",
+            "file": "f:\\projects\\New folder (2)\\security\\sporing\\library-sw2\\backEnd\\library\\src\\main\\resources\\static\\user\\main.html"
+        }
+    ]
+}
