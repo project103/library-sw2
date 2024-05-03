@@ -384,11 +384,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Borrow Books
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Numbers Of Categories
                                             </div>
-                                            <div class="row no-gutters align-items-center">
+                                            <div  class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">6</div>
+                                                    <div id="NoCategories" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -483,6 +483,25 @@
                             });
                         }
                         updateNoOfBooks()
+                    </script>
+
+                    <script>
+                        function updateNoOfCategories(){
+                            var url = "http://localhost:9098/categories/all"
+                            $.ajax({
+                                url:url,
+                                type:"GET",
+                                datatype:"json",
+                                success:function(data){
+                                var divElement = document.getElementById("NoCategories");
+                                divElement.innerHTML = data.length;
+                                },
+                                error:function(){
+                                    console.log("error")
+                                }
+                            });
+                        }
+                        updateNoOfCategories()
                     </script>
 
                 </div>

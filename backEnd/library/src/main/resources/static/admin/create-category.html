@@ -340,10 +340,10 @@
                            <div class="card">
                              <div class="card-body">
                                <h5 class="card-title mb-5 d-inline">Create Categories</h5>
-                               <form id="categoryForm" method="POST" action="" enctype="multipart/form-data">
+                               <form id="categoryForm" method="post" action="/categories/add" enctype="multipart/form-data">
                                  <!-- Email input -->
                                  <div class="form-outline mb-4 mt-4">
-                                   <input type="text" name="name" id="categoryName" class="form-control" placeholder="name" />
+                                   <input type="text" name="name" id="name" class="form-control" placeholder="name" />
                                  </div>
                                
                  
@@ -388,43 +388,33 @@
                     <script src="js/demo/chart-area-demo.js"></script>
                     <script src="js/demo/chart-pie-demo.js"></script>
                     <script>
-                        function updateNoOfUsers() {
-                            var url = "http://localhost:9098/User/getUsers"
-                            $.ajax({
-                                url: url,
-                                type: "GET",
-                                datatype: "json",
-                                success: function (data) {
-                                    var divElement = document.getElementById("NoUsers");
-                                    divElement.innerHTML = data.length;
-                                },
-                                error: function () {
-                                    console.log("error")
-                                }
-                            });
-                        }
-                        updateNoOfUsers()
-                    </script>
-                    <script>
-                        function updateNoOfBooks() {
-                            var url = "http://localhost:9098/books/all"
-                            $.ajax({
-                                url: url,
-                                type: "GET",
-                                datatype: "json",
-                                success: function (data) {
-                                    var divElement = document.getElementById("NoBooks");
-                                    divElement.innerHTML = data.length;
-                                },
-                                error: function () {
-                                    console.log("error")
-                                }
-                            });
-                        }
-                        updateNoOfBooks()
-                    </script>
+                        $(document).ready(function() {
+                            $("#categoryForm").submit(function(event) {
+                            event.preventDefault();
 
+                            // Get form data
+                            var formData = {
+                                name: $("#name").val(),
+                            };
+
+                            $.ajax({
+                                type: "POST",
+                                url: "http://localhost:9098/categories/add",
+                                data: JSON.stringify(formData),
+                                contentType: "application/json",
+                                success: function(response) {
+                                    console.log("Adding successful");
+                                    $("#name").val("");
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Error:", error);
+                                }
+                            });
+                        });
+                    });
+                    </script>
                 </div>
+            </div>
 </body>
 
 </html>
