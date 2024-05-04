@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item ">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                 <a class="nav-link" href="members.html">
+                    <i class='bx bx-male-female'></i>                   
+                    <span>Members</span>
+                </a>
+               
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="books.html">
+                    <i class='bx bxs-add-to-queue' ></i>
+                    <span>Add Books</span>
+                </a>
+                
+            </li>
+            
+
+            <li class="nav-item">
+                <a class="nav-link" href="returnbooks.html">
+                    <i class='bx bx-archive-in' ></i>
+                    <span>Return Books</span>
+                </a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="show-categories.html">
+                    <i class='bx bx-archive-in' ></i>
+                    <span>View Category</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="transactions.html">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>transactions</span>
+                </a>
+                
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            
+            <!-- Nav Item - Charts -->
+            
+
+            <!-- Sidebar Message -->
+            <!-- <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div> -->
+
+        </ul>
+        <!-- id	age	email	gender	job	joined	name	password	phone	profile_pic	 user_role	 -->
+
+
+    <div class="container-fluid">
+       <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-5 d-inline">Update Book</h5>
+              <form method="post" id="updateForm" action="/books/update/{bookId}" enctype="multipart/form-data">
+                <!-- Email input -->
+                <div class="form-outline mb-4 mt-4">
+                    <select name="categoryName" id="categoryName" class="form-control">
+                        <option value="" selected disabled>Select Category</option>
+                    </select>
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="BookName" id="BookName" class="form-control" placeholder="Book Name" />
+                </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
+                  </div>
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="description" id="description" class="form-control" placeholder="Description" />
+                  </div>
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="price" id="price" class="form-control" placeholder="Price" />
+                  </div>
+                
+                <div class="form-outline mb-4 mt-4">
+                    <input type="text" name="copies" id="copies" class="form-control" placeholder="Copies" />
+                </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <select name="bookType" id="bookType" class="form-control">
+                          <option value="" selected disabled>Select Format</option>
+                          <option value="book">Book</option>
+                          <option value="ebook">Ebook</option>
+                      </select>
+                  </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="length" id="length" class="form-control" placeholder="Length" />
+                  </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="rating" id="rating" class="form-control" placeholder="Rating" />
+                  </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" />
+                  </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="language" id="language" class="form-control" placeholder="Language" />
+                  </div>
+                <!-- Submit button -->
+                <button type="button" id="updateButton" class="btn btn-primary  mb-4 text-center">Update</button>
+
+          
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+  <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
+                   <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
+        <!-- Include jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- JavaScript code to fetch and update user data -->
+       <!-- <script>
+            function getUserData(userId) {
+                $.ajax({
+                    url: "http://localhost:9098/User/getUserById/" + userId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        console.log("User data retrieved successfully:", response);
+                        // Populate the form fields with the retrieved user data
+                        $("#name").val(response.name);
+                        $("#email").val(response.email);
+                        $("#password").val(response.password);
+                        $("#phone").val(response.phone);
+                        $("#user_role").val(response.userRole);
+                        // Set the gender radio button
+                        if (response.gender === "male") {
+                            $("#male").prop("checked", true);
+                        } else {
+                            $("#female").prop("checked", true);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error retrieving user data:", error);
+                    }
+                });
+            }
+
+            function updateUser() {
+                // Get form data
+                var formData = {
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    password: $("#password").val(),
+                    phone: $("#phone").val(),
+                    userRole: $("#user_role").val(),
+                    gender: $("input[name='gender']:checked").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:9098/User/UpdateUser",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    success: function(response) {
+                        console.log("User data updated successfully");
+                        // Handle success, such as showing a success message
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error updating user data:", error);
+                        // Handle error, such as showing an error message
+                    }
+                });
+            }
+        </script>-->
+        <!--<script>
+            $(document).ready(function() {
+    // Retrieve the user ID from the URL query parameter
+    var urlParams = new URLSearchParams(window.location.search);
+    var userId = urlParams.get('id');
+
+    // Call the getUserData function to populate the form with user data
+    getUserData(userId);
+});
+
+// Define the getUserData function to fetch user data and populate the form fields
+function getUserData(userId) {
+    $.ajax({
+        url: "http://localhost:9098/User/getUserById/" + userId,
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+            // Populate the form fields with the retrieved user data
+            $("#name").val(response.name);
+            $("#email").val(response.email);
+            $("#password").val(response.password);
+            $("#phone").val(response.phone);
+            $("#userRole").val(response.userRole);
+            // Set the gender radio button
+            if (response.gender === "male") {
+                $("#male").prop("checked", true);
+            } else {
+                $("#female").prop("checked", true);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error retrieving user data:", error);
+        }
+    });
+}
+
+        </script>
+
+        <script>
+            $(document).ready(function() {
+    $("#updateForm").submit(function(event) {
+        event.preventDefault();
+
+        // Get form data
+        var formData = {
+            name: $("#name").val(),
+            email: $("#email").val(),
+            password: $("#password").val(),
+            phone: $("#phone").val(),
+            userRole: $("#userRole").val(),
+            gender: $("input[name='gender']:checked").val()
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "http://localhost:9098/User/UpdateUser",
+            data: JSON.stringify(formData),
+            contentType: "application/json",
+            success: function(response) {
+                console.log("User data updated successfully");
+                // Optionally, you can display a success message here
+            },
+            error: function(xhr, status, error) {
+                console.error("Error updating user data:", error);
+            }
+        });
+    });
+});
+
+        </script>-->
+        <!--<script>
+            $(document).ready(function() {
+                // Retrieve the user ID from the URL query parameter
+                var urlParams = new URLSearchParams(window.location.search);
+                var userId = urlParams.get('id');
+
+                // Call the getUserData function to populate the form with user data
+                getUserData(userId);
+
+                // Function to handle form submission
+                $("#updateForm").submit(function(event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+
+                    // Get form data
+                    var formData = {
+                        // Only include the fields that have been updated
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        phone: $("#phone").val(),
+                        userRole: $("#userRole").val(),
+                        gender: $("input[name='gender']:checked").val()
+                    };
+
+                    // Send a PUT request to the backend API
+                    $.ajax({
+                        type: "PUT",
+                        url: "http://localhost:9098/User/UpdateUser",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function(response) {
+                            console.log("User data updated successfully");
+                            // Optionally, you can display a success message here
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error updating user data:", error);
+                        }
+                    });
+                });
+            });
+
+            // Define the getUserData function to fetch user data and populate the form fields
+            function getUserData(userId) {
+                $.ajax({
+                    url: "http://localhost:9098/User/getUserById/" + userId,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(response) {
+                        // Populate the form fields with the retrieved user data
+                        $("#name").val(response.name);
+                        $("#email").val(response.email);
+                        $("#password").val(response.password);
+                        $("#phone").val(response.phone);
+                        $("#userRole").val(response.userRole);
+                        // Set the gender radio button
+                        if (response.gender === "male") {
+                            $("#male").prop("checked", true);
+                        } else {
+                            $("#female").prop("checked", true);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error retrieving user data:", error);
+                    }
+                });
+            }
+        </script>-->
+        <!-- Include jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                // Retrieve the user ID from the URL query parameter
+                var urlParams = new URLSearchParams(window.location.search);
+                var userId = urlParams.get('id');
+
+                // Call the getUserData function to populate the form with user data
+                getUserData(userId);
+
+                // Function to handle form submission
+                $("#updateButton").click(function() {
+                    // Get form data
+                    var formData = {
+                        name: $("#name").val(),
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                        phone: $("#phone").val(),
+                        userRole: $("#userRole").val(),
+                        gender: $("input[name='gender']:checked").val()
+                    };
+
+                    // Send a PUT request to the backend API
+                    $.ajax({
+                        type: "PUT",
+                        url: "http://localhost:9098/User/UpdateUser",
+                        data: JSON.stringify(formData),
+                        contentType: "application/json",
+                        success: function(response) {
+                            console.log("User data updated successfully");
+                            // Optionally, you can display a success message here
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error updating user data:", error);
+                        }
+                    });
+                });
+
+                // Define the getUserData function to fetch user data and populate the form fields
+                function getUserData(userId) {
+                    $.ajax({
+                        url: "http://localhost:9098/User/getUserById/" + userId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(response) {
+                            // Populate the form fields with the retrieved user data
+                            $("#name").val(response.name);
+                            $("#email").val(response.email);
+                            $("#password").val(response.password);
+                            $("#phone").val(response.phone);
+                            $("#userRole").val(response.userRole);
+                            // Set the gender radio button
+                            if (response.gender === "male") {
+                                $("#male").prop("checked", true);
+                            } else {
+                                $("#female").prop("checked", true);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error retrieving user data:", error);
+                        }
+                    });
+                }
+            });
+        </script>
+
+
+</body>
+</html>
