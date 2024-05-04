@@ -71,32 +71,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="books.html">
                     <i class='bx bxs-add-to-queue' ></i>
-                    <span>Add Books</span>
+                    <span>Books</span>
                 </a>
                 
             </li>
-            
 
-            <li class="nav-item">
-                <a class="nav-link" href="returnbooks.html">
-                    <i class='bx bx-archive-in' ></i>
-                    <span>Return Books</span>
-                </a>
-                
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="show-categories.html">
                     <i class='bx bx-archive-in' ></i>
-                    <span>View Category</span>
+                    <span>Categories</span>
                 </a>
 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="transactions.html">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>transactions</span>
-                </a>
-                
             </li>
 
             <!-- Divider -->
@@ -162,11 +147,11 @@
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
+                                        <input type="text" id="searchInput" class="form-control bg-light border-0 small"
                                             placeholder="Search for..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
+                                            <button id="searchButton" class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
                                             </button>
                                         </div>
@@ -503,7 +488,6 @@
                         }
                         updateNoOfCategories()
                     </script>
-
                 </div>
 </body>
 
