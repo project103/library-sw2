@@ -133,11 +133,11 @@
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
                     <select name="categoryName" id="categoryName" class="form-control">
-                        <option value="" selected disabled>Select Category</option>
+                        <option value="" selected disabled >Select Category</option>
                     </select>
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="BookName" id="BookName" class="form-control" placeholder="Book Name" />
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
                     <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
@@ -154,10 +154,10 @@
                 </div>
 
                   <div class="form-outline mb-4 mt-4">
-                      <select name="bookType" id="bookType" class="form-control">
+                      <select name="format" id="format" class="form-control">
                           <option value="" selected disabled>Select Format</option>
-                          <option value="book">Book</option>
-                          <option value="ebook">Ebook</option>
+                          <option value="book">book</option>
+                          <option value="ebook">ebook</option>
                       </select>
                   </div>
 
@@ -202,273 +202,99 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
-                   <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
         <!-- Include jQuery library -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        <!-- JavaScript code to fetch and update user data -->
-       <!-- <script>
-            function getUserData(userId) {
-                $.ajax({
-                    url: "http://localhost:9098/User/getUserById/" + userId,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        console.log("User data retrieved successfully:", response);
-                        // Populate the form fields with the retrieved user data
-                        $("#name").val(response.name);
-                        $("#email").val(response.email);
-                        $("#password").val(response.password);
-                        $("#phone").val(response.phone);
-                        $("#user_role").val(response.userRole);
-                        // Set the gender radio button
-                        if (response.gender === "male") {
-                            $("#male").prop("checked", true);
-                        } else {
-                            $("#female").prop("checked", true);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error retrieving user data:", error);
-                    }
-                });
-            }
-
-            function updateUser() {
-                // Get form data
-                var formData = {
-                    name: $("#name").val(),
-                    email: $("#email").val(),
-                    password: $("#password").val(),
-                    phone: $("#phone").val(),
-                    userRole: $("#user_role").val(),
-                    gender: $("input[name='gender']:checked").val()
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost:9098/User/UpdateUser",
-                    data: JSON.stringify(formData),
-                    contentType: "application/json",
-                    success: function(response) {
-                        console.log("User data updated successfully");
-                        // Handle success, such as showing a success message
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error updating user data:", error);
-                        // Handle error, such as showing an error message
-                    }
-                });
-            }
-        </script>-->
-        <!--<script>
+        <script>
+            //get catogories name and show it on option list
             $(document).ready(function() {
-    // Retrieve the user ID from the URL query parameter
-    var urlParams = new URLSearchParams(window.location.search);
-    var userId = urlParams.get('id');
-
-    // Call the getUserData function to populate the form with user data
-    getUserData(userId);
-});
-
-// Define the getUserData function to fetch user data and populate the form fields
-function getUserData(userId) {
-    $.ajax({
-        url: "http://localhost:9098/User/getUserById/" + userId,
-        type: "GET",
-        dataType: "json",
-        success: function(response) {
-            // Populate the form fields with the retrieved user data
-            $("#name").val(response.name);
-            $("#email").val(response.email);
-            $("#password").val(response.password);
-            $("#phone").val(response.phone);
-            $("#userRole").val(response.userRole);
-            // Set the gender radio button
-            if (response.gender === "male") {
-                $("#male").prop("checked", true);
-            } else {
-                $("#female").prop("checked", true);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error retrieving user data:", error);
-        }
-    });
-}
-
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:9098/categories/all",
+                    success: function(response) {
+                        response.forEach(function(category) {
+                            $("#categoryName").append(`<option value="${category.name}">${category.name}</option>`);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching categories:", error);
+                    }
+                });
+            });
         </script>
-
         <script>
             $(document).ready(function() {
-    $("#updateForm").submit(function(event) {
-        event.preventDefault();
+                // Function to fetch book data by ID and populate the update form
+                function getBookDataById(bookId) {
+                    $.ajax({
+                        url: "http://localhost:9098/books/GetById/" + bookId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(response) {
+                            // Populate the form fields with the retrieved book data
+                            $("#categoryName").val(response.category.name);
+                            $("#name").val(response.name);
+                            $("#author").val(response.author);
+                            $("#description").val(response.description);
+                            $("#price").val(response.price);
+                            $("#copies").val(response.copies);
+                            $("#format").val(response.format);
+                            $("#length").val(response.length);
+                            $("#rating").val(response.rating);
+                            $("#edition").val(response.edition);
+                            $("#language").val(response.language);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error retrieving book data:", error);
+                        }
+                    });
+                }
 
-        // Get form data
-        var formData = {
-            name: $("#name").val(),
-            email: $("#email").val(),
-            password: $("#password").val(),
-            phone: $("#phone").val(),
-            userRole: $("#userRole").val(),
-            gender: $("input[name='gender']:checked").val()
-        };
-
-        $.ajax({
-            type: "PUT",
-            url: "http://localhost:9098/User/UpdateUser",
-            data: JSON.stringify(formData),
-            contentType: "application/json",
-            success: function(response) {
-                console.log("User data updated successfully");
-                // Optionally, you can display a success message here
-            },
-            error: function(xhr, status, error) {
-                console.error("Error updating user data:", error);
-            }
-        });
-    });
-});
-
-        </script>-->
-        <!--<script>
-            $(document).ready(function() {
-                // Retrieve the user ID from the URL query parameter
+                // Retrieve the book ID from the URL query parameter
                 var urlParams = new URLSearchParams(window.location.search);
-                var userId = urlParams.get('id');
+                var bookId = urlParams.get('id');
 
-                // Call the getUserData function to populate the form with user data
-                getUserData(userId);
+                // Call the function to fetch and populate book data
+                getBookDataById(bookId);
 
-                // Function to handle form submission
+                // Handle form submission
                 $("#updateForm").submit(function(event) {
-                    // Prevent the default form submission
                     event.preventDefault();
 
                     // Get form data
                     var formData = {
-                        // Only include the fields that have been updated
-                        name: $("#name").val(),
-                        email: $("#email").val(),
-                        password: $("#password").val(),
-                        phone: $("#phone").val(),
-                        userRole: $("#userRole").val(),
-                        gender: $("input[name='gender']:checked").val()
+                        categoryName: $("#categoryName").val(),
+                        BookName: $("#BookName").val(),
+                        author: $("#author").val(),
+                        description: $("#description").val(),
+                        price: $("#price").val(),
+                        copies: $("#copies").val(),
+                        format: $("#format").val(),
+                        length: $("#length").val(),
+                        rating: $("#rating").val(),
+                        edition: $("#edition").val(),
+                        language: $("#language").val()
                     };
 
-                    // Send a PUT request to the backend API
+                    // Send a PUT request to update the book
                     $.ajax({
                         type: "PUT",
-                        url: "http://localhost:9098/User/UpdateUser",
+                        url: "http://localhost:9098/books/update/" + bookId,
                         data: JSON.stringify(formData),
                         contentType: "application/json",
                         success: function(response) {
-                            console.log("User data updated successfully");
-                            // Optionally, you can display a success message here
-
+                            console.log("Book data updated successfully");
+                            // Optionally, you can redirect or show a success message
                         },
                         error: function(xhr, status, error) {
-                            console.error("Error updating user data:", error);
+                            console.error("Error updating book data:", error);
                         }
                     });
                 });
-            });
-
-            // Define the getUserData function to fetch user data and populate the form fields
-            function getUserData(userId) {
-                $.ajax({
-                    url: "http://localhost:9098/User/getUserById/" + userId,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(response) {
-                        // Populate the form fields with the retrieved user data
-                        $("#name").val(response.name);
-                        $("#email").val(response.email);
-                        $("#password").val(response.password);
-                        $("#phone").val(response.phone);
-                        $("#userRole").val(response.userRole);
-                        // Set the gender radio button
-                        if (response.gender === "male") {
-                            $("#male").prop("checked", true);
-                        } else {
-                            $("#female").prop("checked", true);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error retrieving user data:", error);
-                    }
-                });
-            }
-        </script>-->
-        <!-- Include jQuery library -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                // Retrieve the user ID from the URL query parameter
-                var urlParams = new URLSearchParams(window.location.search);
-                var userId = urlParams.get('id');
-
-                // Call the getUserData function to populate the form with user data
-                getUserData(userId);
-
-                // Function to handle form submission
-                $("#updateButton").click(function() {
-                    // Get form data
-                    var formData = {
-                        name: $("#name").val(),
-                        email: $("#email").val(),
-                        password: $("#password").val(),
-                        phone: $("#phone").val(),
-                        userRole: $("#userRole").val(),
-                        gender: $("input[name='gender']:checked").val()
-                    };
-
-                    // Send a PUT request to the backend API
-                    $.ajax({
-                        type: "PUT",
-                        url: "http://localhost:9098/User/UpdateUser",
-                        data: JSON.stringify(formData),
-                        contentType: "application/json",
-                        success: function(response) {
-                            console.log("User data updated successfully");
-                            // Optionally, you can display a success message here
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("Error updating user data:", error);
-                        }
-                    });
-                });
-
-                // Define the getUserData function to fetch user data and populate the form fields
-                function getUserData(userId) {
-                    $.ajax({
-                        url: "http://localhost:9098/User/getUserById/" + userId,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(response) {
-                            // Populate the form fields with the retrieved user data
-                            $("#name").val(response.name);
-                            $("#email").val(response.email);
-                            $("#password").val(response.password);
-                            $("#phone").val(response.phone);
-                            $("#userRole").val(response.userRole);
-                            // Set the gender radio button
-                            if (response.gender === "male") {
-                                $("#male").prop("checked", true);
-                            } else {
-                                $("#female").prop("checked", true);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("Error retrieving user data:", error);
-                        }
-                    });
-                }
             });
         </script>
 
+        </script>
 
 </body>
 </html>
