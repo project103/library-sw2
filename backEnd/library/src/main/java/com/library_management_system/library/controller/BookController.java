@@ -36,7 +36,7 @@ public class BookController {
     }//check but needs exception!
 
 
-    @GetMapping("/GetByFormat /{format}")
+    @GetMapping("/GetByFormat/{format}")
     public List<Book> getBookByFormat(@PathVariable String format) {
         return bookService.getBookByFormat(format);
     }
@@ -78,6 +78,7 @@ public class BookController {
         book.setRating(Double.parseDouble(NewBook.get("rating")));
         book.setEdition(NewBook.get("edition"));
         book.setLanguage(NewBook.get("language"));
+        book.setPic(NewBook.get("pic"));
 
         return bookService.AddBookToCategory(book, categoryName);
     }

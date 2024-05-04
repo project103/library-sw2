@@ -25,9 +25,9 @@ public class CartItemService {
     private BookRepository bookRepository;
 
 
-    public void addItem(int userId, String bookName, int quantity) {
+    public void addItem(int userId, int id) {
         User user = UserRepository.getUserById(userId);
-        Book book = bookRepository.findByName(bookName);
+        Book book = bookRepository.getBookById(id);
         ShoppingCart shoppingCart = shoppingCartRepository.findByuser(user);
 
 
@@ -40,7 +40,7 @@ public class CartItemService {
     CartItem cartItem = new CartItem();
         cartItem.setProduct(book);
         cartItem.setCart(shoppingCart);
-        cartItem.setQuantity(quantity);
+        cartItem.setQuantity(1);
         repository.save(cartItem);
 }
     public List<CartItem> getCartItemById(int userId) {

@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="zxx">
-    
 
-<head>        
-        
+
+<head>
+
     <!-- Meta -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <!-- Title -->
     <title>..:: LIBRARIA ::..</title>
-    
+
     <!-- Favicon -->
     <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
-    
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CLato:100,100i,300,300i,400,400i,700,700i,900,900i"
+        rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    
+
     <!-- Mobile Menu -->
     <link href="css/mmenu.css" rel="stylesheet" type="text/css" />
     <link href="css/mmenu.positioning.css" rel="stylesheet" type="text/css" />
-    
-    <!-- Stylesheet -->
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-    
+    <!-- Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="js/html5shiv.min.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <title>Your Page Title</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <body>
-    
+
     <!-- Start: Header Section -->
     <header id="header-v1" class="navbar-wrapper">
         <div class="container">
@@ -61,7 +67,8 @@
                                         <div class="topbar-info">
                                             <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+61-3-8376-6284</a>
                                             <span>/</span>
-                                            <a href="mailto:support@libraria.com"><i class="fa fa-envelope"></i>support@libraria.com</a>
+                                            <a href="mailto:support@libraria.com"><i
+                                                    class="fa fa-envelope"></i>support@libraria.com</a>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -70,24 +77,25 @@
                                             <span>|</span>
                                             <a href="Favorits.html"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                             <span>|</span>
-                                            
+
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                             <!-- Your script for updating the cart menu -->
                                             <script>
                                                 function UpdateCartMenu() {
-                                                    var url = "http://localhost:9098/cart-items/"+localStorage.getItem("userId");
+                                                    var url = "http://localhost:9098/cart-items/" + localStorage.getItem("userId");
                                                     var total = 0; // Initialize total variable
 
                                                     $.ajax({
                                                         url: url,
                                                         type: "GET",
                                                         dataType: "json",
-                                                        success: function(data) {
+                                                        success: function (data) {
                                                             // Clear existing items in the cart menu
                                                             $('#cart-items-list').empty();
 
                                                             // Iterate through each item in the data array and append to cart menu
-                                                            for(var i = 0; i < data.length; i++) {
+                                                            for (var i = 0; i < data.length; i++) {
                                                                 var item = data[i];
                                                                 $('#cart-items-list').append(
                                                                     `<li class="clearfix">
@@ -99,13 +107,13 @@
                             </div>
                             <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
                         </li>`
-                                                                    );
+                                                                );
                                                                 total += item.quantity * item.product.price; // Calculate total
                                                             }
                                                             $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
                                                             $('#numItemOfCart').text(data.length); // Update number of items in cart
                                                         },
-                                                        error: function() {
+                                                        error: function () {
                                                             console.log("Error");
                                                         }
                                                     });
@@ -113,7 +121,7 @@
 
                                                 UpdateCartMenu();
                                             </script>
-                                            
+
                                             <div class="header-cart dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                     <i class="fa fa-shopping-cart"></i>
@@ -140,14 +148,17 @@
                             <div class="navbar-collapse hidden-sm hidden-xs">
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown ">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="main.html">Home</a>
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="main.html">Home</a>
                                     </li>
-                                    
+
                                     <li class="dropdown active">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="audio.html">audio</a>
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="audio.html">audio</a>
                                     </li>
                                     <li class="dropdown ">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">categories</a>
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="#">categories</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="books-media-list-view.html">Adults </a></li>
                                             <li><a href="books-media-list-view.html">Romance </a></li>
@@ -158,7 +169,8 @@
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="Suggtions.html">Suggestion</a>
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="Suggtions.html">Suggestion</a>
                                     </li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
@@ -171,226 +183,282 @@
         </div>
         <div class="mobile-menu hidden-lg hidden-md">
             <a href="#mobile-menu"><i class="fa fa-navicon"></i></a>
-                <div id="mobile-menu">
-                    <ul>
-                        <li class="mobile-title">
-                            <h4>Navigation</h4>
-                            <a href="#" class="close"></a>
-                        </li>
-                        <li>
-                            <a href="main.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="books-media-list-view.html">Books </a>
-                        </li>
-                        <li>
-                            <a href="audio.html">Audio</a>
-                        </li>
-                        <li>
-                            <a href="#">categories</a>
-                            <ul>
-                                            <li><a href="books-media-list-view.html">Adults </a></li>
-                                            <li><a href="books-media-list-view.html">Romance </a></li>
-                                            <li><a href="books-media-list-view.html">horror </a></li>
-                                            <li><a href="books-media-list-view.html">Fantasy </a></li>
-                                            <li><a href="books-media-list-view.html">Crime </a></li>
-                                            <li><a href="books-media-list-view.html">Adventure </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="Suggtions.html">Suggestion</a>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-    </header>
-    <!-- End: Header Section -->
-                
-        <!-- Start: Page Banner -->
-        <section class="page-banner services-banner">
-            <div class="container">
-                <div class="banner-header">
-                    <h2>Books & Media Listing</h2>
-                    <span class="underline center"></span>
-                    <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
-                </div>
-                <div class="breadcrumb">
-                    <ul>
-                        <li><a href="main.html">Home</a></li>
-                        <li>Books & Media</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <!-- End: Page Banner -->
-
-        <!-- Start: Book & Media Section -->
-        <div id="content" class="site-content">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <div class="books-media-list">
-                        <div class="container">
-                            <div class="row">
-                                <!-- Start: Search Section -->
-                                <section class="search-filters">
-                                    <div class="container">
-                                        <div class="filter-box">
-                                            <h3>What are you looking for at the library?</h3>
-                                            <form action="Search.html" method="get">
-                                                <div class="col-md-4 col-sm-6">
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="keywords">Search by Keyword</label>
-                                                        <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-2 col-sm-6">
-                                                    <div class="form-group">
-                                                        <button type="submit" type="submit">Search</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </section>
-                                <!-- End: Search Section -->
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9 col-md-push-3">
-                                    <div class="filter-options margin-list">
-                                        <div class="row">
-                                            <div class="col-md-4 col-sm-4">
-                                                <select name="orderby">
-                                                    <option selected="selected">Default sorting</option>
-                                                    <option>Sort by popularity</option>
-                                                    <option>Sort by rating</option>
-                                                    <option>Sort by newness</option>
-                                                    <option>Sort by price</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="books-list">
-                                        <article>
-                                            <div class="single-book-box">
-                                                <div class="post-thumbnail">
-                                                    <div class="book-list-icon yellow-icon"></div>
-                                                    <a href="books-media-detail-v2.html"><img alt="Book" src="images/books-media/list-view/book-media-01.jpg" /></a>                                                                 </div>
-                                                <div class="post-detail">
-
-                                                    <div class="optional-links">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
-                                                                    <i class="fa fa-shopping-cart"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" target="_blank" data-toggle="blog-tags" data-placement="top" title="Like">
-                                                                    <i class="fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </div>
-                                                    <header class="entry-header">
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <h3 class="entry-title">
-                                                                    <a href="books-media-detail-v1.html">The Great Gatsby</a>
-                                                                </h3>
-                                                                <ul>
-                                                                    <li><strong>Author:</strong> F. Scott Fitzgerald</li>
-                                                                    <li><strong>ISBN:</strong> 9781581573268</li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <ul>
-                                                                    <li><strong>Edition:</strong> First editio</li>
-                                                                    <li><strong>Local Availability:</strong> 0 (of 1)</li>
-                                                                    <li>
-                                                                        <div class="rating">
-                                                                            <strong>Rating: </strong>
-                                                                            <span>☆</span>
-                                                                            <span>☆</span>
-                                                                            <span>☆</span>
-                                                                            <span>☆</span>
-                                                                            <span>☆</span>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </header>
-
-
-
-
-                    </div>
-                </main>
-            </div>
-        </div>
-        <!-- End: Books & Media Section -->
-
-        <!-- Start: Social Network -->
-        <section class="social-network section-padding">
-            <div class="container">
-                <div class="center-content">
-                    <h2 class="section-title">Follow Us</h2>
-                    <span class="underline center"></span>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
+            <div id="mobile-menu">
                 <ul>
-                    <li>
-                        <a class="facebook" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-facebook-f"></i>
-                            </span>
-                        </a>
+                    <li class="mobile-title">
+                        <h4>Navigation</h4>
+                        <a href="#" class="close"></a>
                     </li>
                     <li>
-                        <a class="twitter" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-twitter"></i>
-                            </span>
-                        </a>
+                        <a href="main.html">Home</a>
                     </li>
                     <li>
-                        <a class="google" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-google-plus"></i>
-                            </span>
-                        </a>
+                        <a href="books-media-list-view.html">Books </a>
                     </li>
                     <li>
-                        <a class="rss" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-rss"></i>
-                            </span>
-                        </a>
+                        <a href="audio.html">Audio</a>
                     </li>
                     <li>
-                        <a class="linkedin" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-linkedin"></i>
-                            </span>
-                        </a>
+                        <a href="#">categories</a>
+                        <ul>
+                            <li><a href="books-media-list-view.html">Adults </a></li>
+                            <li><a href="books-media-list-view.html">Romance </a></li>
+                            <li><a href="books-media-list-view.html">horror </a></li>
+                            <li><a href="books-media-list-view.html">Fantasy </a></li>
+                            <li><a href="books-media-list-view.html">Crime </a></li>
+                            <li><a href="books-media-list-view.html">Adventure </a></li>
+                        </ul>
                     </li>
                     <li>
-                        <a class="youtube" href="#" target="_blank">
-                            <span>
-                                <i class="fa fa-youtube"></i>
-                            </span>
-                        </a>
+                        <a href="Suggtions.html">Suggestion</a>
                     </li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-        </section>
-        <!-- End: Social Network -->
+        </div>
+    </header>
+    <!-- End: Header Section -->
 
-        <!-- Start: Footer -->
+    <!-- Start: Page Banner -->
+    <section class="page-banner services-banner">
+        <div class="container">
+            <div class="banner-header">
+                <h2>Books & Media Listing</h2>
+                <span class="underline center"></span>
+                <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p>
+            </div>
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="main.html">Home</a></li>
+                    <li>Books & Media</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- End: Page Banner -->
+
+    <!-- Start: Book & Media Section -->
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="books-media-list">
+                    <div class="container">
+                        <div class="row">
+                            <!-- Start: Search Section -->
+                            <section class="search-filters">
+                                <div class="container">
+                                    <div class="filter-box">
+                                        <h3>What are you looking for at the library?</h3>
+                                        <form action="Search.html" method="get">
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="keywords">Search by Keyword</label>
+                                                    <input class="form-control" placeholder="Search by Keyword"
+                                                        id="keywords" name="keywords" type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 col-sm-6">
+                                                <div class="form-group">
+                                                    <button type="submit" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- End: Search Section -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9 col-md-push-3">
+                                <div class="filter-options margin-list">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <select name="orderby">
+                                                <option selected="selected">Default sorting</option>
+                                                <option>Sort by popularity</option>
+                                                <option>Sort by rating</option>
+                                                <option>Sort by newness</option>
+                                                <option>Sort by price</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="books-list" id="books-list">
+
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                                    <script>
+                                        function UpdateBooks() {
+                                            var url = "http://localhost:9098/books/GetByFormat/ebook";
+
+                                            $.ajax({
+                                                url: url,
+                                                type: "GET",
+                                                dataType: "json",
+                                                success: function (dataa) {
+                                                    // Clear existing items in the books list
+                                                    $('#books-list').empty();
+
+                                                    // Iterate through each item in the data array and append to books list
+                                                    for (var i = 0; i < dataa.length; i++) {
+                                                        var book = dataa[i];
+                                                        $('#books-list').append(
+                                                            `<article>
+                                                                <div class="single-book-box">
+                                                                    <div class="post-thumbnail">
+                                                                        <div class="book-list-icon yellow-icon"></div>
+                                                                        <a href="books-media-detail-v2.html"><img alt="Book" src="${book.image}" /></a>
+                                                                    </div>
+                                                                    <div class="post-detail">
+                                                                        <div class="optional-links">
+                                                                            <ul>
+                                                                                <li>
+                                                                                    <a href="#" class="add-to-cart" data-book-id="${book.id}" data-toggle="blog-tags" data-placement="top" title="Add TO CART">
+                                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <header class="entry-header">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <h3 class="entry-title">
+                                                                                        <a href="books-media-detail-v1.html">${book.name}</a>
+                                                                                    </h3>
+                                                                                    <ul>
+                                                                                        <li><strong>Author:</strong> ${book.author}</li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <ul>
+                                                                                        <li><strong>Edition:</strong> ${book.edition}</li>
+                                                                                        <li><strong>Local Availability:</strong> ${book.copies}</li>
+                                                                                        <li>
+                                                                                            <div class="rating">
+                                                                                                <strong>Rating: </strong>
+                                                                                                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                                                                                            </div>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </header>
+                                                                    </div>
+                                                                </div>
+                                                            </article>`
+                                                        );
+                                                    }
+
+                                                    // Add event listener to "Add to Cart" buttons
+                                                    $('.add-to-cart').click(function (event) {
+                                                        event.preventDefault();
+                                                        var bookId = $(this).data('book-id');
+
+                                                        addToCart(bookId);
+                                                    });
+                                                },
+                                                error: function () {
+                                                    console.log("Error");
+                                                }
+                                            });
+                                        }
+
+                                        function addToCart(bookId) {
+                                            var url = "http://localhost:9098/cart-items/add";
+                                            var formData = {
+                                                UserId: localStorage.getItem('userId'),
+                                                BookId: bookId, // Corrected to send the bookId
+                                            };
+
+                                            $.ajax({
+                                                url: url,
+                                                type: "POST",
+                                                data: JSON.stringify(formData),
+                                                contentType: "application/json",
+                                                success: function (data) {
+                                                    console.log("Book added to cart with ID: " + bookId);
+                                                },
+                                                error: function () {
+                                                    console.log("Error");
+                                                }
+                                            });
+                                        }
+
+
+                                        UpdateBooks();
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+
+            </main>
+
+        </div>
+    </div>
+    <!-- End: Books & Media Section -->
+
+    <!-- Start: Social Network -->
+    <section class="social-network section-padding">
+        <div class="container">
+            <div class="center-content">
+                <h2 class="section-title">Follow Us</h2>
+                <span class="underline center"></span>
+                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <ul>
+                <li>
+                    <a class="facebook" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-facebook-f"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="twitter" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-twitter"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="google" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-google-plus"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="rss" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-rss"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="linkedin" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-linkedin"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="youtube" href="#" target="_blank">
+                        <span>
+                            <i class="fa fa-youtube"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- End: Social Network -->
+
+    <!-- Start: Footer -->
     <footer class="site-footer">
         <div class="container">
             <div id="footer-widgets">
@@ -445,56 +513,56 @@
     </footer>
     <!-- End: Footer -->
 
-        <!-- jQuery Latest Version 1.x -->
-        <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-        
-        <!-- jQuery UI -->
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        
-        <!-- jQuery Easing -->
-        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <!-- jQuery Latest Version 1.x -->
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        
-        <!-- Mobile Menu -->
-        <script type="text/javascript" src="js/mmenu.min.js"></script>
-        
-        <!-- Harvey - State manager for media queries -->
-        <script type="text/javascript" src="js/harvey.min.js"></script>
-        
-        <!-- Waypoints - Load Elements on View -->
-        <script type="text/javascript" src="js/waypoints.min.js"></script>
+    <!-- jQuery UI -->
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 
-        <!-- Facts Counter -->
-        <script type="text/javascript" src="js/facts.counter.min.js"></script>
+    <!-- jQuery Easing -->
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 
-        <!-- MixItUp - Category Filter -->
-        <script type="text/javascript" src="js/mixitup.min.js"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-        <!-- Owl Carousel -->
-        <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-        
-        <!-- Accordion -->
-        <script type="text/javascript" src="js/accordion.min.js"></script>
-        
-        <!-- Responsive Tabs -->
-        <script type="text/javascript" src="js/responsive.tabs.min.js"></script>
-        
-        <!-- Responsive Table -->
-        <script type="text/javascript" src="js/responsive.table.min.js"></script>
-        
-        <!-- Masonry -->
-        <script type="text/javascript" src="js/masonry.min.js"></script>
-        
-        <!-- Carousel Swipe -->
-        <script type="text/javascript" src="js/carousel.swipe.min.js"></script>
-        
-        <!-- bxSlider -->
-        <script type="text/javascript" src="js/bxslider.min.js"></script>
-        
-        <!-- Custom Scripts -->
-        <script type="text/javascript" src="js/main.js"></script>
+    <!-- Mobile Menu -->
+    <script type="text/javascript" src="js/mmenu.min.js"></script>
+
+    <!-- Harvey - State manager for media queries -->
+    <script type="text/javascript" src="js/harvey.min.js"></script>
+
+    <!-- Waypoints - Load Elements on View -->
+    <script type="text/javascript" src="js/waypoints.min.js"></script>
+
+    <!-- Facts Counter -->
+    <script type="text/javascript" src="js/facts.counter.min.js"></script>
+
+    <!-- MixItUp - Category Filter -->
+    <script type="text/javascript" src="js/mixitup.min.js"></script>
+
+    <!-- Owl Carousel -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+
+    <!-- Accordion -->
+    <script type="text/javascript" src="js/accordion.min.js"></script>
+
+    <!-- Responsive Tabs -->
+    <script type="text/javascript" src="js/responsive.tabs.min.js"></script>
+
+    <!-- Responsive Table -->
+    <script type="text/javascript" src="js/responsive.table.min.js"></script>
+
+    <!-- Masonry -->
+    <script type="text/javascript" src="js/masonry.min.js"></script>
+
+    <!-- Carousel Swipe -->
+    <script type="text/javascript" src="js/carousel.swipe.min.js"></script>
+
+    <!-- bxSlider -->
+    <script type="text/javascript" src="js/bxslider.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script type="text/javascript" src="js/main.js"></script>
     <script>
 
         if (localStorage.getItem('sessionId') == 1) {
@@ -502,27 +570,27 @@
             window.location.href = 'signin.html';
         }
     </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-                                            <!-- Your script for updating the cart menu -->
-                                            <script>
-                                                function UpdateCartMenu() {
-                                                    var url = "http://localhost:9098/cart-items/"+localStorage.getItem("userId");
-                                                    var total = 0; // Initialize total variable
+    <!-- Your script for updating the cart menu -->
+    <script>
+        function UpdateCartMenu() {
+            var url = "http://localhost:9098/cart-items/" + localStorage.getItem("userId");
+            var total = 0; // Initialize total variable
 
-                                                    $.ajax({
-                                                        url: url,
-                                                        type: "GET",
-                                                        dataType: "json",
-                                                        success: function(data) {
-                                                            // Clear existing items in the cart menu
-                                                            $('#cart-items-list').empty();
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    // Clear existing items in the cart menu
+                    $('#cart-items-list').empty();
 
-                                                            // Iterate through each item in the data array and append to cart menu
-                                                            for(var i = 0; i < data.length; i++) {
-                                                                var item = data[i];
-                                                                $('#cart-items-list').append(
-                                                                    `<li class="clearfix">
+                    // Iterate through each item in the data array and append to cart menu
+                    for (var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        $('#cart-items-list').append(
+                            `<li class="clearfix">
                             <div class="item-info">
                                 <div class="name">
                                     <a href="#" class="item-name">${item.product.name}</a>
@@ -531,22 +599,22 @@
                             </div>
                             <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
                         </li>`
-                                                                    );
-                                                                total += item.quantity * item.product.price; // Calculate total
-                                                            }
-                                                            $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
-                                                            $('#numItemOfCart').text(data.length); // Update number of items in cart
-                                                        },
-                                                        error: function() {
-                                                            console.log("Error");
-                                                        }
-                                                    });
-                                                }
+                        );
+                        total += item.quantity * item.product.price; // Calculate total
+                    }
+                    $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
+                    $('#numItemOfCart').text(data.length); // Update number of items in cart
+                },
+                error: function () {
+                    console.log("Error");
+                }
+            });
+        }
 
-                                                UpdateCartMenu();
-                                            </script>
+        UpdateCartMenu();
+    </script>
 
-    </body>
+</body>
 
 
 </html>

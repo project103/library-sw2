@@ -138,7 +138,7 @@
 
                                             </script>
 
-                                        
+
 
 
 
@@ -193,7 +193,7 @@
                                 <script>
                                     function UpdateCategories() {
                                         var url = "http://localhost:9098/categories/all";
-                                
+
                                         $.ajax({
                                             url: url,
                                             type: "GET",
@@ -201,12 +201,13 @@
                                             success: function (data) {
                                                 // Clear existing items in the cart menu
                                                 $('#dropdownCategory').empty();
-                                
+
                                                 // Iterate through each item in the data array and append to cart menu
                                                 for (var i = 0; i < data.length; i++) {
                                                     var item = data[i];
+                                                    // Inside your UpdateCategories function after appending the category:
                                                     $('#dropdownCategory').append(
-                                                        '<li><a href="books-media-list-view.html">' + item.name + '</a></li>'
+                                                        '<li><a href="books-media-list-view.html?categoryName=' + item.name + '">' + item.name + '</a></li>'
                                                     );
                                                 }
                                             },
@@ -215,10 +216,10 @@
                                             }
                                         });
                                     }
-                                
+
                                     UpdateCategories();
                                 </script>
-                                
+
 
                             </div>
                         </div>

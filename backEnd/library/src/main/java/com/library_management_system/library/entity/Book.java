@@ -22,7 +22,7 @@ public class Book {
 
 
     public Book(String name, String author, String description, double price, Integer copies, String format,
-            Integer length, Double rating, String edition, String language) {
+            Integer length, Double rating, String edition, String language , String pic) {
         this.name = name;
         this.author = author;
         this.description = description;
@@ -33,12 +33,10 @@ public class Book {
         this.rating = rating;
         this.edition = edition;
         this.language = language;
+        this.Pic = pic;
     }
 
 
-    public Book(String name) {
-        this.name = name;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +57,7 @@ public class Book {
     private Double rating;
     private String edition;
     private String language;
+    private String Pic;
 
     // Getters and setters
 }

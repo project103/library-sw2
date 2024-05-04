@@ -19,7 +19,7 @@ public class CartItemController {
 
     @PostMapping("/add")
     public ResponseEntity<Void> addItemToCart(@RequestBody Map<String , String> request) {
-        cartItemService.addItem(Integer.parseInt(request.get("UserId")), request.get("BookName"), Integer.parseInt(request.get("Quantity")));
+        cartItemService.addItem(Integer.parseInt(request.get("UserId")), Integer.parseInt(request.get("BookId")));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
