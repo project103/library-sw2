@@ -70,7 +70,6 @@ public class userService {
         existingUser.setJob(user.getJob());
         existingUser.setUserRole(user.getUserRole());
         existingUser.setJoined(user.getJoined());
-        Repository.deleteById(existingUser.getId());
         return Repository.save(existingUser);
 
     }

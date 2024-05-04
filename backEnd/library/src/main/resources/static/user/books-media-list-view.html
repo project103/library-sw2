@@ -312,13 +312,14 @@
                                                             </div>
                                                         </article>`
                                                         );
+                                                        
                                                     }
 
                                                     // Add event listener to "Add to Cart" buttons
                                                     $('.add-to-cart').click(function (event) {
                                                         event.preventDefault();
                                                         var bookId = $(this).data('book-id');
-
+                                                        location.reload();
                                                         addToCart(bookId);
                                                     });
                                                 },
@@ -342,6 +343,7 @@
                                                 contentType: "application/json",
                                                 success: function (data) {
                                                     console.log("Book added to cart with ID: " + bookId);
+                                                    location.reload();
                                                 },
                                                 error: function () {
                                                     console.log("Error");

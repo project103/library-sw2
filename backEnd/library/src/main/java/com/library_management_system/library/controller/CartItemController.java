@@ -29,4 +29,10 @@ public class CartItemController {
         List<CartItem> cartItems = cartItemService.getCartItemById(userId);
         return new ResponseEntity<>(cartItems, HttpStatus.OK);
     }
+    @DeleteMapping("/delete/{Id}")
+    public void deleteCartItem(@PathVariable int Id){
+        cartItemService.DeleteCartItemById(Id);
+    }
+
+
 }

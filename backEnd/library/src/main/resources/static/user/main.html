@@ -114,14 +114,14 @@
                                                                 var item = data[i];
                                                                 $('#cart-items-list').append(
                                                                     `<li class="clearfix">
-                            <div class="item-info">
-                                <div class="name">
-                                    <a href="#" class="item-name">${item.product.name}</a>
-                                </div>
-                                <div class="price">${item.quantity} X $${item.product.price.toFixed(2)}</div>
-                            </div>
-                            <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
-                        </li>`
+                                                                        <div class="item-info">
+                                                                            <div class="name">
+                                                                                <a href="#" class="item-name">${item.product.name}</a>
+                                                                            </div>
+                                                                            <div class="price">${item.quantity} X $${item.product.price.toFixed(2)}</div>
+                                                                        </div>
+                                                                        <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
+                                                                    </li>`
                                                                 );
                                                                 total += item.quantity * item.product.price; // Calculate total
                                                             }
@@ -134,8 +134,34 @@
                                                     });
                                                 }
 
+                                                // Attach event listener for "Add to Cart" buttons
+                                                $(document).on('click', '.remove', function (event) {
+                                                    event.preventDefault();
+                                                    var Id = $(this).data('item-id');
+                                                    DeleteFromCart(Id);
+                                                    location.reload();
+                                                });
+
                                                 UpdateCartMenu();
 
+                                                function DeleteFromCart(Id) {
+                                                    var url = "http://localhost:9098/cart-items/delete/" + Id;
+
+                                                    $.ajax({
+                                                        url: url,
+                                                        type: "DELETE",
+                                                        dataType: "json",
+                                                        success: function (data) {
+                                                            // Clear existing items in the cart menu
+                                                            console.log("Deleted from cart!");
+                                                            location.reload();
+                                                        },
+                                                        error: function () {
+                                                            console.log("Error");
+                                                        }
+                                                    });
+
+                                                }
                                             </script>
 
 

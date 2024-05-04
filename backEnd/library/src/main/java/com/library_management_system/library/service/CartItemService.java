@@ -49,6 +49,15 @@ public class CartItemService {
         return  repository.findAllByCart(shoppingCart);
     }
 
+    public void DeleteCartItemById(int Id){
+
+        repository.deleteById(Id);
+
+
+    }
+
+
+
     }
 
 
