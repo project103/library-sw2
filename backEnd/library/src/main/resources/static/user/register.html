@@ -85,13 +85,13 @@
                                                             </div>
                                                             <div class="col-md-6 col-sm-6">
                                                                 <div class="form-group">
-                                                                    <input class="form-control" type="text"  placeholder="Phone Number" name="phone" id="phone" size="30" value="" aria-required="true" required />
+                                                                    <input class="form-control" type="text"  pattern="01[0-2][0-9]{8}" title="Please enter a 11-digit phone number" placeholder="Phone Number" name="phone"     id="phone" size="30" value="" aria-required="true" required />
                                                                 </div>
                                                             </div>
                                                         
                                                             <div class="col-md-6 col-sm-6">
                                                                 <div class="form-group">
-                                                                    <input class="form-control" type="password" placeholder="Enter your password" name="password" id="password" size="30" value="" aria-required="true" required />
+                                                                    <input class="form-control" type="password"  pattern="(?=.*\d)(?=.*[a-zA-Z]).{6,}"  placeholder="Enter your password" name="password" id="password" size="30" value="" aria-required="true" required />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6 col-sm-6">
@@ -111,8 +111,8 @@
                                                             <input type="submit" value="Signup" name="signup" class="button btn btn-default" required>
                                                             <div class="clear"></div>
                                                         </form>
-                                                        
-                                                         
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -238,11 +238,23 @@
         <!-- Custom Scripts -->
         <script type="text/javascript" src="js/main.js"></script>
 
-
         <script>
             $(document).ready(function() {
                 $("#registrationForm").submit(function(event) {
                     event.preventDefault();
+
+                    var password = $("#password").val();
+                    var confirmPassword = $("#2_password").val();
+
+                    // Check if passwords match
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match.");
+                        return;
+                    }
+                    if ($("#name").val().trim() === "" || $("#email").val().trim() === "" || $("#phone").val().trim() === "" || $("#password").val().trim() === "" || !$("input[name='Gender']:checked").val()) {
+                        alert("Please fill in all required fields.");
+                        return;
+                    }
 
                     // Get form data
                     var formData = {
@@ -250,7 +262,8 @@
                         email: $("#email").val(),
                         phone: $("#phone").val(),
                         password: $("#password").val(),
-                        gender: $("input[name='Gender']:checked").val()
+                        gender: $("input[name='Gender']:checked").val(),
+                        user_role: 0  // Adding role field with value 0
                     };
 
                     $.ajax({
@@ -268,10 +281,8 @@
                     });
                 });
             });
+
         </script>
-
-
-
 
 </body>
 
