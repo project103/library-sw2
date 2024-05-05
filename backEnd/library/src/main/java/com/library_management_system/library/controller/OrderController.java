@@ -44,16 +44,16 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping("/{orderId}/{userId}")
-    public ResponseEntity<Void> checkoutOrder(@PathVariable int orderId, @PathVariable int userId) {
-        orderService.checkOut(orderId);
-        List<OrderItem> orderItems = orderItemService.getOrderItemsByUserId(orderId, userId);
+    @PostMapping("/CheckOut/{userId}")
+    public ResponseEntity<Void> checkoutOrder(@PathVariable int userId) {
+        int orderId = orderService.checkOut(userId);
+        List<OrderItem> orderItems = orderItemService.getOrderItemsByUserId(userId,orderId);
 
         suggestionService.addSuggestion(userId,orderItems);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{orderId}/check-completed")
+    @GetMapping("/check-completed/{orderId}")
     public ResponseEntity<Boolean> checkOrderCompleted(@PathVariable int orderId) {
 
         boolean completed = orderService.checkOrderCompleted(orderId);

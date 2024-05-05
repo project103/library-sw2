@@ -18,13 +18,13 @@ public class OrderItemController {
 
     @PostMapping("/add/{userId}")
     public ResponseEntity<Void> addOrderItems(@PathVariable int userId) {
-        orderItemService.addItem(userId);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/{userId}/{orderId}")
     public ResponseEntity<List<OrderItem>> getOrderItemsByUserId(@PathVariable int userId, @PathVariable int orderId) {
-        List<OrderItem> orderItems = orderItemService.getOrderItemsByUserId(userId, orderId);
+        List<OrderItem> orderItems = orderItemService.getOrderItemsByUserId(userId , orderId);
         return new ResponseEntity<>(orderItems, HttpStatus.OK);
     }
 }

@@ -18,7 +18,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query("SELECT o FROM Order o WHERE o.user = :user AND o.id = :id")
     Order findByUserAndId(@Param("user") User user, @Param("id") int id);
 
-
+    Order findByuserAndStatus(User User, String s);
 
 
     // You can add more custom query methods as needed

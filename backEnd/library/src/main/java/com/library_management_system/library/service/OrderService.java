@@ -20,9 +20,11 @@ public class OrderService {
     private userRepository User;
     @Autowired
     private SuggestionRepository suggestionRepository;
+    @Autowired
+    private OrderItemService orderItemService;
 
 
-    public void addOrder(int userId){
+    public Order addOrder(int userId){
         Order order = new Order();
         User user = User.getUserById(userId);
         order.setUser(user);
@@ -30,8 +32,10 @@ public class OrderService {
         LocalDateTime returnDeadline = order.getOrderDate().plus(1, ChronoUnit.WEEKS);
         order.setReturnDeadline(returnDeadline);
         repository.save(order);
+        return order;
     }
     public Order getOrder(int userId, int id){
+        addOrder(userId);
         User user = User.getUserById(userId);
         return repository.findByUserAndId(user, id);
     }
@@ -40,15 +44,16 @@ public class OrderService {
 
         repository.deleteById(id);
     }
-    public void checkOut(int id){
-        Order order;
-        order = repository.getById(id);
-     order.setStatus("Completed");
+    public int checkOut(int id){
+        Order order = addOrder(id);
+        orderItemService.addItem(id , order);
+        order.setStatus("Completed");
+        repository.save(order);
+        return order.getId();
     }
     public boolean checkOrderCompleted(int id){
         Order order;
         order = repository.getById(id);
-
         return order.getStatus().matches("Completed");
     }
 

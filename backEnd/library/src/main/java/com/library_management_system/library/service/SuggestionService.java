@@ -26,7 +26,8 @@ public class SuggestionService {
         return categories;
     }
 
-    public List<Book> getSuggestedBooks(List<Category> categories) {
+    public List<Book> getSuggestedBooks(int userId) {
+        List<Category> categories = getSuggestedCategories(userId);
         List<Book> bookList = new ArrayList<>();
         for (Category category : categories) {
             List<Book> booksInCategory = bookRepository.findByCategory(category);

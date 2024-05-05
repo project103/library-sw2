@@ -7,7 +7,7 @@
         
     <!-- Meta -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1>
     
     <!-- Title -->
     <title>..:: LIBRARIA ::..</title>
@@ -61,7 +61,8 @@
                                         <div class="topbar-info">
                                             <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+61-3-8376-6284</a>
                                             <span>/</span>
-                                            <a href="mailto:support@libraria.com"><i class="fa fa-envelope"></i>support@libraria.com</a>
+                                            <a href="mailto:support@libraria.com"><i
+                                                    class="fa fa-envelope"></i>support@libraria.com</a>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -70,71 +71,96 @@
                                             <span>|</span>
                                             <a href="Favorits.html"><i class="fa fa-heart" aria-hidden="true"></i></a>
                                             <span>|</span>
-                                            
+
+                                            <!-- Your script containing UpdateCartMenu function -->
+                                            <!-- Include jQuery library -->
+                                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                                             <!-- Your script for updating the cart menu -->
                                             <script>
                                                 function UpdateCartMenu() {
-                                                    var url = "http://localhost:9098/cart-items/"+localStorage.getItem("userId");
+                                                    var url = "http://localhost:9098/cart-items/" + localStorage.getItem("userId");
                                                     var total = 0; // Initialize total variable
 
                                                     $.ajax({
                                                         url: url,
                                                         type: "GET",
                                                         dataType: "json",
-                                                        success: function(data) {
+                                                        success: function (data) {
                                                             // Clear existing items in the cart menu
                                                             $('#cart-items-list').empty();
 
                                                             // Iterate through each item in the data array and append to cart menu
-                                                            for(var i = 0; i < data.length; i++) {
+                                                            for (var i = 0; i < data.length; i++) {
                                                                 var item = data[i];
                                                                 $('#cart-items-list').append(
                                                                     `<li class="clearfix">
-                            <div class="item-info">
-                                <div class="name">
-                                    <a href="#" class="item-name">${item.product.name}</a>
-                                </div>
-                                <div class="price">${item.quantity} X $${item.product.price.toFixed(2)}</div>
-                            </div>
-                            <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
-                        </li>`
-                                                                    );
+                                                                        <div class="item-info">
+                                                                            <div class="name">
+                                                                                <a href="#" class="item-name">${item.product.name}</a>
+                                                                            </div>
+                                                                            <div class="price">${item.quantity} X $${item.product.price.toFixed(2)}</div>
+                                                                        </div>
+                                                                        <a class="remove" data-item-id="${item.id}" href="#"><i class="fa fa-trash-o"></i></a>
+                                                                    </li>`
+                                                                );
                                                                 total += item.quantity * item.product.price; // Calculate total
                                                             }
                                                             $('#cart-subtotal').text(total.toFixed(2)); // Update cart subtotal
                                                             $('#numItemOfCart').text(data.length); // Update number of items in cart
                                                         },
-                                                        error: function() {
+                                                        error: function () {
                                                             console.log("Error");
                                                         }
                                                     });
                                                 }
 
+                                                // Attach event listener for "Add to Cart" buttons
+                                                $(document).on('click', '.remove', function (event) {
+                                                    event.preventDefault();
+                                                    var Id = $(this).data('item-id');
+                                                    DeleteFromCart(Id);
+                                                    location.reload();
+                                                });
+
                                                 UpdateCartMenu();
+
+                                                function DeleteFromCart(Id) {
+                                                    var url = "http://localhost:9098/cart-items/delete/" + Id;
+
+                                                    $.ajax({
+                                                        url: url,
+                                                        type: "DELETE",
+                                                        dataType: "json",
+                                                        success: function (data) {
+                                                            // Clear existing items in the cart menu
+                                                            console.log("Deleted from cart!");
+                                                            location.reload();
+                                                        },
+                                                        error: function () {
+                                                            console.log("Error");
+                                                        }
+                                                    });
+
+                                                }
                                             </script>
+
+
+
+
+
                                             <div class="header-cart dropdown">
-                                            
                                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                                     <i class="fa fa-shopping-cart"></i>
-                                                    <small>0</small>
+                                                    <small id="numItemOfCart"></small>
                                                 </a>
-                                               <div class="dropdown-menu cart-dropdown" id="dropdown-menu"> 
-                                                    <ul>
-                                                        <li class="clearfix">
-                                                            <img src="images/header-cart-image-01.jpg" alt="cart item" />
-                                                            <div class="item-info">
-                                                                <div class="name">
-                                                                    <a href="#">The Great Gatsby</a>
-                                                                </div>
-                                                                <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                <div class="price">1 X $10.00</div>
-                                                            </div>
-                                                            <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+                                                <div class="dropdown-menu cart-dropdown" id="dropdown-menu">
+                                                    <ul id="cart-items-list">
+                                                        <!-- Cart items will be dynamically added here -->
                                                     </ul>
                                                     <div class="cart-total">
                                                         <div class="title">SubTotal</div>
-                                                        <div class="price">$30.00</div>
+                                                        <div class="price" id="cart-subtotal">$30.00</div>
                                                     </div>
                                                     <div class="cart-buttons">
                                                         <a href="cart.html" class="btn btn-dark-gray">View Cart</a>
@@ -142,34 +168,66 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="navbar-collapse hidden-sm hidden-xs">
                                 <ul class="nav navbar-nav">
-                                    <li class="dropdown ">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="main.html">Home</a>
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="main.html">Home</a>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="audio.html">audio</a>
                                     </li>
                                     <li class="dropdown">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="audio.html">audio</a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="#">categories</a>
-                                        <ul class="dropdown-menu">
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="#">categories</a>
+                                        <ul class="dropdown-menu" id="dropdownCategory">
                                             <li><a href="books-media-list-view.html">Adults </a></li>
-                                            <li><a href="books-media-list-view.html">Romance </a></li>
-                                            <li><a href="books-media-list-view.html">horror </a></li>
-                                            <li><a href="books-media-list-view.html">Fantasy </a></li>
-                                            <li><a href="books-media-list-view.html">Crime </a></li>
-                                            <li><a href="books-media-list-view.html">Adventure </a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a data-toggle="dropdown" class="dropdown-toggle disabled" href="Suggtions.html">Suggestion</a>
+                                        <a data-toggle="dropdown" class="dropdown-toggle disabled"
+                                            href="Suggtions.html">Suggestion</a>
                                     </li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
+                                <script>
+                                    function UpdateCategories() {
+                                        var url = "http://localhost:9098/categories/all";
+
+                                        $.ajax({
+                                            url: url,
+                                            type: "GET",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                // Clear existing items in the cart menu
+                                                $('#dropdownCategory').empty();
+
+                                                // Iterate through each item in the data array and append to cart menu
+                                                for (var i = 0; i < data.length; i++) {
+                                                    var item = data[i];
+                                                    // Inside your UpdateCategories function after appending the category:
+                                                    $('#dropdownCategory').append(
+                                                        '<li><a href="books-media-list-view.html?categoryName=' + item.name + '">' + item.name + '</a></li>'
+                                                    );
+                                                }
+                                            },
+                                            error: function () {
+                                                console.log("Error");
+                                            }
+                                        });
+                                    }
+
+                                    UpdateCategories();
+                                </script>
+
+
                             </div>
                         </div>
                     </div>
@@ -179,39 +237,39 @@
         </div>
         <div class="mobile-menu hidden-lg hidden-md">
             <a href="#mobile-menu"><i class="fa fa-navicon"></i></a>
-                <div id="mobile-menu">
-                    <ul>
-                        <li class="mobile-title">
-                            <h4>Navigation</h4>
-                            <a href="#" class="close"></a>
-                        </li>
-                        <li>
-                            <a href="main.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="books-media-list-view.html">Books </a>
-                        </li>
-                        <li>
-                            <a href="audio.html">Audio</a>
-                        </li>
-                        <li>
-                            <a href="#">categories</a>
-                            <ul>
-                                            <li><a href="books-media-list-view.html">Adults </a></li>
-                                            <li><a href="books-media-list-view.html">Romance </a></li>
-                                            <li><a href="books-media-list-view.html">horror </a></li>
-                                            <li><a href="books-media-list-view.html">Fantasy </a></li>
-                                            <li><a href="books-media-list-view.html">Crime </a></li>
-                                            <li><a href="books-media-list-view.html">Adventure </a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="Suggtions.html">Suggestion</a>
-                        </li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
+            <div id="mobile-menu">
+                <ul>
+                    <li class="mobile-title">
+                        <h4>Navigation</h4>
+                        <a href="#" class="close"></a>
+                    </li>
+                    <li>
+                        <a href="main.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="books-media-list-view.html">Books </a>
+                    </li>
+                    <li>
+                        <a href="audio.html">Audio</a>
+                    </li>
+                    <li>
+                        <a href="#">categories</a>
+                        <ul>
+                            <li><a href="books-media-list-view.html">Adults </a></li>
+                            <li><a href="books-media-list-view.html">Romance </a></li>
+                            <li><a href="books-media-list-view.html">horror </a></li>
+                            <li><a href="books-media-list-view.html">Fantasy </a></li>
+                            <li><a href="books-media-list-view.html">Crime </a></li>
+                            <li><a href="books-media-list-view.html">Adventure </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="Suggtions.html">Suggestion</a>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
+        </div>
     </header>
     <!-- End: Header Section -->
 

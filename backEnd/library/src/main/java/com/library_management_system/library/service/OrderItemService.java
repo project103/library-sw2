@@ -23,64 +23,36 @@ public class OrderItemService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-
-    public ShoppingCart getShoppingCartByUserId(int userId) {
+    public void addItem(int userId ,Order order) {
         User user = UserRepository.getUserById(userId);
-        return shoppingCartRepository.findByuser(user);
-    }
-
-
-    public void addItem(int userId) {
-        ShoppingCart cart = getShoppingCartByUserId(userId);
-        if (cart == null) {
-            
-            return;
-        }
-
-        List<CartItem> cartItems = cartItemsRepository.findAllByCart(cart);
-        Order order = orderRepository.findByuser(getUserByUserId(userId));
-        if (order == null) {
-
-            return;
-        }
-
+        ShoppingCart shoppingCart = shoppingCartRepository.findByuser(user);
+        List<CartItem> cartItems = cartItemsRepository.findAllByCart(shoppingCart);
         List<OrderItem> orderItems = new ArrayList<>();
 
+
         for (CartItem cartItem : cartItems) {
-            OrderItem orderItem = createOrderItemFromCartItem(cartItem, order);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setProduct(cartItem.getProduct());
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setOrder(order);
+            orderItem.setPrice(cartItem.getProduct().getPrice());
+            if (LocalDateTime.now().isAfter(order.getReturnDeadline())) {
+                orderItem.setFine(10);
+            } else {
+                orderItem.setFine(0);
+            }
             orderItems.add(orderItem);
         }
 
         orderItemRepository.saveAll(orderItems);
+
+        // delete cart items after converting them to order items
         cartItemsRepository.deleteAll(cartItems);
     }
-    private User getUserByUserId(int userId) {
-        return UserRepository.getUserById(userId);
-    }
 
-    private OrderItem createOrderItemFromCartItem(CartItem cartItem, Order order) {
-        OrderItem orderItem = new OrderItem();
-        orderItem.setProduct(cartItem.getProduct());
-        orderItem.setQuantity(cartItem.getQuantity());
-        orderItem.setOrder(order);
-        orderItem.setPrice(cartItem.getProduct().getPrice());
-        orderItem.setFine(calculateFine(order));
-        return orderItem;
-    }
-
-    private int calculateFine(Order order) {
-        if (LocalDateTime.now().isAfter(order.getReturnDeadline())) {
-            return 10;
-        } else {
-            return 0;
-        }
-    }
-
-
-    public List<OrderItem> getOrderItemsByUserId(int userId , int orderId) {
+    public List<OrderItem> getOrderItemsByUserId(int userId,int orderID) {
         User user = UserRepository.getUserById(userId);
-        Order order = orderRepository.findByUserAndId(user, orderId);
+        Order order = orderRepository.findByuserAndStatus(user , "");
         return orderItemRepository.findAllByOrder(order);
     }
 }
-
