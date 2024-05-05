@@ -180,10 +180,11 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <button class="dropdown-item" onclick="OpenLoginPage()" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                </button>
+
                             </div>
                         </li>
 
@@ -282,6 +283,11 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
                     <script>
+                        function OpenLoginPage() {
+                            window.location.href = "login.html"; // Redirect to the login page
+                        }
+                    </script>
+                    <script>
                         function updateNoOfUsers(){
                             var url = "http://localhost:9098/User/getUsers"
                             $.ajax({
@@ -289,8 +295,8 @@
                                 type:"GET",
                                 datatype:"json",
                                 success:function(data){
-                                var divElement = document.getElementById("NoUsers");
-                                divElement.innerHTML = data.length;
+                                    var divData = document.getElementById("NoUsers");
+                                    divData.innerHTML = data.length;
                                 },
                                 error:function(){
                                     console.log("error")
@@ -307,8 +313,8 @@
                                 type:"GET",
                                 datatype:"json",
                                 success:function(data){
-                                var divElement = document.getElementById("NoBooks");
-                                divElement.innerHTML = data.length;
+                                    var divData = document.getElementById("NoBooks");
+                                    divData.innerHTML = data.length;
                                 },
                                 error:function(){
                                     console.log("error")
@@ -326,8 +332,8 @@
                                 type:"GET",
                                 datatype:"json",
                                 success:function(data){
-                                var divElement = document.getElementById("NoCategories");
-                                divElement.innerHTML = data.length;
+                                    var divData = document.getElementById("NoCategories");
+                                    divData.innerHTML = data.length;
                                 },
                                 error:function(){
                                     console.log("error")

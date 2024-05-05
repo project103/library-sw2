@@ -181,19 +181,20 @@
                 });
             }
             function deleteBook(bookId) {
-            var apiUrl = "http://localhost:9098/books/delete/" + bookId
-            $.ajax({
-                url: apiUrl,
-                type: "DELETE",
-                success: function(result) {
-                console.log("Book deleted successfully");
-                updateTable();
-        },
-        error: function(xhr, status, error) {
-            console.error("Error deleting book:", error);
-        }
-    });
-}
+                var url = "http://localhost:9098/books/delete/" + bookId
+                $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    success: function(result) {
+                    console.log("Book deleted successfully");
+                    updateTable();
+                    },
+                    error: function() {
+                        console.error("error");
+                    }
+                });
+            }
+
             updateTable()
         </script>
     </div>
