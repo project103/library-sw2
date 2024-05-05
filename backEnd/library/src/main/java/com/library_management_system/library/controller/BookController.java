@@ -71,7 +71,7 @@ public class BookController {
         book.setName(NewBook.get("BookName"));
         book.setAuthor(NewBook.get("author"));
         book.setDescription(NewBook.get("description"));
-        book.setPrice(Double.parseDouble(NewBook.get("price")));
+        book.setPrice(Integer.parseInt(NewBook.get("price")));
         book.setCopies(Integer.parseInt(NewBook.get("copies")));
         book.setFormat(NewBook.get("format"));
         book.setLength(Integer.parseInt(NewBook.get("length")));

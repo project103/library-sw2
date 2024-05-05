@@ -21,7 +21,7 @@ public class Book {
     }
 
 
-    public Book(String name, String author, String description, double price, Integer copies, String format,
+    public Book(String name, String author, String description, Integer price, Integer copies, String format,
             Integer length, Double rating, String edition, String language , String pic) {
         this.name = name;
         this.author = author;
@@ -50,7 +50,7 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private double price;
+    private Integer price;
     private Integer copies;
     private String format;
     private Integer length;

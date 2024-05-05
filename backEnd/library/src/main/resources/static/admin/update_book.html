@@ -84,10 +84,9 @@
                 </a>
 
             </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
 
             <!-- Nav Item - Pages Collapse Menu -->
             
@@ -103,7 +102,6 @@
 
         </ul>
         <!-- id	age	email	gender	job	joined	name	password	phone	profile_pic	 user_role	 -->
-        <!-- id	author	copies	description	edition	format	language	length	name	price	rating	category_id	 -->
 
 
     <div class="container-fluid">
@@ -111,61 +109,56 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title mb-5 d-inline">Add Books</h5>
-              <form method="post" id="creationForm" action="/books/addBook/{categoryName}" enctype="multipart/form-data">
+              <h5 class="card-title mb-5 d-inline">Update Book</h5>
+              <form method="post" id="updateForm" action="/books/update/{bookId}" enctype="multipart/form-data">
                 <!-- Email input -->
                 <div class="form-outline mb-4 mt-4">
                     <select name="categoryName" id="categoryName" class="form-control">
-                        <option value="" selected disabled>Select Category</option>
-                        <!-- Populate options dynamically from database -->
+                        <option value="" selected disabled >Select Category</option>
                     </select>
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="BookName" id="BookName" class="form-control" placeholder="Book Name" />
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Book Name" />
                 </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
-                </div>
+                    <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
+                  </div>
                 <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="description" id="description" class="form-control" placeholder="Description" />
-                </div>
-                <div class="form-outline mb-4 mt-4">
-                  <input type="text" name="price" id="price" class="form-control" placeholder="Price" />
-                </div>
+                    <input type="text" name="description" id="description" class="form-control" placeholder="Description" />
+                  </div>
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="price" id="price" class="form-control" placeholder="Price" />
+                  </div>
+                
                 <div class="form-outline mb-4 mt-4">
                     <input type="text" name="copies" id="copies" class="form-control" placeholder="Copies" />
+                </div>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <select name="format" id="format" class="form-control">
+                          <option value="" selected disabled>Select Format</option>
+                          <option value="book">book</option>
+                          <option value="ebook">ebook</option>
+                      </select>
                   </div>
-                <div class="form-outline mb-4 mt-4">
-                    <select name="format" id="format" class="form-control" >
-                        <option value="" selected disabled>Select Format</option>
-                        <option value="book">book</option>
-                        <option value="ebook">ebook</option>
-                    </select>
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="length" id="length" class="form-control" placeholder="Length" />
                   </div>
-                <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="length" id="length" class="form-control" placeholder="Length" />
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="rating" id="rating" class="form-control" placeholder="Rating" />
                   </div>
-                <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="rating" id="rating" class="form-control" placeholder="Rating" />
+
+                  <div class="form-outline mb-4 mt-4">
+                      <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" />
                   </div>
-                <div class="form-outline mb-4 mt-4">
-                    <input type="text" name="edition" id="edition" class="form-control" placeholder="Edition" />
-                  </div>
+
                   <div class="form-outline mb-4 mt-4">
                       <input type="text" name="language" id="language" class="form-control" placeholder="Language" />
                   </div>
-                 <!-- <div class="form-outline mb-4 mt-4">
-                      <label for="photo">Upload Photo</label>
-                      <input type="file" name="photo" id="photo" class="form-control" accept="image/*">
-                  </div>-->
-
-
-
-
-
-
-                  <!-- Submit button -->
-                <button type="submit" name="submit" class="btn btn-primary  mb-4 text-center">create</button>
+                <!-- Submit button -->
+                <button type="submit" id="updateButton" class="btn btn-primary  mb-4 text-center">Update</button>
 
           
               </form>
@@ -174,7 +167,7 @@
           </div>
         </div>
       </div>
-  </div>
+   </div>
   <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -190,15 +183,71 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-    <script>
-        $(document).ready(function() {
-                $("#creationForm").submit(function(event) {
+        <!-- Include jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            //get catogories name and show it on option list
+            $(document).ready(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:9098/categories/all",
+                    success: function(response) {
+                        response.forEach(function(category) {
+                            $("#categoryName").append(`<option value="${category.name}">${category.name}</option>`);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching categories:", error);
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                // Function to fetch book data by ID and populate the update form
+                function getBookDataById(bookId) {
+                    $.ajax({
+                        url: "http://localhost:9098/books/GetById/" + bookId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(response) {
+                            // Populate the form fields with the retrieved book data
+                            $("#categoryName").val(response.category.name);
+                            $("#name").val(response.name);
+                            $("#author").val(response.author);
+                            $("#description").val(response.description);
+                            $("#price").val(response.price);
+                            $("#copies").val(response.copies);
+                            $("#format").val(response.format);
+                            $("#length").val(response.length);
+                            $("#rating").val(response.rating);
+                            $("#edition").val(response.edition);
+                            $("#language").val(response.language);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error retrieving book data:", error);
+                        }
+                    });
+                }
+
+                // Retrieve the book ID from the URL query parameter
+                var urlParams = new URLSearchParams(window.location.search);
+                var bookId = urlParams.get('id');
+
+                // Call the function to fetch and populate book data
+                getBookDataById(bookId);
+
+                // Handle form submission
+                $("#updateForm").submit(function(event) {
                     event.preventDefault();
 
                     // Get form data
                     var formData = {
-                        categoryName: $("#categoryName").val(),
-                        BookName: $("#BookName").val(),
+                        category: {
+                            name: $("#categoryName").val() // Correctly retrieve the category name
+                        },
+                        name: $("#name").val(),
                         author: $("#author").val(),
                         description: $("#description").val(),
                         price: $("#price").val(),
@@ -207,55 +256,28 @@
                         length: $("#length").val(),
                         rating: $("#rating").val(),
                         edition: $("#edition").val(),
-                        language: $("#language").val(),
-                        //photo:$('#photo')[0].files[0]);
+                        language: $("#language").val()
                     };
 
+                    // Send a PUT request to update the book
                     $.ajax({
-                        type: "POST",
-                        url: "http://localhost:9098/books/addBook/"+ formData.categoryName,
+                        type: "PUT",
+                        url: "http://localhost:9098/books/update/" + bookId,
                         data: JSON.stringify(formData),
                         contentType: "application/json",
                         success: function(response) {
-                            console.log("Registration successful");
-                             $("#categoryName").val("");
-                             $("#BookName").val("");
-                             $("#author").val("");
-                             $("#description").val("");
-                             $("#price").val("");
-                             $("#copies").val("");
-                             $("#format").val("");
-                             $("#length").val("");
-                             $("#rating").val("");
-                             $("#edition").val("");
-                             $("#language").val("");
+                            console.log("Book data updated successfully");
+                            // Optionally, you can redirect or show a success message
                         },
                         error: function(xhr, status, error) {
-                            console.error("Error:", error);
+                            console.error("Error updating book data:", error);
                         }
                     });
                 });
             });
-    </script>
+        </script>
 
-    <script>
-        //get catogories name and show it on option list
-        $(document).ready(function() {
-            $.ajax({
-                type: "GET",
-                url: "http://localhost:9098/categories/all",
-                success: function(response) {
-                    response.forEach(function(category) {
-                        $("#categoryName").append(`<option value="${category.name}">${category.name}</option>`);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error("Error fetching categories:", error);
-                }
-            });
-        });
-    </script>
+        </script>
 
-    </div>
 </body>
 </html>

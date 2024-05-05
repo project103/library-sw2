@@ -37,7 +37,7 @@ public class BookService {
     }
 
 
-    public Book updateBook(int bookId, Book updatedBook) {
+    /*public Book updateBook(int bookId, Book updatedBook) {
         Book existingBook = bookRepository.findById(bookId).orElse(null);
         
         existingBook.setName(updatedBook.getName());
@@ -47,7 +47,49 @@ public class BookService {
         existingBook.setEdition(updatedBook.getEdition());
         existingBook.setLanguage(updatedBook.getLanguage());
         return bookRepository.save(existingBook);
+    }*/
+    public Book updateBook(int bookId, Book updatedBook) {
+        Book existingBook = bookRepository.findById(bookId).orElse(null);
+
+        if (updatedBook.getName() != null) {
+            existingBook.setName(updatedBook.getName());
+        }
+        if (updatedBook.getAuthor() != null) {
+            existingBook.setAuthor(updatedBook.getAuthor());
+        }
+        if (updatedBook.getDescription() != null) {
+            existingBook.setDescription(updatedBook.getDescription());
+        }
+        if (updatedBook.getPrice() != null) {
+            existingBook.setPrice(updatedBook.getPrice());
+        }
+        if (updatedBook.getEdition() != null) {
+            existingBook.setEdition(updatedBook.getEdition());
+        }
+        if (updatedBook.getLanguage() != null) {
+            existingBook.setLanguage(updatedBook.getLanguage());
+        }
+        if (updatedBook.getFormat() != null) {
+            existingBook.setFormat(updatedBook.getFormat());
+        }
+        if (updatedBook.getCategory().getName() != null) {
+            Category existingCategory = categoryRepository.findByName(updatedBook.getCategory().getName());
+                existingCategory.setName(updatedBook.getCategory().getName());
+                existingBook.setCategory(existingCategory);
+        }
+        if (updatedBook.getCopies() != null) {
+            existingBook.setCopies(updatedBook.getCopies());
+        }
+        if (updatedBook.getRating() != null) {
+            existingBook.setRating(updatedBook.getRating());
+        }
+        if (updatedBook.getLength() != null) {
+            existingBook.setLength(updatedBook.getLength());
+        }
+
+        return bookRepository.save(existingBook);
     }
+
 
     public List<Book> getBookByCategory(String categoryName){
         

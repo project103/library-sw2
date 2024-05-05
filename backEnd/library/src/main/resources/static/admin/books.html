@@ -71,41 +71,24 @@
             <li class="nav-item">
                 <a class="nav-link" href="books.html">
                     <i class='bx bxs-add-to-queue' ></i>
-                    <span>Add Books</span>
+                    <span>Books</span>
                 </a>
                 
             </li>
             
 
             <li class="nav-item">
-                <a class="nav-link" href="returnbooks.html">
-                    <i class='bx bx-archive-in' ></i>
-                    <span>Return Books</span>
-                </a>
-                
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="show-categories.html">
                     <i class='bx bx-archive-in' ></i>
-                    <span>View Category</span>
+                    <span>Categories</span>
                 </a>
 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="transactions.html">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>transactions</span>
-                </a>
-                
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             
@@ -127,8 +110,8 @@
           <div class="col">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title mb-4 d-inline">Categories</h5>
-               <a href="add_books.html" class="btn btn-primary mb-4 text-center float-right">Add Books</a>
+                <h5 class="card-title mb-4 d-inline">Books</h5>
+               <a href="add_books.html" class="btn btn-primary mb-4 text-center float-right">Add Book</a>
                 <table class="table" id="table">
                   <thead>
                       <th scope="col">Id</th>
@@ -141,6 +124,7 @@
                       <th scope="col">Edition</th>
                       <th scope="col">Language</th>
                       <th scope="col">Category</th>
+                      <th scope="col">Picture</th>
                       <th scope="col">Update</th>
                       <th scope="col">Delete</th>
                   </thead>
@@ -186,8 +170,8 @@
                         for(i=0; i<data.length; i++){
                             $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
                             '</td><td>' + data[i].price +'</td><td>' + data[i].copies +'</td><td>' + data[i].format +'</td><td>' + data[i].length +
-                            '</td><td>' + data[i].edition +'</td><td>' + data[i].language +'</td><td>' + data[i].category.name +
-                            '</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteBook(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
+                            '</td><td>' + data[i].edition +'</td><td>' + data[i].language +'</td><td>' + data[i].category.name +'</td><td>' + data[i].pic +
+                            '</td><td> <a  href="update_book.html?id=' + data[i].id + '" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteBook(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
                         }
                         console.log(data)
                     },
