@@ -177,12 +177,12 @@
                 $.ajax({
                     url: url,
                     type: "DELETE",
-                    success: function(result) {
+                    success: function(data) {
                         console.log("User deleted successfully");
                         updateTable();
                      },
-                    error: function(xhr, status, error) {
-                        console.error("Error deleting user:", error);
+                    error: function() {
+                        console.error("error");
                     }
                 });
             }

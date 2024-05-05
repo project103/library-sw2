@@ -187,18 +187,17 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
-            //get catogories name and show it on option list
             $(document).ready(function() {
                 $.ajax({
                     type: "GET",
                     url: "http://localhost:9098/categories/all",
-                    success: function(response) {
-                        response.forEach(function(category) {
+                    success: function(data) {
+                        data.forEach(function(category) {
                             $("#categoryName").append(`<option value="${category.name}">${category.name}</option>`);
                         });
                     },
-                    error: function(xhr, status, error) {
-                        console.error("Error fetching categories:", error);
+                    error: function() {
+                        console.error("error");
                     }
                 });
             });
@@ -211,29 +210,29 @@
                         url: "http://localhost:9098/books/GetById/" + bookId,
                         type: "GET",
                         dataType: "json",
-                        success: function(response) {
+                        success: function(data) {
                             // Populate the form fields with the retrieved book data
-                            $("#categoryName").val(response.category.name);
-                            $("#name").val(response.name);
-                            $("#author").val(response.author);
-                            $("#description").val(response.description);
-                            $("#price").val(response.price);
-                            $("#copies").val(response.copies);
-                            $("#format").val(response.format);
-                            $("#length").val(response.length);
-                            $("#rating").val(response.rating);
-                            $("#edition").val(response.edition);
-                            $("#language").val(response.language);
+                            $("#categoryName").val(data.category.name);
+                            $("#name").val(data.name);
+                            $("#author").val(data.author);
+                            $("#description").val(data.description);
+                            $("#price").val(data.price);
+                            $("#copies").val(data.copies);
+                            $("#format").val(data.format);
+                            $("#length").val(data.length);
+                            $("#rating").val(data.rating);
+                            $("#edition").val(data.edition);
+                            $("#language").val(data.language);
                         },
-                        error: function(xhr, status, error) {
-                            console.error("Error retrieving book data:", error);
+                        error: function() {
+                            console.error("error");
                         }
                     });
                 }
 
                 // Retrieve the book ID from the URL query parameter
-                var urlParams = new URLSearchParams(window.location.search);
-                var bookId = urlParams.get('id');
+                var urlParameter = new URLSearchParams(window.location.search);
+                var bookId = urlParameter.get('id');
 
                 // Call the function to fetch and populate book data
                 getBookDataById(bookId);
@@ -265,12 +264,12 @@
                         url: "http://localhost:9098/books/update/" + bookId,
                         data: JSON.stringify(formData),
                         contentType: "application/json",
-                        success: function(response) {
+                        success: function(data) {
                             console.log("Book data updated successfully");
                             // Optionally, you can redirect or show a success message
                         },
-                        error: function(xhr, status, error) {
-                            console.error("Error updating book data:", error);
+                        error: function() {
+                            console.error("error");
                         }
                     });
                 });

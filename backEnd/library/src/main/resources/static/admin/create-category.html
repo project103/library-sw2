@@ -249,28 +249,27 @@
                     <script>
                         $(document).ready(function() {
                             $("#categoryForm").submit(function(event) {
-                            event.preventDefault();
+                                event.preventDefault();
 
-                            // Get form data
-                            var formData = {
-                                name: $("#name").val(),
-                            };
+                                var formData = {
+                                    name: $("#name").val(),
+                                };
 
-                            $.ajax({
-                                type: "POST",
-                                url: "http://localhost:9098/categories/add",
-                                data: JSON.stringify(formData),
-                                contentType: "application/json",
-                                success: function(response) {
-                                    console.log("Adding successful");
-                                    $("#name").val("");
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error("Error:", error);
-                                }
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://localhost:9098/categories/add",
+                                    data: JSON.stringify(formData),
+                                    contentType: "application/json",
+                                    success: function(data) {
+                                        console.log("Adding successful");
+                                        $("#name").val("");
+                                    },
+                                    error: function() {
+                                        console.error("error");
+                                    }
+                                });
                             });
                         });
-                    });
                     </script>
                 </div>
             </div>
