@@ -111,14 +111,12 @@ public class BookService {
         if(book.getFormat().equals("Audio")) {
             book.setCopies(1);
         }
-        Category category = categoryRepository.findByName(categoryName);
         
         book.setCategory(category);
         return bookRepository.save(book);
     }
 
     public List<Book> getCategoryContent(String categoryName){
-        Category category = categoryRepository.findByName(categoryName);
         return bookRepository.findByCategory(category);
     }
 
