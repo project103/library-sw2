@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import java.util.Optional;
+
+
 @Service
 public class userService {
 @Autowired
@@ -58,7 +61,7 @@ public class userService {
         return "deleted successfully !!" + id;
     }
 
-    public User UpdateUser(User user) {
+    /*public User UpdateUser(Integer userId, User user) {
         User existingUser = Repository.findById(user.getId()).orElse(null);
 
         existingUser.setName(user.getName());
@@ -72,6 +75,37 @@ public class userService {
         existingUser.setJoined(user.getJoined());
         return Repository.save(existingUser);
 
+    }*/
+
+
+    public User updateUser(Integer userId, User updatedUser) {
+        // Find the user by the provided userId
+        Optional<User> optionalUser = Repository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            // Get the existing user
+            User existingUser = optionalUser.get();
+
+            // Update the existing user data with the data from the updatedUser
+            existingUser.setName(updatedUser.getName());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPassword(updatedUser.getPassword());
+            existingUser.setAge(updatedUser.getAge());
+            existingUser.setGender(updatedUser.getGender());
+            existingUser.setPhone(updatedUser.getPhone());
+            existingUser.setJob(updatedUser.getJob());
+            existingUser.setUserRole(updatedUser.getUserRole());
+            existingUser.setJoined(updatedUser.getJoined());
+
+            // Save the updated user and return
+            return Repository.save(existingUser);
+        } else {
+            // Handle the case where no user with the provided ID is found
+            // You can throw an exception, return null, or handle it based on your application's requirements
+            return null;
+        }
     }
+
+
 
 }

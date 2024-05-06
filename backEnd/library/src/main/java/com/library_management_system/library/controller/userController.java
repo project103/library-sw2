@@ -59,9 +59,9 @@ public class userController {
         return "deleted successfully !!" + id;
     }
 
-    @PutMapping("/UpdateUser")
-    public User UpdateUser(@RequestBody User user) {
-        return Service.UpdateUser(user);
+    @PutMapping("/UpdateUser/{userId}")
+    public User UpdateUser(@PathVariable Integer userId,@RequestBody User user) {
+        return Service.updateUser(userId,user);
     }
 
     @PostMapping("/login")
