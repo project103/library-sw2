@@ -142,28 +142,40 @@
                             <form method="post" id="updateForm"  enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="name">Name:</label>
-                                    <input type="name" class="form-control" id="name" value=""  required>
+                                    <input type="text" class="form-control" id="name" name="name" value=""  aria-required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" value="" required>
+                                    <input type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" class="form-control" id="email" name="email" value="" aria-required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone:</label>
-                                    <input type="text" class="form-control" id="phone" value="" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" value="" aria-required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password:</label>
-                                    <input type="text" class="form-control" id="password" value="" required>
+                                    <label for="old_password">Password:</label>
+                                    <input type="password" class="form-control" name="old_password" id="old_password" value="" aria-required="true" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="repeat_old_password">Current Password:</label>
+                                    <input type="password" class="form-control" name="repeat_old_password" id="repeat_old_password" value="" placeholder="Enter your current password to update if want">
+                                </div>
+                                <div class="form-group">
+                                    <label for="new_password">New Password:</label>
+                                    <input type="password" class="form-control" name="new_password" id="new_password" value="" placeholder="Write new password to update">
+                                </div>
+                                <div class="form-group">
+                                    <label for="repeat_new_password">Repeat New Password:</label>
+                                    <input type="password" class="form-control" name="repeat_new_password" id="repeat_new_password" value="" placeholder="Repeat new password"  >
                                 </div>
                                 <div class="form-group">
                                     <label>Gender:</label><br>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male"  >
+                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male" aria-required="true" >
                                         <label class="form-check-label" for="male">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" >
+                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female" aria-required="true" >
                                         <label class="form-check-label" for="female">Female</label>
                                     </div>
 
@@ -173,7 +185,11 @@
                                     <input type="text" class="form-control" id="userRole" value="" readonly>
                                 </div>
 
-                                <button type="submit"  id="updateButton" class="btn btn-primary  mb-4 text-center">Update</button>
+                                <input class="btn btn-primary  mb-4 text-center" id="updateButton" type="submit" value="Update"/>
+                                <!--<div class="form-group">
+                                    <input class="btn btn-primary mb-4 text-center" id="updateButton" type="button" value="Update" onclick="updateUser(event)"/>
+                                </div>-->
+                               <!-- <button type="submit"  id="updateButton" class="btn btn-primary  mb-4 text-center">Update</button>-->
                             </form>
                             <div style="height: 26px"></div>
                             <div class="card shadow-sm">
@@ -210,8 +226,10 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+
+    <script>
     function GetUserData() {
         var url = "http://localhost:9098/User/getUserById/" + localStorage.getItem("userId");
 
@@ -223,7 +241,7 @@
                 $("#name").val(data.name);
                 $("#email").val(data.email);
                 $("#phone").val(data.phone);
-                $("#password").val(data.password);
+                $("#old_password").val(data.password);
                 $("#userRole").val(data.userRole);
                 if (data.gender === "male") {
                     $("#male").prop("checked", true);
@@ -241,50 +259,60 @@
     GetUserData();
 
 </script>
-
     <script>
         $(document).ready(function() {
             $("#updateButton").click(updateUser);
         });
     </script>
     <script>
-        function updateUser() {
-            event.preventDefault();
+        function updateUser(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
 
-            //  Get values from form fields
             var name = $("#name").val();
             var email = $("#email").val();
-            var password = $("#password").val();
-            var gender = $("input[name='gender']:checked").val();
             var phone = $("#phone").val();
-            var userRole = $("#userRole").val();
+            var gender = $("input[name='gender']:checked").val();
+            var oldPassword = $("#old_password").val();
+            var repeatOldPassword = $("#repeat_old_password").val();
+            var newPassword = $("#new_password").val();
+            var repeatNewPassword = $("#repeat_new_password").val();
 
-            // Get the userId from localStorage
+            // Validate password
+            if (newPassword !== "" && newPassword !== repeatNewPassword) {
+                alert("New password and repeat new password do not match.");
+                return;
+            }
+
+            if (repeatOldPassword!=="" && oldPassword !== "" && oldPassword !== repeatOldPassword) {
+                alert("Old password and repeat old password do not match.");
+                return;
+            }
+
             var userId = localStorage.getItem("userId");
-
-            // Set the form action URL with the userId
             $("#updateForm").attr("action", "User/UpdateUser/" + userId);
 
-            // Create formdata object
-            var formdata = {
+            var formData = {
                 "name": name,
                 "email": email,
-                "password": password,
-                "gender": gender,
                 "phone": phone,
-                "userRole": userRole
+                "password": newPassword === "" ? oldPassword : newPassword,
+                "gender": gender
             };
 
             $.ajax({
                 url: "http://localhost:9098/User/UpdateUser/" + userId,
                 type: "PUT",
                 contentType: "application/json",
-                data: JSON.stringify(formdata),
+                data: JSON.stringify(formData),
                 success: function(data) {
                     console.log("User data updated successfully:", data);
+                    location.reload();
+                    //window.open("profile.html");
+                    alert("User data updated successfully.");
                 },
                 error: function() {
                     console.error("Error");
+                    alert("Error updating user data. Please try again later.");
                 }
             });
         }

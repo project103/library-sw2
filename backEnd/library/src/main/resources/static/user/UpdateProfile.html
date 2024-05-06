@@ -574,56 +574,56 @@
     });
 </script>
 <script>
-function updateUser(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+    function updateUser(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
 
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var phone = $("#phone").val();
-    var gender = $("input[name='gender']:checked").val();
-    var oldPassword = $("#old_password").val();
-    var repeatOldPassword = $("#repeat_old_password").val();
-    var newPassword = $("#new_password").val();
-    var repeatNewPassword = $("#repeat_new_password").val();
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+        var gender = $("input[name='gender']:checked").val();
+        var oldPassword = $("#old_password").val();
+        var repeatOldPassword = $("#repeat_old_password").val();
+        var newPassword = $("#new_password").val();
+        var repeatNewPassword = $("#repeat_new_password").val();
 
-    // Validate password
-    if (newPassword.trim() !== "" && newPassword !== repeatNewPassword) {
-        alert("New password and repeat new password do not match.");
-        return;
-    }
-
-    if (repeatOldPassword.trim()!=="" && oldPassword.trim() !== "" && oldPassword !== repeatOldPassword) {
-        alert("Old password and repeat old password do not match.");
-        return;
-    }
-
-    var userId = localStorage.getItem("userId");
-    $("#updateForm").attr("action", "User/UpdateUser/" + userId);
-
-    var formData = {
-        "name": name,
-        "email": email,
-        "phone": phone,
-        "password": newPassword.trim() === "" ? oldPassword : newPassword,
-        "gender": gender
-    };
-
-    $.ajax({
-        url: "http://localhost:9098/User/UpdateUser/" + userId,
-        type: "PUT",
-        contentType: "application/json",
-        data: JSON.stringify(formData),
-        success: function(data) {
-            console.log("User data updated successfully:", data);
-            window.open("profile.html");
-            //alert("User data updated successfully.");
-        },
-        error: function(xhr, status, error) {
-            console.error("Error updating user data:", error);
-            alert("Error updating user data. Please try again later.");
+        // Validate password
+        if (newPassword.trim() !== "" && newPassword !== repeatNewPassword) {
+            alert("New password and repeat new password do not match.");
+            return;
         }
-    });
-}
+
+        if (repeatOldPassword.trim()!=="" && oldPassword.trim() !== "" && oldPassword !== repeatOldPassword) {
+            alert("Old password and repeat old password do not match.");
+            return;
+        }
+
+        var userId = localStorage.getItem("userId");
+        $("#updateForm").attr("action", "User/UpdateUser/" + userId);
+
+        var formData = {
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "password": newPassword.trim() === "" ? oldPassword : newPassword,
+            "gender": gender
+        };
+
+        $.ajax({
+            url: "http://localhost:9098/User/UpdateUser/" + userId,
+            type: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function(data) {
+                console.log("User data updated successfully:", data);
+                //window.open("profile.html");
+                alert("User data updated successfully.");
+            },
+            error: function(xhr, status, error) {
+                console.error("Error updating user data:", error);
+                alert("Error updating user data. Please try again later.");
+            }
+        });
+    }
 
 </script>
 </body>
