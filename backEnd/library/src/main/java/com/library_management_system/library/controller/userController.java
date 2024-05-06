@@ -2,10 +2,18 @@ package com.library_management_system.library.controller;
 
 import com.library_management_system.library.service.userService;
 import com.library_management_system.library.entity.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +27,7 @@ public class userController {
     private userService Service;
 
     @PostMapping("/Register")
-    public ModelAndView registerUser(@RequestBody User user) {
+    public ModelAndView registerUser(@Valid @RequestBody User user) {
         List<User> existingUsers = Service.findUsersByEmail(user.getEmail());
         if (!existingUsers.isEmpty()) {
             return new ModelAndView("redirect:/user/register.html");
@@ -62,5 +70,12 @@ public class userController {
         if (id != null){
             return Service.getUserById(id);}
         else return null;
+    }
+
+@ExceptionHandler(BindException.class)
+    public ResponseEntity<List> handeBindException(BindException e) {
+
+        return new ResponseEntity<>(e.getAllErrors() , HttpStatus.BAD_REQUEST);
 }
+
 }

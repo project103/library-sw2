@@ -21,8 +21,8 @@ public class userService {
     }
 
      public User saveUser(User user) {
+        user.setUserRole(0);
         return Repository.save(user);
-
     }
 
     public List<User> getUsers() {
