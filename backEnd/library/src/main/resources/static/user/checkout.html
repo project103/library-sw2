@@ -341,10 +341,11 @@
                                                     <div class="col-sm-4">
                                                         <h2>Your order</h2>
                                                         <span class="underline left"></span>
-                                                        <div class="woocommerce-checkout-review-order" id="cart-items-list">
-
+                                                        <div class="woocommerce-checkout-review-order" id="car-items-list">
+                                                            <!-- Dynamic content will be inserted here -->
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                             </form>
@@ -690,7 +691,7 @@
                     tableHTML += '</table>';
 
                     // Update the HTML content of the table container with the dynamically generated table
-                    $('#cart-items-list').html(tableHTML);
+                    $('#car-items-list').html(tableHTML);
 
                     // Update the number of items in cart
                     $('#numItemOfCart').text(data.length);
