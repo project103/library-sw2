@@ -257,8 +257,8 @@
                                                         <h2>Update your profile</h2>
                                                         <span class="underline left"></span>
                                                         <div class="contact-fields">
-                                                            <form id="contact" name="contact"
-                                                                action="UpdateProfile.html" method="post">
+                                                            <form id="updateForm"
+                                                                 method="post" enctype="multipart/form-data">
                                                                 <div class="row">
                                                                     <div class="col-md-6 col-sm-6">
                                                                         <div class="form-group">
@@ -290,31 +290,46 @@
                                                                     <div class="col-md-6 col-sm-6">
                                                                         <div class="form-group">
                                                                             <input class="form-control" type="password"
-                                                                                placeholder="enter your password"
-                                                                                name="password" id="password" size="30"
-                                                                                value="" aria-required="true" />
+                                                                                placeholder="Enter your password"
+                                                                                name="old_password" id="old_password" size="30"
+                                                                                value="" aria-required="true" readonly/>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 col-sm-6">
                                                                         <div class="form-group">
                                                                             <input class="form-control" type="password"
-                                                                                placeholder="enter your new password"
+                                                                                   placeholder="Enter your old password to update"
+                                                                                   name="repeat_old_password" id="repeat_old_password"
+                                                                                   size="30" value="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <input class="form-control" type="password"
+                                                                                placeholder="Enter your new password"
                                                                                 name="new_password" id="new_password"
-                                                                                size="30" value=""
-                                                                                aria-required="true" />
+                                                                                size="30" value="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6">
+                                                                        <div class="form-group">
+                                                                            <input class="form-control" type="password"
+                                                                                   placeholder="Repeat your new password"
+                                                                                   name="repeat_new_password" id="repeat_new_password"
+                                                                                   size="30" value="" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 col-sm-6">
                                                                         <div class="form-group">
                                                                             <div>gender</div>
                                                                             <span>male<input class="form-contro"
-                                                                                    type="radio" name="Gender"
-                                                                                    id="gender_male" size="30" value=""
+                                                                                    type="radio" name="gender"
+                                                                                    id="male" size="30" value="male"
                                                                                     aria-required="true" /></span>
                                                                             <span>female<input class="form-contro"
-                                                                                    type="radio" name="Gender"
-                                                                                    id="gender_female" size="30"
-                                                                                    value=""
+                                                                                    type="radio" name="gender"
+                                                                                    id="female" size="30"
+                                                                                    value="female"
                                                                                     aria-required="true" /></span>
                                                                         </div>
                                                                     </div>
@@ -322,18 +337,14 @@
                                                                     <div class="col-sm-12">
                                                                         <div class="form-group form-submit">
                                                                             <input class="btn btn-default"
-                                                                                id="submit-contact-form" type="button"
-                                                                                name="submit" value="Send Message" />
+                                                                                id="updateButton" type="submit" value="Update"/>
                                                                         </div>
                                                                     </div>
                                                                     <div id="success">
                                                                         <span>CONFIRMED.</span>
                                                                     </div>
 
-                                                                    <div id="error">
-                                                                        <span>Something went wrong, try refreshing and
-                                                                            submitting the form again.</span>
-                                                                    </div>
+
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -527,6 +538,94 @@
             window.location.href = 'signin.html';
         }
     </script>
+
+    <script>
+        function GetUserData() {
+        var url = "http://localhost:9098/User/getUserById/" + localStorage.getItem("userId");
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                $("#name").val(data.name);
+                $("#email").val(data.email);
+                $("#phone").val(data.phone);
+                $("#old_password").val(data.password);
+                if (data.gender === "male") {
+                    $("#male").prop("checked", true);
+                }
+                else if (data.gender === "female") {
+                    $("#female").prop("checked", true);
+                }
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+    }
+
+    GetUserData();
+    </script>
+
+<script>
+    $(document).ready(function() {
+        $("#updateButton").click(updateUser);
+    });
+</script>
+<script>
+function updateUser(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    var name = $("#name").val();
+    var email = $("#email").val();
+    var phone = $("#phone").val();
+    var gender = $("input[name='gender']:checked").val();
+    var oldPassword = $("#old_password").val();
+    var repeatOldPassword = $("#repeat_old_password").val();
+    var newPassword = $("#new_password").val();
+    var repeatNewPassword = $("#repeat_new_password").val();
+
+    // Validate password
+    if (newPassword.trim() !== "" && newPassword !== repeatNewPassword) {
+        alert("New password and repeat new password do not match.");
+        return;
+    }
+
+    if (repeatOldPassword.trim()!=="" && oldPassword.trim() !== "" && oldPassword !== repeatOldPassword) {
+        alert("Old password and repeat old password do not match.");
+        return;
+    }
+
+    var userId = localStorage.getItem("userId");
+    $("#updateForm").attr("action", "User/UpdateUser/" + userId);
+
+    var formData = {
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "password": newPassword.trim() === "" ? oldPassword : newPassword,
+        "gender": gender
+    };
+
+    $.ajax({
+        url: "http://localhost:9098/User/UpdateUser/" + userId,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function(data) {
+            console.log("User data updated successfully:", data);
+            window.open("profile.html");
+            //alert("User data updated successfully.");
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating user data:", error);
+            alert("Error updating user data. Please try again later.");
+        }
+    });
+}
+
+</script>
 </body>
 
 
