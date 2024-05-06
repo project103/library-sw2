@@ -34,7 +34,8 @@
 <body>
 
 <script>
-    localStorage.setItem('sessionId', 0);
+    localStorage.removeItem('sessionId');
+    localStorage.removeItem('userId');
 </script>
 
 <!-- Start: Page Banner -->
@@ -191,11 +192,14 @@
                 success: function(data) {
                     if (data != null) {
                         // Redirect to dashboard or another page upon successful login
-                        localStorage.setItem('sessionId' , 1);
+
                         localStorage.setItem('userId' ,data.id);
                         if (data.userRole == 0) {
+                            localStorage.setItem('sessionId' , 1);
                             window.location.href = "/user/main.html";
-                        }else if(data.userRole == 1){window.location.href = "/admin/index.html";}
+                        }else if(data.userRole == 1){
+                            localStorage.setItem('sessionId' , 0);
+                            window.location.href = "/admin/index.html";}
 
                     } else {
                         // Redirect to sign-in page with error message

@@ -75,7 +75,7 @@
                                         <div class="topbar-links">
                                             <a href="profile.html"><i class="fa fa-user" aria-hidden="true"></i></a>
                                             <span>|</span>
-                                            <a href="Favorits.html"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="signin.html"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                                             <span>|</span>
 
                                             <!-- Your script containing UpdateCartMenu function -->
@@ -304,45 +304,13 @@
                 <div class="books-media-list">
                     <div class="container">
                         <div class="row">
-                            <!-- Start: Search Section -->
-                            <section class="search-filters">
-                                <div class="container">
-                                    <div class="filter-box">
-                                        <h3>What are you looking for at the library?</h3>
-                                        <form action="Search.html" method="get">
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <label class="sr-only" for="keywords">Search by Keyword</label>
-                                                    <input class="form-control" placeholder="Search by Keyword"
-                                                        id="keywords" name="keywords" type="text">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-2 col-sm-6">
-                                                <div class="form-group">
-                                                    <button type="submit" type="submit">Search</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </section>
-                            <!-- End: Search Section -->
+                            
                         </div>
                         <div class="row">
                             <div class="col-md-9 col-md-push-3">
                                 <div class="filter-options margin-list">
                                     <div class="row">
-                                        <div class="col-md-4 col-sm-4">
-                                            <select name="orderby">
-                                                <option selected="selected">Default sorting</option>
-                                                <option>Sort by popularity</option>
-                                                <option>Sort by rating</option>
-                                                <option>Sort by newness</option>
-                                                <option>Sort by price</option>
-                                            </select>
-                                        </div>
-
+                                        
                                     </div>
                                 </div>
                                 <div class="books-list" id="books-list">
@@ -371,7 +339,7 @@
                                                                 <div class="single-book-box">
                                                                     <div class="post-thumbnail">
                                                                         <div class="book-list-icon yellow-icon"></div>
-                                                                        <a href="books-media-detail-v2.html"><img alt="Book" src="${book.image}" /></a>
+                                                                        <a href="books-media-detail-v2.html?BookName=${book.name}"><img alt="Book" src="images/books-media/layout-3/books-media-layout3-03.jpg" /></a>
                                                                     </div>
                                                                     <div class="post-detail">
                                                                         <div class="optional-links">
@@ -387,7 +355,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">
                                                                                     <h3 class="entry-title">
-                                                                                        <a href="books-media-detail-v1.html">${book.name}</a>
+                                                                                        <a href="books-media-detail-v2.html?BookName=${book.name}">${book.name}</a>
                                                                                     </h3>
                                                                                     <ul>
                                                                                         <li><strong>Author:</strong> ${book.author}</li>
