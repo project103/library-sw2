@@ -21,7 +21,7 @@ public class userService {
     }
 
      public User saveUser(User user) {
-        user.setUserRole(0);
+        //user.setUserRole(0);
         return Repository.save(user);
     }
 
