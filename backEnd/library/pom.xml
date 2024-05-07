@@ -54,10 +54,7 @@
     		<artifactId>hibernate-core</artifactId>
     		<version>6.4.4.Final</version> <!-- or latest version -->
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

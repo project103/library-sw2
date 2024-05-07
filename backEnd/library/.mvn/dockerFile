@@ -1,4 +1,26 @@
-From openjdk : 21
-copy target/library-0.0.1-SNAPSHOT.jar  library-0.0.1-SNAPSHOT.jar
+# Use the OpenJDK 21 with JProfiler image as the base image
+FROM mediasol/openjdk21-slim-jprofiler:7
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the packaged Spring Boot application
+COPY target/library-0.0.1-SNAPSHOT.jar /app/my-spring-boot-app.jar
+
+# Expose the port
 EXPOSE 9098
-ENTRYPOINT ["java" , "-jar" , "library-0.0.1-SNAPSHOT.jar"]
+
+# Set environment variables for Spring Boot application properties
+ENV SPRING_APPLICATION_NAME=demo \
+    SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/library \
+    SPRING_DATASOURCE_USERNAME=root \
+    SPRING_DATASOURCE_PASSWORD=Root \
+    SERVER_PORT=9098 \
+    SPRING_DATASOURCE_DRIVER-CLASS-NAME=com.mysql.cj.jdbc.Driver \
+    SPRING_JPA_HIBERNATE_DDL-AUTO=update \
+    SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true \
+    SPRING_JPA_PROPERTIES_HIBERNATE_SHOW_SQL=true \
+    SPRING_JPA_PROPERTIES_HIBERNATE_LOGGING=true
+
+# Define the entry point
+ENTRYPOINT ["java", "-jar", "my-spring-boot-app.jar"]
