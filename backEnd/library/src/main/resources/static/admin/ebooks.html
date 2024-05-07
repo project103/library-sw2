@@ -71,27 +71,53 @@
             <li class="nav-item">
                 <a class="nav-link" href="books.html">
                     <i class='bx bxs-add-to-queue' ></i>
-                    <span>Books</span>
+                    <span>Add Books</span>
                 </a>
                 
             </li>
-            
-
+            <li class="nav-item">
+                <a class="nav-link" href="ebooks.html">
+                    <i class='bx bxs-add-to-queue' ></i>
+                    <span>E Books</span>
+                </a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="borrowbooks.html">
+                    <i class='bx bx-archive-out' ></i>
+                    <span>Borrow Books</span>
+                </a>
+                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="returnbooks.html">
+                    <i class='bx bx-archive-in' ></i>
+                    <span>Return Books</span>
+                </a>
+                
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="show-categories.html">
                     <i class='bx bx-archive-in' ></i>
-                    <span>Categories</span>
+                    <span>View Category</span>
                 </a>
 
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="transactions.html">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>transactions</span>
+                </a>
+                
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
             <!-- Nav Item - Charts -->
             
 
@@ -104,43 +130,12 @@
 
         </ul>
 
-        <div class="container-fluid">
-
-            <div class="row">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mb-4 d-inline">Books</h5>
-               <a href="add_books.html" class="btn btn-primary mb-4 text-center float-right">Add Book</a>
-                <table class="table" id="table">
-                  <thead>
-                      <th scope="col">Id</th>
-                      <th scope="col">Book Name</th>
-                      <th scope="col">Author</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Copies</th>
-                      <th scope="col">Format</th>
-                      <th scope="col">Length</th>
-                      <th scope="col">Edition</th>
-                      <th scope="col">Language</th>
-                      <th scope="col">Category</th>
-                      <th scope="col">Picture</th>
-                      <th scope="col">Update</th>
-                      <th scope="col">Delete</th>
-                  </thead>
-                  <tbody></tbody>
-                </table> 
-              </div>
-            </div>
-          </div>
-        </div>
-  
-  
-  
-    </div>
 
 
 
+
+        
+    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -156,55 +151,14 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-<!-- "</td><td> <a  href="#" class="btn btn-warning text-white text-center ">Update </a> </td>
-                             <td> <a href="#" class="btn btn-danger  text-center ">Delete </a> </td></tr>"-->
-        <script>
-            function updateTable(){
-                $("#table tbody").empty()
-                var url = "http://localhost:9098/books/all"
-                $.ajax({
-                    url:url,
-                    type:"GET",
-                    datatype:"json",
-                    success:function(data){
-                        for(i=0; i<data.length; i++){
-                            $('#table tbody').append('<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td><td>' + data[i].author +
-                            '</td><td>' + data[i].price +'</td><td>' + data[i].copies +'</td><td>' + data[i].format +'</td><td>' + data[i].length +
-                            '</td><td>' + data[i].edition +'</td><td>' + data[i].language +'</td><td>' + data[i].category.name +'</td><td>' + data[i].pic +
-                            '</td><td> <a  href="update_book.html?id=' + data[i].id + '" class="btn btn-warning text-white text-center ">Update </a> </td><td> <button onclick="deleteBook(' + data[i].id + ')" class="btn btn-danger  text-center "> Delete </button> </td></tr>')
-                        }
-                        console.log(data)
-                    },
-                    error:function(){
-                        console.log("error")
-                    }
-                });
-            }
-            function deleteBook(bookId) {
-                var url = "http://localhost:9098/books/delete/" + bookId
-                $.ajax({
-                    url: url,
-                    type: "DELETE",
-                    success: function(result) {
-                    console.log("Book deleted successfully");
-                    updateTable();
-                    },
-                    error: function() {
-                        console.error("error");
-                    }
-                });
-            }
 
-            updateTable()
-        </script>
-        <script>
-
-            if (localStorage.getItem('sessionId') == 0) {
-            } else {
-                window.location.href = '../user/signin.html';
-            }
-        </script>
-    </div>
 </body>
+<script>
+
+    if (localStorage.getItem('sessionId') == 0) {
+    } else {
+        window.location.href = '../user/signin.html';
+    }
+</script>
 
 </html>

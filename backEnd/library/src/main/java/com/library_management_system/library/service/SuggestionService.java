@@ -4,10 +4,7 @@ import com.library_management_system.library.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 @Service
 public class SuggestionService {
     @Autowired
@@ -31,16 +28,13 @@ public class SuggestionService {
 
     public List<Book> getSuggestedBooks(int userId) {
         List<Category> categories = getSuggestedCategories(userId);
-        Set<Book> uniqueBooks = new HashSet<>();
-
+        List<Book> bookList = new ArrayList<>();
         for (Category category : categories) {
             List<Book> booksInCategory = bookRepository.findByCategory(category);
-            uniqueBooks.addAll(booksInCategory);
+            bookList.addAll(booksInCategory);
         }
-
-        return new ArrayList<>(uniqueBooks);
+        return bookList;
     }
-
 
     public void addSuggestion(int userId, List<OrderItem> orderItems) {
         User user = Repository.getUserById(userId);
