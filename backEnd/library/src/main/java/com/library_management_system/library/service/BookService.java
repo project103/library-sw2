@@ -91,40 +91,28 @@ public class BookService {
     }
 
 
-    public List<Book> getBookByCategory(String categoryName){
-        
-        try {
-            Category category = categoryRepository.findByName(categoryName);
-            return bookRepository.findByCategory(category);
-          } catch (Exception e) {
-            System.out.println("There's no Books in category: " + categoryName);
-          }
-        return null;
-    }
 
     public List<Book> getBookByLanguage(String language){
         return bookRepository.findByLanguage(language);
     }
 
     public Book AddBookToCategory(Book book, String categoryName){
-        
         if(book.getFormat().equals("Audio")) {
             book.setCopies(1);
         }
-        Category category = categoryRepository.findByName(categoryName);
+        
         
         book.setCategory(category);
         return bookRepository.save(book);
     }
 
     public List<Book> getCategoryContent(String categoryName){
-        Category category = categoryRepository.findByName(categoryName);
         return bookRepository.findByCategory(category);
     }
 
     public void RemoveBookFromCategory(String bookName, String categoryName){
         Book book = findBookByName(bookName);
-        getBookByCategory(categoryName).remove(book);
+        getCategoryContent(categoryName).remove(book);
     }
 
 

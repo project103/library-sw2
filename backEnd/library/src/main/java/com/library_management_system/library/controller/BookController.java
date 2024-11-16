@@ -28,12 +28,12 @@ public class BookController {
     @GetMapping("/all")
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
-    }//check
+    }
 
     @GetMapping("/GetById/{id}")
     public Book getBookById(@PathVariable int id) {
         return bookService.getBookById(id);
-    }//check but needs exception!
+    }
 
 
     @GetMapping("/GetByFormat/{format}")
@@ -41,27 +41,21 @@ public class BookController {
         return bookService.getBookByFormat(format);
     }
 
-    // @PostMapping("/add")
-    // public Book addBook(@RequestBody Book book) {
-        
-    //     return bookService.addBook(book);
-    // }
-
     @PutMapping("/update/{bookId}")
     public Book updateBook(@PathVariable int bookId ,@RequestBody Book book) {
         return bookService.updateBook(bookId, book);
-    }//check
+    }
 
     @GetMapping("/category/{categoryName}")
     public List<Book> getBooksByCategory(@PathVariable String categoryName) {
-        return bookService.getBookByCategory(categoryName);
-    }//check but needs exception
+        return bookService.getCategoryContent(categoryName);
+    }
 
     @DeleteMapping("/delete/{id}")
     public String deleteBook(@PathVariable int id) {
         bookService.deleteBook(bookService.getBookById(id));
         return "Book deleted successfully";
-    }//check but needs exception
+    }
 
     @PostMapping("/addBook/{categoryName}")
     public Book addBookToCategory(@PathVariable String categoryName,@RequestBody Map<String , String> NewBook) {

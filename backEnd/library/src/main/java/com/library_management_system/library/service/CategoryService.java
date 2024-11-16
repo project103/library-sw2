@@ -30,8 +30,7 @@ public class CategoryService {
     }
 
     public Category getCategoryById(int id) {
-        return categoryRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Category not found with id: " + category.getId()));
+        return categoryRepository.findById(id);
     }
 
     public Category getCategoryByName(String name) {
